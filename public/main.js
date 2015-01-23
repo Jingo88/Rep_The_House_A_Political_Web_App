@@ -50,7 +50,7 @@
 
 //Part 3
 var button = document.querySelector("button");
-var list = document.querySelector('ul');
+var billList = document.querySelector('#sponsoredBills');
 var input = document.querySelector("input");
 
 console.log("THIS IS YOUR API KEY " + apikey)
@@ -73,7 +73,7 @@ function allBills(bioID) {
     	bills.forEach(function(x){
     		var li = document.createElement('li');
     		li.innerText=x.official_title;
-    		list.appendChild(li);
+    		billList.appendChild(li);
     	})
     })
     xhr.send();
@@ -81,8 +81,6 @@ function allBills(bioID) {
 
 
 button.addEventListener("click", function() {
-    
-
     var name = input.value;
     console.log("this is the person's name " + name)
     

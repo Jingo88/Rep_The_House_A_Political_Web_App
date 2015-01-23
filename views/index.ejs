@@ -6,14 +6,40 @@
 <link href="style.css" rel='stylesheet'>
 </head>
 <body>
+	<h1>PolitiSearch</h1>
 
-<input type='text' placeholder='senators last name'></input>
-<button> Find Senator </button>
 
-<ul>Bioguide List
-</ul>
+<div id='search'>
+	<input type='text' placeholder='senators last name' id='findlastName'></input>
+	<button> Find Senator </button>
+</div>
 
 <h2></h2>
+
+<div id='poliInfo'>
+	<ul id='Info'>
+		
+	</ul>
+</div>
+
+<ul id='sponsoredBills'>
+</ul>
+
+
+<!-- First Name
+Last Name
+Party
+Term Start
+Term End
+State
+
+Donations & Year
+have an input box to put a year
+if it is valid when a button is clicked it will show the donation amounts and individuals that have given it to them
+Bills Sponsored?
+Click a button and you can see a list of the bills they have sponsored
+*** crp_id***** -->
+
 
 <script>
 	var apikey = '<%= apikey %>' 
