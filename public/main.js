@@ -51,10 +51,13 @@
 //Part 3
 var button = document.querySelector("button");
 var list = document.querySelector('ul');
+var input = document.querySelector("input");
+
+console.log("THIS IS YOUR API KEY " + apikey)
 
 function allBills(bioID) {
     var bills = [];
-    var urlB = "https://congress.api.sunlightfoundation.com/bills?&apikey=YOUR API KEY&sponsor_id=" + bioID;
+    var urlB = "https://congress.api.sunlightfoundation.com/bills?&apikey=" + apikey + "&sponsor_id=" + bioID;
     var xhr = new XMLHttpRequest();
 
     xhr.open("GET", urlB);
@@ -78,13 +81,15 @@ function allBills(bioID) {
 
 
 button.addEventListener("click", function() {
-    var input = document.querySelector("input")
+    
 
-    var name = input.value.capitalize;
+    var name = input.value;
+    console.log("this is the person's name " + name)
     
     var sponsor = "sponsor_id";
 
-    var url = "https://congress.api.sunlightfoundation.com/legislators?fields=&apikey=YOUR API KEY&last_name=" + name
+    var url = "https://congress.api.sunlightfoundation.com/legislators?fields=&apikey="+ apikey + "&last_name=" + name;
+    console.log("THIS IS YOUR URL " + url)
     var xhr = new XMLHttpRequest();
 
     xhr.open("GET", url);

@@ -9,9 +9,13 @@ app.use(express.static('public'));
 
 var apikey = fs.readFileSync('api_key.txt', 'utf8');
 
+
+
+
 app.get('/', function(req, res){
 	
-	res.render('index.ejs');
+	res.render('index.ejs', {apikey: apikey});
+
 })
 
 app.listen(3000);
