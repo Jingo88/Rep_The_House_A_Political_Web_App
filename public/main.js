@@ -77,11 +77,11 @@ function allBills(bioID) {
 }
 
 
-
-
 button.addEventListener("click", function() {
     var input = document.querySelector("input")
-    var name = input.value;
+
+    var name = input.value.capitalize;
+    
     var sponsor = "sponsor_id";
 
     var url = "https://congress.api.sunlightfoundation.com/legislators?fields=&apikey=YOUR API KEY&last_name=" + name
