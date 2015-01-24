@@ -51,6 +51,7 @@
 //Part 3
 var button = document.querySelector("button");
 var billList = document.querySelector('#sponsoredBills');
+var donateList = document.querySelector('#donationAmts');
 var input = document.querySelector("input");
 var fName = document.querySelector('#first');
 var lName = document.querySelector('#last');
@@ -101,14 +102,23 @@ function donations(crpID,year){
         
         var donateObj = JSON.parse(xhr.responseText);
 
+        var contributions = donateObj.response["contributors"]["contributor"]
 
-        var contributions = donateObj.response["contributors"]
+        for (var i = 0; i < contributions.length; i++) {
 
-        console.log(contributions);
-        // for (var i = 0; i < contributions.length; i++) {
+            donations.push(contributions[i]["@attributes"]);
 
-        //     donations.push(contributions[i]);
-        // };
+            var org = document.createElement('li');
+            org.setAttribute('class', 'donate_org');
+            org.innerText = contributions[i]["@attributes"]["org_name"];
+            donateList.appendChild(org);
+
+            var total = document.createElement('li');
+            total.setAttribute('class', 'donate_total');
+            total.innerText = contributions[i]["@attributes"]["total"];
+            donateList.appendChild(total);
+
+        };
 
     console.log(donations)
 

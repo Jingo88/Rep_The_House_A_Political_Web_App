@@ -24,8 +24,7 @@ app.get('/donate/:crpID/:year', function(req, res){
 	var donateurl = "http://www.opensecrets.org/api/?method=candContrib&cid="+ crp + "&cycle=" + yr + "&output=json&apikey=" + openKey
 
 	console.log('this is your donateurl ' + donateurl)
-	// res.render('index.ejs', {donateurl: donateurl})
-
+	
 	request(donateurl, function(error, response, body){
 		if (!error && response.statusCode == 200){
 			res.send(body)
