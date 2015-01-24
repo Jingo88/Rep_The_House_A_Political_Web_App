@@ -60,7 +60,7 @@ var termEnd = document.querySelector('#endT');
 var state = document.querySelector('#state');
 
 console.log("Your sunlight key is " + sunKey);
-console.log("Your open secret key is " + openKey);
+// console.log("Your open secret key is " + openKey);
 
 function allBills(bioID) {
     var bills = [];
@@ -89,21 +89,26 @@ function allBills(bioID) {
 function donations(crpID,year){
     var donations = [];
 
-    var donateurl = "http://www.opensecrets.org/api/?method=candContrib&cid="+ crpID + "&cycle=" + year + "&output=json&apikey=" + openKey
+    var donateurl2 = "/donate/"+crpID+"/"+year;
+
+    console.log("YOUR DONATE URL TWO IS " + donateurl2)
+    // var donateurl = "http://www.opensecrets.org/api/?method=candContrib&cid="+ crpID + "&cycle=" + year + "&output=json&apikey=" + openKey
     var xhr = new XMLHttpRequest();
 
-    xhr.open("GET", donateurl);
+    xhr.open("GET", donateurl2);
 
     xhr.addEventListener('load', function(){
         
         var donateObj = JSON.parse(xhr.responseText);
 
-        var contributions = donateObj.response[0].contributor
 
-        for (var i = 0; i < contributions.length; i++) {
+        var contributions = donateObj.response["contributors"]
 
-            donations.push(contributions[i]);
-        };
+        console.log(contributions);
+        // for (var i = 0; i < contributions.length; i++) {
+
+        //     donations.push(contributions[i]);
+        // };
 
     console.log(donations)
 
@@ -114,7 +119,6 @@ function donations(crpID,year){
         // })
     })
     xhr.send();
-
 }
 
 
