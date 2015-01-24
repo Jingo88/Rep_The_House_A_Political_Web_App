@@ -59,8 +59,15 @@ var termStart = document.querySelector('#startT');
 var termEnd = document.querySelector('#endT');
 var state = document.querySelector('#state');
 
+// var apikeys = JSON.parse(apikey);
 
-console.log("THIS IS YOUR API KEY " + apikey)
+
+console.log("Your sunlight key is " + sunKey);
+console.log("Your open secret key is " + openKey);
+
+// var working = Object.keys(apikeys);
+// console.log(apikeys)
+// console.log("THIS IS YOUR API KEY " + apikeys)
 
 function allBills(bioID) {
     var bills = [];

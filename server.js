@@ -7,11 +7,12 @@ var fs = require('fs');
 
 app.use(express.static('public'));
 
-var apikey = fs.readFileSync('api_key.txt', 'utf8');
+var sunKey = fs.readFileSync('sunlightKey.txt', 'utf8');
+var openKey = fs.readFileSync('openKey.txt', 'utf8');
 
 app.get('/', function(req, res){
-	
-	res.render('index.ejs', {apikey: apikey});
+
+	res.render('index.ejs', {sunKey: sunKey, openKey: openKey});
 
 })
 
