@@ -1,58 +1,11 @@
-// var button = document.querySelector("button")
-// button.addEventListener("click", function(){
-// var input = document.querySelector("input")
-// var name = input.value
-// console.log(name);
-// var url = "https://congress.api.sunlightfoundation.com/legislators?apikey=YOUR API KEY&last_name=" + name
-// var xhr = new XMLHttpRequest();
-// xhr.open("GET", url);
-// xhr.addEventListener("load", function(){
-//     var senatorObj = JSON.parse(xhr.responseText)
-//     console.log(senatorObj);
-//     var h2 = document.querySelector("h2")
-// // h2.innerText = senatorObj.results[0].first_name +" "+ senatorObj.results[0].last_name
-//     h2.innerText = senatorObj.results[0].twitter_id
-// })
-// xhr.send();
-// })
-// //Part 2
-//     var button = document.querySelector("button")
-//     button.addEventListener("click", function(){
-//      var input = document.querySelector("input")
-//      var name = input.value
-//      console.log(name);
-//      var url = "https://congress.api.sunlightfoundation.com/legislators?fields=twitter_id&apikey=YOUR API KEY&last_name=" + name
-//      var xhr = new XMLHttpRequest();
-//      console.log('this is the url  ' + url)
-//      xhr.open("GET", url);
-//      xhr.addEventListener("load", function(){
-//      	console.log('now we are in the load')
-//          var senatorObj = JSON.parse(xhr.responseText)
-//          console.log(senatorObj);
-//          var h2 = document.querySelector("h2")
-//          h2.innerText = senatorObj.results[0].twitter_id;
-//      })
-//      xhr.send()
-// })
-
-
-
-
-
-
-
-
-
-//all senators have one bioguide_id
-//the bills have a sponsor_id
-//the sponsor_id is the bioguide_id of the senator that sponsored it
-//take the short_title of the bill and link it to the senator that sponsored it
-
-//Part 3
-var button = document.querySelector("button");
+var findName = document.querySelector("#searchName");
+var findState = document.querySelector('#searchState');
 var billList = document.querySelector('#sponsoredBills');
 var donateList = document.querySelector('#donationAmts');
-var input = document.querySelector("input");
+
+var inputName = document.querySelector("#findlastName");
+var inputState = document.querySelector('#findStateTwo');
+
 var fName = document.querySelector('#first');
 var lName = document.querySelector('#last');
 var party = document.querySelector('#party');
@@ -131,14 +84,32 @@ function donations(crpID,year){
     xhr.send();
 }
 
+//search by state two letters
+//
 
-button.addEventListener("click", function() {
-    var name = input.value;
-    console.log("this is the person's name " + name)
+findState.addEventListener('click', function(){
+    var stateInitials = inputState.value;
+
+    var sunStateURL = "https://congress.api.sunlightfoundation.com/legislators?fields=&apikey=" + sunKey+ "&state="+ stateInitials;
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET', sunStateURL);
+
+    xhr.addEventListener('load', function(){
+        var stateObj = JSON.parse(xhr.responseText);
+
+        var stateLegislators = stateObj.results
+    })
+
+    xhr.send();
+})
+
+
+findName.addEventListener("click", function() {
+    var name = inputName.value;
 
     var sunlighturl = "https://congress.api.sunlightfoundation.com/legislators?fields=&apikey="+ sunKey + "&last_name=" + name;
-    
-    console.log("THIS IS YOUR URL " + sunlighturl)
     
     var xhr = new XMLHttpRequest();
 
