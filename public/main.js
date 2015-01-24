@@ -59,19 +59,12 @@ var termStart = document.querySelector('#startT');
 var termEnd = document.querySelector('#endT');
 var state = document.querySelector('#state');
 
-// var apikeys = JSON.parse(apikey);
-
-
 console.log("Your sunlight key is " + sunKey);
 console.log("Your open secret key is " + openKey);
 
-// var working = Object.keys(apikeys);
-// console.log(apikeys)
-// console.log("THIS IS YOUR API KEY " + apikeys)
-
 function allBills(bioID) {
     var bills = [];
-    var urlB = "https://congress.api.sunlightfoundation.com/bills?&apikey=" + apikey + "&sponsor_id=" + bioID;
+    var urlB = "https://congress.api.sunlightfoundation.com/bills?&apikey=" + sunKey + "&sponsor_id=" + bioID;
     var xhr = new XMLHttpRequest();
 
     xhr.open("GET", urlB);
@@ -93,12 +86,43 @@ function allBills(bioID) {
     xhr.send();
 }
 
+function donations(crpID,year){
+    var donations = [];
+
+    var donateurl = "http://www.opensecrets.org/api/?method=candContrib&cid="+ crpID + "&cycle=" + year + "&output=json&apikey=" + openKey
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("GET", donateurl);
+
+    xhr.addEventListener('load', function(){
+        
+        var donateObj = JSON.parse(xhr.responseText);
+
+        var contributions = donateObj.response[0].contributor
+
+        for (var i = 0; i < contributions.length; i++) {
+
+            donations.push(contributions[i]);
+        };
+
+    console.log(donations)
+
+        // bills.forEach(function(x){
+        //     var li = document.createElement('li');
+        //     li.innerText=x.official_title;
+        //     billList.appendChild(li);
+        // })
+    })
+    xhr.send();
+
+}
+
 
 button.addEventListener("click", function() {
     var name = input.value;
     console.log("this is the person's name " + name)
 
-    var sunlighturl = "https://congress.api.sunlightfoundation.com/legislators?fields=&apikey="+ apikey + "&last_name=" + name;
+    var sunlighturl = "https://congress.api.sunlightfoundation.com/legislators?fields=&apikey="+ sunKey + "&last_name=" + name;
     
     console.log("THIS IS YOUR URL " + sunlighturl)
     
@@ -136,7 +160,7 @@ button.addEventListener("click", function() {
         state.innerText = stateTwo;
 
         allBills(bioguide);
-
+        donations(crp, 2013);
     })
 
     xhr.send()
