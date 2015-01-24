@@ -52,6 +52,13 @@
 var button = document.querySelector("button");
 var billList = document.querySelector('#sponsoredBills');
 var input = document.querySelector("input");
+var fName = document.querySelector('#first');
+var lName = document.querySelector('#last');
+var party = document.querySelector('#party');
+var termStart = document.querySelector('#startT');
+var termEnd = document.querySelector('#endT');
+var state = document.querySelector('#state');
+
 
 console.log("THIS IS YOUR API KEY " + apikey)
 
@@ -83,24 +90,43 @@ function allBills(bioID) {
 button.addEventListener("click", function() {
     var name = input.value;
     console.log("this is the person's name " + name)
-    
-    var sponsor = "sponsor_id";
 
-    var url = "https://congress.api.sunlightfoundation.com/legislators?fields=&apikey="+ apikey + "&last_name=" + name;
-    console.log("THIS IS YOUR URL " + url)
+    var sunlighturl = "https://congress.api.sunlightfoundation.com/legislators?fields=&apikey="+ apikey + "&last_name=" + name;
+    
+    console.log("THIS IS YOUR URL " + sunlighturl)
+    
     var xhr = new XMLHttpRequest();
 
-    xhr.open("GET", url);
+    xhr.open("GET", sunlighturl);
 
     xhr.addEventListener("load", function() {
 
+        //gives you the senator you found in a JSON object
         var senatorObj = JSON.parse(xhr.responseText);
+
+        //you will use the bioguide to pass into the function as a parameter and search for bills        
         var bioguide = senatorObj.results[0].bioguide_id;
         
+        //you will use the crp id to pass into a function to search for donations
+        var crp = senatorObj.results[0].crp_id;
 
-        console.log(senatorObj);
-        var h2 = document.querySelector("h2")
-        h2.innerText = bioguide;
+        console.log(name + " has a crp id of " + crp)
+
+        var firstName = senatorObj.results[0].first_name;
+        var lastName = senatorObj.results[0].last_name;
+        var stateTwo = senatorObj.results[0].state;
+        var partyOne = senatorObj.results[0].party;
+        var gender = senatorObj.results[0].gender;
+        var termS = senatorObj.results[0].term_start;
+        var termE = senatorObj.results[0].term_end;
+        var twitter = senatorObj.results[0].twitter_id;
+
+        fName.innerText = firstName;
+        lName.innerText = lastName;
+        party.innerText = partyOne;
+        termStart.innerText = termS;
+        termEnd.innerText = termE;
+        state.innerText = stateTwo;
 
         allBills(bioguide);
 

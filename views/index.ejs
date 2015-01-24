@@ -10,8 +10,12 @@
 
 
 <div id='search'>
-	<input type='text' placeholder='senators last name' id='findlastName'></input>
-	<button> Find Senator </button>
+	<input type='text' placeholder='Search By Last Name' id='findlastName'></input>
+	<button id='searchName'> Find Senator </button>
+
+	<input type='text' placeholder='Search By State ' id='findState'></input>
+	<button id='searchState'> Find Senator </button>
+
 </div>
 
 <h2></h2>
@@ -31,6 +35,7 @@
 </ul>
 
 
+
 <!-- First Name
 Last Name
 Party
@@ -48,6 +53,7 @@ Click a button and you can see a list of the bills they have sponsored
 
 <script>
 	var apikey = '<%= apikey %>' 
+	
 </script>
 
 <script type='text/javascript' src='main.js'></script>
