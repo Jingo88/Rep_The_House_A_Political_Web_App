@@ -168,15 +168,13 @@ findName.addEventListener("click", function() {
         var bioUL = document.createElement('ul');
         bioUL.setAttribute('id', 'info');
         
-        var data = Object.keys(nowLegislator);
-        
         for (var i in nowLegislator){
             var value = nowLegislator[i];
 
             var li = document.createElement('li');
             
             li.setAttribute('class', 'bioInfo');
-            li.innerText = value;
+            li.innerText = i + ": " + value;
             bioUL.appendChild(li);
         }
 
