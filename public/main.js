@@ -114,7 +114,10 @@ findState.addEventListener('click', function(){
 
 
 findName.addEventListener("click", function() {
-    var name = inputName.value;
+    var input = inputName.value;
+
+    var name = input.charAt(0).toUpperCase() + input.slice(1);
+
     var sunlighturl = "https://congress.api.sunlightfoundation.com/legislators?fields=&apikey="+ sunKey + "&last_name=" + name;
     
     var xhr = new XMLHttpRequest();
@@ -144,13 +147,6 @@ findName.addEventListener("click", function() {
         var twitter = senatorObj.results[0].twitter_id;
 
         nowLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, twitter);
-        
-        fName.innerText = firstName;
-        lName.innerText = lastName;
-        party.innerText = partyOne;
-        termStart.innerText = termS;
-        termEnd.innerText = termE;
-        state.innerText = stateTwo;
 
         var person = document.createElement('h1');
         person.innerText = nowLegislator.first + " " + nowLegislator.last;
@@ -171,18 +167,14 @@ findName.addEventListener("click", function() {
             bioUL.appendChild(li);
         }
 
-
-        // for (i=0; i<data.length; i++){
-
-
-        // }
-
         bioDiv.appendChild(bioUL)
         console.log(nowLegislator);
     })
 
     xhr.send()
 })
+
+
 
 showBills.addEventListener('click', function(){
     allBills(bioguide);
