@@ -6,6 +6,7 @@ var inputState = document.querySelector('#findStateTwo');
 
 //div where we will store the info of the politicions search
 var bioDiv = document.querySelector('#poliInfo');
+var multiDiv = document.querySelector('#multiList');
 
 //button and div for bill list
 var showbills = document.querySelector('#showBills');
@@ -21,6 +22,14 @@ var bioguide = '';
 var crp = '';
 
 var legislatorsArr = [];
+
+function clearData(){
+    legislatorsArr = [];
+    inputName.value = '';
+    inputState.value = '';
+    bioDiv.innerHTML = '';
+    multiDiv.innerHTML = '';
+}
 
 //constructor to create a object of the currently viewed legislator
 function currentBio(First_Name,Last_Name,State,Party,Gender,Term_Start,Term_End,Twitter_Handle) {
@@ -138,6 +147,7 @@ findState.addEventListener('click', function(){
 })
 
 findName.addEventListener("click", function() {
+    clearData();
     var input = inputName.value;
 
     var name = input.charAt(0).toUpperCase() + input.slice(1);
@@ -146,11 +156,14 @@ findName.addEventListener("click", function() {
 })
 
 inputName.addEventListener('keypress', function(e){
+    
     if (e.keyCode === 13){
+        
         var input = inputName.value;
 
         var name = input.charAt(0).toUpperCase() + input.slice(1);
 
+        clearData();
         searchLegislatorName(name);
     }
 })
@@ -257,7 +270,7 @@ function searchLegislatorName(name){
                     bioUL.appendChild(li);
                 }
                 
-                bioDiv.appendChild(bioUL)
+                multiDiv.appendChild(bioUL)
                 console.log('WE ARE AT THE L COUNTER === ' + l);
             }
             console.log(legislatorsArr); 
@@ -289,7 +302,7 @@ showDonations.addEventListener('click', function(){
 //do an if else statement seeing if the results.length is greater than 1, and if so then go to a different formation?
 //push them all into a array of objects?
 
-
+//have to clear the array when the search bar is run again, clear the legislator div box, clear the input box
 
 //http://services.sunlightlabs.com/docs/congressapi/legislators.get%28List%29/
 //Look at this, need to bring out the bio data better
