@@ -20,6 +20,8 @@ var yearDonate = document.querySelector('#donationYear');
 var bioguide = '';
 var crp = '';
 
+var legislatorsArr = [];
+
 //constructor to create a object of the currently viewed legislator
 function currentBio(First_Name,Last_Name,State,Party,Gender,Term_Start,Term_End,Twitter_Handle) {
     this.First_Name = First_Name;
@@ -150,48 +152,101 @@ findName.addEventListener("click", function() {
 
         //gives you the senator you found in a JSON object
         var senatorObj = JSON.parse(xhr.responseText);
+        var results = senatorObj.results;
 
-        //you will use the bioguide to pass into the function as a parameter and search for bills        
-        bioguide = senatorObj.results[0].bioguide_id;
-        
-        //you will use the crp id to pass into a function to search for donations
-        crp = senatorObj.results[0].crp_id;
-
-        console.log(name + " has a crp id of " + crp)
-
-        var firstName = senatorObj.results[0].first_name;
-        var lastName = senatorObj.results[0].last_name;
-        var stateTwo = senatorObj.results[0].state;
-        var partyOne = senatorObj.results[0].party;
-        var gender = senatorObj.results[0].gender;
-        var termS = senatorObj.results[0].term_start;
-        var termE = senatorObj.results[0].term_end;
-        var twitter = senatorObj.results[0].twitter_id;
-
-        nowLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, twitter);
-
-        var person = document.createElement('h1');
-        person.innerText = nowLegislator.First_Name + " " + nowLegislator.Last_Name;
-        bioDiv.appendChild(person);
-
-        var bioUL = document.createElement('ul');
-        bioUL.setAttribute('id', 'info');
-        
-        for (var i in nowLegislator){
-            var value = nowLegislator[i];
-            var newKey = i.replace(/[_]/g, " ");
-
-            var li = document.createElement('li');
+        if (senatorObj.results.length === 1){
+            //you will use the bioguide to pass into the function as a parameter and search for bills        
+            bioguide = senatorObj.results[0].bioguide_id;
             
-            li.setAttribute('class', 'bioInfo');
-            li.innerText = newKey + ": " + value;
-            bioUL.appendChild(li);
+            //you will use the crp id to pass into a function to search for donations
+            crp = senatorObj.results[0].crp_id;
+
+            console.log(name + " has a crp id of " + crp)
+
+            var firstName = senatorObj.results[0].first_name;
+            var lastName = senatorObj.results[0].last_name;
+            var stateTwo = senatorObj.results[0].state;
+            var partyOne = senatorObj.results[0].party;
+            var gender = senatorObj.results[0].gender;
+            var termS = senatorObj.results[0].term_start;
+            var termE = senatorObj.results[0].term_end;
+            var twitter = senatorObj.results[0].twitter_id;
+
+            nowLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, twitter);
+
+            var person = document.createElement('h1');
+            person.innerText = nowLegislator.First_Name + " " + nowLegislator.Last_Name;
+            bioDiv.appendChild(person);
+
+            var bioUL = document.createElement('ul');
+            bioUL.setAttribute('id', 'info');
+            
+            for (var i in nowLegislator){   
+                var value = nowLegislator[i];
+                var newKey = i.replace(/[_]/g, " ");
+
+                var li = document.createElement('li');
+                
+                li.setAttribute('class', 'bioInfo');
+                li.innerText = newKey + ": " + value;
+                bioUL.appendChild(li);
+
+            }
+
+            bioDiv.appendChild(bioUL)
+            console.log(nowLegislator);            
+        
+        }  else if (results.length > 1) {
+                //how to store multiples
+                console.log("THERE IS MORE THAN ONE");
+                //build a for loop that will grab the first name / last name / party / state
+                //where will that go?
+                //how will you show it?
+                //more DOM manipulation
+            for (i=0; i<results.length; i++){
+                var firstName = results[i].first_name;                
+                var lastName = results[i].last_name;
+                var stateTwo = results[i].state;
+                var partyOne = results[i].party;
+                var gender = results[i].gender;
+                var termS = results[i].term_start;
+                var termE = results[i].term_end;
+                var twitter = results[i].twitter_id;
+
+                addLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, twitter);
+
+                legislatorsArr.push(addLegislator);
+            }
+
+            var people = document.createElement('h1');
+            people.innerText = "Legislators with the last name " + name;
+            bioDiv.appendChild(people);
+
+            var breaking = document.createElement('br');
+
+            var bioUL = document.createElement('ul');
+            bioUL.setAttribute('id', 'info');
+               
+            for (l=0; l<legislatorsArr.length; l++){    
+
+                for (var k in legislatorsArr[l]){   
+                    var value = legislatorsArr[l][k];
+                    var newKey = k.replace(/[_]/g, " ");
+
+                    var li = document.createElement('li');
+                    
+                    li.setAttribute('class', 'bioInfo');
+                    li.innerText = newKey + ": " + value;
+
+                    bioUL.appendChild(li);
+                    bioUL.appendChild(breaking);
+                }
+            }
+            bioDiv.appendChild(bioUL)
+
+            console.log(legislatorsArr); 
         }
-
-        bioDiv.appendChild(bioUL)
-        console.log(nowLegislator);
     })
-
     xhr.send()
 })
 
