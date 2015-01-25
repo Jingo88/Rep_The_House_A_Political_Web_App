@@ -1,17 +1,21 @@
+//buttons to grab inputs of the name and/or state
 var findName = document.querySelector("#searchName");
 var findState = document.querySelector('#searchState');
-var billList = document.querySelector('#sponsoredBills');
-var donateList = document.querySelector('#donationAmts');
-var showbills = document.querySelector('#showBills');
-var showDonations = document.querySelector('#showDonate');
-var bioDiv = document.querySelector('#poliInfo');
-var billsDiv = document.querySelector('#billsDiv');
-var donateDiv = document.querySelector('#donationDiv');
-
-
 var inputName = document.querySelector("#findlastName");
 var inputState = document.querySelector('#findStateTwo');
 
+//div where we will store the info of the politicions search
+var bioDiv = document.querySelector('#poliInfo');
+
+//button and div for bill list
+var showbills = document.querySelector('#showBills');
+var billsDiv = document.querySelector('#billsDiv');
+
+//button and div for donation list
+var showDonations = document.querySelector('#showDonate');
+var donateDiv = document.querySelector('#donationDiv');
+
+//defined these variables as global so we can use them in multiple functions
 var bioguide = '';
 var crp = '';
 
@@ -103,6 +107,7 @@ function donations(crpID,year){
 
 findState.addEventListener('click', function(){
     var stateInitials = inputState.value;
+
     var sunStateURL = "https://congress.api.sunlightfoundation.com/legislators?fields=&apikey=" + sunKey+ "&state="+ stateInitials;
 
     var xhr = new XMLHttpRequest();
@@ -116,7 +121,6 @@ findState.addEventListener('click', function(){
     })
     xhr.send();
 })
-
 
 findName.addEventListener("click", function() {
     var input = inputName.value;
