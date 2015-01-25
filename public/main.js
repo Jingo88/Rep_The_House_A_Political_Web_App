@@ -14,6 +14,7 @@ var billsDiv = document.querySelector('#billsDiv');
 //button and div for donation list
 var showDonations = document.querySelector('#showDonate');
 var donateDiv = document.querySelector('#donationDiv');
+var yearDonate = document.querySelector('#donationYear');
 
 //defined these variables as global so we can use them in multiple functions
 var bioguide = '';
@@ -112,7 +113,7 @@ findState.addEventListener('click', function(){
     console.log("YOU HAVE SEARCHED FOR " + stateInitials)
 
     if (stateInitials.length>= 3){
-        prompt ("Please enter two letters of a valid state");
+        alert("Please enter two letters of a valid state");
 
     } else {
 
@@ -130,10 +131,8 @@ findState.addEventListener('click', function(){
 
             console.log(stateLegislators);
         })
-
     xhr.send();
     }
-
 })
 
 findName.addEventListener("click", function() {
@@ -148,10 +147,6 @@ findName.addEventListener("click", function() {
     xhr.open("GET", sunlighturl);
 
     xhr.addEventListener("load", function() {
-
-        //add an if/else statement for this where if senatorObj.results.length is > 1 then make a loop 
-        //to show the bios of the legislators
-
 
         //gives you the senator you found in a JSON object
         var senatorObj = JSON.parse(xhr.responseText);
@@ -203,11 +198,36 @@ findName.addEventListener("click", function() {
 
 
 showBills.addEventListener('click', function(){
-    allBills(bioguide);
+    if (bioguide != ''){
+        allBills(bioguide);
+    } else {
+        alert("Sorry you have not chosen a legislator to view the bills of")
+    }
 })
 
 showDonations.addEventListener('click', function(){
-    donations(crp, 2013);
+    var year = yearDonate.value
+
+    if (year.length != 4){
+        alert("please enter a valid year");
+    } else {
+        donations(crp,year);
+    }    
 })
     
+//how to store the legislators information when there is more than one whether it's by state, or by same last name?
+//keep in mind crp_id and bioguide_id > both being used for bill and donation lists. 
+//do an if else statement seeing if the results.length is greater than 1, and if so then go to a different formation?
+//push them all into a array of objects?
+
+
+
+//http://services.sunlightlabs.com/docs/congressapi/legislators.get%28List%29/
+//Look at this, need to bring out the bio data better
+//gender, party, title, state, etc. 
+
+
+
+
+
 
