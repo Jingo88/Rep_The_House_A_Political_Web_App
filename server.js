@@ -28,7 +28,42 @@ app.get('/donate/:crpID/:year', function(req, res){
 			res.send(body)
 		}
 	})
+});
 
+app.get('/searchLname/:Lname', function(req, res){
+
+	var name = req.params.Lname;
+
+	var sunurl = "https://congress.api.sunlightfoundation.com/legislators?fields=&apikey="+ sunKey + "&last_name=" + name;
+	
+	request(sunurl, function(error, response, body){
+		if (!error && response.statusCode == 200){
+			res.send(body)
+		}
+	})
+});
+
+
+app.get('/searchState/:stateInitials', function(req, res){
+
+	var state = req.params.stateInitials;
+
+	var sunStateurl = "https://congress.api.sunlightfoundation.com/legislators?fields=&apikey=" + sunKey+ "&state="+ state;
+	
+	request(sunStateurl, function(error, response, body){
+		if (!error && response.statusCode == 200){
+			res.send(body)
+		}
+	})
 });
 
 app.listen(3000);
+
+
+
+
+
+
+
+
+

@@ -106,20 +106,34 @@ function donations(crpID,year){
 }
 
 findState.addEventListener('click', function(){
-    var stateInitials = inputState.value;
+    var searchingState = inputState.value;
+    var stateInitials = searchingState.toUpperCase();
 
-    var sunStateURL = "https://congress.api.sunlightfoundation.com/legislators?fields=&apikey=" + sunKey+ "&state="+ stateInitials;
+    console.log("YOU HAVE SEARCHED FOR " + stateInitials)
 
-    var xhr = new XMLHttpRequest();
+    if (stateInitials.length>= 3){
+        prompt ("Please enter two letters of a valid state");
 
-    xhr.open('GET', sunStateURL);
+    } else {
 
-    xhr.addEventListener('load', function(){
-        var stateObj = JSON.parse(xhr.responseText);
+        var sunStateURL = "/searchState/"+ stateInitials;
 
-        var stateLegislators = stateObj.results
-    })
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('GET', sunStateURL);
+
+        xhr.addEventListener('load', function(){
+
+            var stateObj = JSON.parse(xhr.responseText);
+
+            var stateLegislators = stateObj.results;
+
+            console.log(stateLegislators);
+        })
+
     xhr.send();
+    }
+
 })
 
 findName.addEventListener("click", function() {
@@ -127,7 +141,7 @@ findName.addEventListener("click", function() {
 
     var name = input.charAt(0).toUpperCase() + input.slice(1);
 
-    var sunlighturl = "https://congress.api.sunlightfoundation.com/legislators?fields=&apikey="+ sunKey + "&last_name=" + name;
+    var sunlighturl = "/searchLname/"+name
     
     var xhr = new XMLHttpRequest();
 
