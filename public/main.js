@@ -159,16 +159,23 @@ findName.addEventListener("click", function() {
         var bioUL = document.createElement('ul');
         bioUL.setAttribute('id', 'info');
         
-        console.log(nowLegislator.length)
+        var data = Object.keys(nowLegislator);
+        
+        for (var i in nowLegislator){
+            var value = nowLegislator[i];
 
-        for (i=2; i<nowLegislator.length-2; i++){
-            console.log('we are in the for loop!!!!!')
-            var data = Object.keys(nowLegislator);
             var li = document.createElement('li');
+            
             li.setAttribute('class', 'bioInfo');
-            li.innerText = data[i];
+            li.innerText = value;
             bioUL.appendChild(li);
         }
+
+
+        // for (i=0; i<data.length; i++){
+
+
+        // }
 
         bioDiv.appendChild(bioUL)
         console.log(nowLegislator);
