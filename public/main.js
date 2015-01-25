@@ -20,15 +20,15 @@ var bioguide = '';
 var crp = '';
 
 //constructor to create a object of the currently viewed legislator
-function currentBio(first,last,state,party,gender,term_start,term_end,twitter_id) {
-    this.first = first;
-    this.last = last;
-    this.state = state;
-    this.party = party;
-    this.gender = gender;
-    this.term_start = term_start;
-    this.term_end = term_end;
-    this.twitter_id = twitter_id;
+function currentBio(First_Name,Last_Name,State,Party,Gender,Term_Start,Term_End,Twitter_Handle) {
+    this.First_Name = First_Name;
+    this.Last_Name = Last_Name;
+    this.State = State;
+    this.Party = Party;
+    this.Gender = Gender;
+    this.Term_Start = Term_Start;
+    this.Term_End = Term_End;
+    this.Twitter_Handle = Twitter_Handle;
 }
 
 //creates a list of all the bills sponsored by the currently searched politician
@@ -162,7 +162,7 @@ findName.addEventListener("click", function() {
         nowLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, twitter);
 
         var person = document.createElement('h1');
-        person.innerText = nowLegislator.first + " " + nowLegislator.last;
+        person.innerText = nowLegislator.First_Name + " " + nowLegislator.Last_Name;
         bioDiv.appendChild(person);
 
         var bioUL = document.createElement('ul');
@@ -170,11 +170,12 @@ findName.addEventListener("click", function() {
         
         for (var i in nowLegislator){
             var value = nowLegislator[i];
+            var newKey = i.replace(/[_]/g, " ");
 
             var li = document.createElement('li');
             
             li.setAttribute('class', 'bioInfo');
-            li.innerText = i + ": " + value;
+            li.innerText = newKey + ": " + value;
             bioUL.appendChild(li);
         }
 
