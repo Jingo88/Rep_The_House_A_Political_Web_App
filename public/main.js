@@ -142,8 +142,23 @@ findName.addEventListener("click", function() {
 
     var name = input.charAt(0).toUpperCase() + input.slice(1);
 
+    searchLegislatorName(name);
+})
+
+inputName.addEventListener('keypress', function(e){
+    if (e.keyCode === 13){
+        var input = inputName.value;
+
+        var name = input.charAt(0).toUpperCase() + input.slice(1);
+
+        searchLegislatorName(name);
+    }
+})
+
+function searchLegislatorName(name){
+
     var sunlighturl = "/searchLname/"+name
-    
+
     var xhr = new XMLHttpRequest();
 
     xhr.open("GET", sunlighturl);
@@ -197,12 +212,8 @@ findName.addEventListener("click", function() {
             console.log(nowLegislator);            
         
         }  else if (results.length > 1) {
-                //how to store multiples
-                console.log("THERE IS MORE THAN ONE");
-                //build a for loop that will grab the first name / last name / party / state
-                //where will that go?
-                //how will you show it?
-                //more DOM manipulation
+                
+            //pushes each of the legislators information out to the legislatorsArr
             for (i=0; i<results.length; i++){
                 var firstName = results[i].first_name;                
                 var lastName = results[i].last_name;
@@ -221,20 +232,18 @@ findName.addEventListener("click", function() {
             var people = document.createElement('h1');
             people.innerText = "Legislators with the last name " + name;
             bioDiv.appendChild(people);
-               
+            
+            //this for loop runs for the length of the array
             for (l=0; l<legislatorsArr.length; l++){    
 
                 var bioUL = document.createElement('ul');
                 bioUL.setAttribute('id', 'info');
                 
                 var keys = Object.keys(legislatorsArr[l]);
-                console.log('THESE ARE YOUR KEYS' + keys);
-                console.log(keys.length);
 
-
+                //this for loop runs to print out the values of each of the keys
                 for (k=0; k<keys.length; k++){
 
-                    //keys[0] === first_name
                     var values =  keys[k];
                     console.log('trying to get the value of the keys' + values)
                     
@@ -251,14 +260,11 @@ findName.addEventListener("click", function() {
                 bioDiv.appendChild(bioUL)
                 console.log('WE ARE AT THE L COUNTER === ' + l);
             }
-            
-
             console.log(legislatorsArr); 
         }
     })
     xhr.send()
-})
-
+}
 
 showBills.addEventListener('click', function(){
     if (bioguide != ''){
