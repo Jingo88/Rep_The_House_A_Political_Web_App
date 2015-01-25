@@ -4,18 +4,13 @@ var billList = document.querySelector('#sponsoredBills');
 var donateList = document.querySelector('#donationAmts');
 var showbills = document.querySelector('#showBills');
 var showDonations = document.querySelector('#showDonate');
-var bioDiv = document.querySelector('#poliInfo')
+var bioDiv = document.querySelector('#poliInfo');
+var billsDiv = document.querySelector('#billsDiv');
+var donateDiv = document.querySelector('#donationDiv');
 
 
 var inputName = document.querySelector("#findlastName");
 var inputState = document.querySelector('#findStateTwo');
-
-var fName = document.querySelector('#first');
-var lName = document.querySelector('#last');
-var party = document.querySelector('#party');
-var termStart = document.querySelector('#startT');
-var termEnd = document.querySelector('#endT');
-var state = document.querySelector('#state');
 
 var bioguide = '';
 var crp = '';
@@ -32,7 +27,6 @@ function currentBio(first,last,state,party,gender,term_start,term_end,twitter_id
     this.twitter_id = twitter_id;
 }
 
-
 //creates a list of all the bills sponsored by the currently searched politician
 function allBills(bioID) {
     var bills = [];
@@ -45,15 +39,21 @@ function allBills(bioID) {
     	
     	var billObj = JSON.parse(xhr.responseText)
 
-    	for (var i = 0; i < billObj.results.length; i++) {
+    	var billsUL = document.createElement('ul');
+        billsUL.setAttribute('id', 'billInfo');
+        billsUL.innerText = "Bills Sponsored"
+
+        for (var i = 0; i < billObj.results.length; i++) {
     		bills.push(billObj.results[i]);
     	};
 
     	bills.forEach(function(x){
     		var li = document.createElement('li');
     		li.innerText=x.official_title;
-    		billList.appendChild(li);
+    		billsUL.appendChild(li);
     	})
+
+        billsDiv.appendChild(billsUL)
     })
     xhr.send();
 }
@@ -74,7 +74,11 @@ function donations(crpID,year){
         
         var donateObj = JSON.parse(xhr.responseText);
 
-        var contributions = donateObj.response["contributors"]["contributor"]
+        var contributions = donateObj.response["contributors"]["contributor"];
+
+        var donateUL = document.createElement('ul');
+        donateUL.setAttribute('id', 'donationList');
+        donateUL.innerText = "Donations Lists"
 
         for (var i = 0; i < contributions.length; i++) {
 
@@ -83,14 +87,16 @@ function donations(crpID,year){
             var org = document.createElement('li');
             org.setAttribute('class', 'donate_org');
             org.innerText = contributions[i]["@attributes"]["org_name"];
-            donateList.appendChild(org);
+            donateUL.appendChild(org);
 
             var total = document.createElement('li');
             total.setAttribute('class', 'donate_total');
             total.innerText = contributions[i]["@attributes"]["total"];
-            donateList.appendChild(total);
+            donateUL.appendChild(total);
 
         };
+
+        donateDiv.appendChild(donateUL);
     })
     xhr.send();
 }
@@ -108,7 +114,6 @@ findState.addEventListener('click', function(){
 
         var stateLegislators = stateObj.results
     })
-
     xhr.send();
 })
 
@@ -125,6 +130,10 @@ findName.addEventListener("click", function() {
     xhr.open("GET", sunlighturl);
 
     xhr.addEventListener("load", function() {
+
+        //add an if/else statement for this where if senatorObj.results.length is > 1 then make a loop 
+        //to show the bios of the legislators
+
 
         //gives you the senator you found in a JSON object
         var senatorObj = JSON.parse(xhr.responseText);
