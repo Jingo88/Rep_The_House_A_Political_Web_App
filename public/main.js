@@ -221,35 +221,43 @@ findName.addEventListener("click", function() {
             var people = document.createElement('h1');
             people.innerText = "Legislators with the last name " + name;
             bioDiv.appendChild(people);
-
-            var breaking = document.createElement('br');
-
-            var bioUL = document.createElement('ul');
-            bioUL.setAttribute('id', 'info');
                
             for (l=0; l<legislatorsArr.length; l++){    
 
-                for (var k in legislatorsArr[l]){   
-                    var value = legislatorsArr[l][k];
-                    var newKey = k.replace(/[_]/g, " ");
+                var bioUL = document.createElement('ul');
+                bioUL.setAttribute('id', 'info');
+                
+                var keys = Object.keys(legislatorsArr[l]);
+                console.log('THESE ARE YOUR KEYS' + keys);
+                console.log(keys.length);
+
+
+                for (k=0; k<keys.length; k++){
+
+                    //keys[0] === first_name
+                    var values =  keys[k];
+                    console.log('trying to get the value of the keys' + values)
+                    
+                    var newKey = values.replace(/[_]/g, " ");
 
                     var li = document.createElement('li');
                     
                     li.setAttribute('class', 'bioInfo');
-                    li.innerText = newKey + ": " + value;
+                    li.innerText = newKey + ": " + legislatorsArr[l][values];
 
                     bioUL.appendChild(li);
-                    bioUL.appendChild(breaking);
                 }
+                
+                bioDiv.appendChild(bioUL)
+                console.log('WE ARE AT THE L COUNTER === ' + l);
             }
-            bioDiv.appendChild(bioUL)
+            
 
             console.log(legislatorsArr); 
         }
     })
     xhr.send()
 })
-
 
 
 showBills.addEventListener('click', function(){
