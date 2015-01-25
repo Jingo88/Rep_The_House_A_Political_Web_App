@@ -4,6 +4,7 @@ var billList = document.querySelector('#sponsoredBills');
 var donateList = document.querySelector('#donationAmts');
 var showbills = document.querySelector('#showBills');
 var showDonations = document.querySelector('#showDonate');
+var bioDiv = document.querySelector('#poliInfo')
 
 
 var inputName = document.querySelector("#findlastName");
@@ -16,7 +17,8 @@ var termStart = document.querySelector('#startT');
 var termEnd = document.querySelector('#endT');
 var state = document.querySelector('#state');
 
-
+var bioguide = '';
+var crp = '';
 
 //constructor to create a object of the currently viewed legislator
 function currentBio(first,last,state,party,gender,term_start,term_end,twitter_id) {
@@ -95,7 +97,6 @@ function donations(crpID,year){
 
 findState.addEventListener('click', function(){
     var stateInitials = inputState.value;
-
     var sunStateURL = "https://congress.api.sunlightfoundation.com/legislators?fields=&apikey=" + sunKey+ "&state="+ stateInitials;
 
     var xhr = new XMLHttpRequest();
@@ -114,7 +115,6 @@ findState.addEventListener('click', function(){
 
 findName.addEventListener("click", function() {
     var name = inputName.value;
-
     var sunlighturl = "https://congress.api.sunlightfoundation.com/legislators?fields=&apikey="+ sunKey + "&last_name=" + name;
     
     var xhr = new XMLHttpRequest();
@@ -127,10 +127,10 @@ findName.addEventListener("click", function() {
         var senatorObj = JSON.parse(xhr.responseText);
 
         //you will use the bioguide to pass into the function as a parameter and search for bills        
-        var bioguide = senatorObj.results[0].bioguide_id;
+        bioguide = senatorObj.results[0].bioguide_id;
         
         //you will use the crp id to pass into a function to search for donations
-        var crp = senatorObj.results[0].crp_id;
+        crp = senatorObj.results[0].crp_id;
 
         console.log(name + " has a crp id of " + crp)
 
@@ -152,6 +152,25 @@ findName.addEventListener("click", function() {
         termEnd.innerText = termE;
         state.innerText = stateTwo;
 
+        var person = document.createElement('h1');
+        person.innerText = nowLegislator.first + " " + nowLegislator.last;
+        bioDiv.appendChild(person);
+
+        var bioUL = document.createElement('ul');
+        bioUL.setAttribute('id', 'info');
+        
+        console.log(nowLegislator.length)
+
+        for (i=2; i<nowLegislator.length-2; i++){
+            console.log('we are in the for loop!!!!!')
+            var data = Object.keys(nowLegislator);
+            var li = document.createElement('li');
+            li.setAttribute('class', 'bioInfo');
+            li.innerText = data[i];
+            bioUL.appendChild(li);
+        }
+
+        bioDiv.appendChild(bioUL)
         console.log(nowLegislator);
     })
 
