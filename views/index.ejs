@@ -13,9 +13,11 @@
 	<input type='text' placeholder='Search By Last Name' id='findlastName'></input>
 	<button id='searchName'> Find Senator </button>
 
-	<input type='text' placeholder='Search By State ' id='findStateTwo'></input>
+	<input type='text' placeholder='Search By State ' id='findStateTwok,'></input>
 	<button id='searchState'> Find Senator </button>
-
+	
+	<button id='showBills'>Show Bills Sponsored</button>
+	<button id='showDonate'>Show Donations </button>
 </div>
 
 <h2></h2>
@@ -31,12 +33,16 @@
 	</ul>
 </div>
 
-<ul id='sponsoredBills'> Bills Sponsored
-</ul>
 
+<div>
+	<ul id='sponsoredBills'> Bills Sponsored
+	</ul>
+</div>
 
-<ul id='donationAmts'> Donations Received 
-</ul>
+<div>
+	<ul id='donationAmts'> Donations Received 
+	</ul>
+</div>
 
 <script>
 	var sunKey = '<%= sunKey %>'; 

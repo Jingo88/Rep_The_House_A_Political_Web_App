@@ -2,6 +2,9 @@ var findName = document.querySelector("#searchName");
 var findState = document.querySelector('#searchState');
 var billList = document.querySelector('#sponsoredBills');
 var donateList = document.querySelector('#donationAmts');
+var showbills = document.querySelector('#showBills');
+var showDonations = document.querySelector('#showDonate');
+
 
 var inputName = document.querySelector("#findlastName");
 var inputState = document.querySelector('#findStateTwo');
@@ -13,9 +16,22 @@ var termStart = document.querySelector('#startT');
 var termEnd = document.querySelector('#endT');
 var state = document.querySelector('#state');
 
-console.log("Your sunlight key is " + sunKey);
-// console.log("Your open secret key is " + openKey);
 
+
+//constructor to create a object of the currently viewed legislator
+function currentBio(first,last,state,party,gender,term_start,term_end,twitter_id) {
+    this.first = first;
+    this.last = last;
+    this.state = state;
+    this.party = party;
+    this.gender = gender;
+    this.term_start = term_start;
+    this.term_end = term_end;
+    this.twitter_id = twitter_id;
+}
+
+
+//creates a list of all the bills sponsored by the currently searched politician
 function allBills(bioID) {
     var bills = [];
     var urlB = "https://congress.api.sunlightfoundation.com/bills?&apikey=" + sunKey + "&sponsor_id=" + bioID;
@@ -40,13 +56,14 @@ function allBills(bioID) {
     xhr.send();
 }
 
+//creates a list of donations for the currently viewed politician
 function donations(crpID,year){
     var donations = [];
 
     var donateurl2 = "/donate/"+crpID+"/"+year;
 
     console.log("YOUR DONATE URL TWO IS " + donateurl2)
-    // var donateurl = "http://www.opensecrets.org/api/?method=candContrib&cid="+ crpID + "&cycle=" + year + "&output=json&apikey=" + openKey
+    
     var xhr = new XMLHttpRequest();
 
     xhr.open("GET", donateurl2);
@@ -72,20 +89,9 @@ function donations(crpID,year){
             donateList.appendChild(total);
 
         };
-
-    console.log(donations)
-
-        // bills.forEach(function(x){
-        //     var li = document.createElement('li');
-        //     li.innerText=x.official_title;
-        //     billList.appendChild(li);
-        // })
     })
     xhr.send();
 }
-
-//search by state two letters
-//
 
 findState.addEventListener('click', function(){
     var stateInitials = inputState.value;
@@ -137,6 +143,8 @@ findName.addEventListener("click", function() {
         var termE = senatorObj.results[0].term_end;
         var twitter = senatorObj.results[0].twitter_id;
 
+        nowLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, twitter);
+        
         fName.innerText = firstName;
         lName.innerText = lastName;
         party.innerText = partyOne;
@@ -144,15 +152,18 @@ findName.addEventListener("click", function() {
         termEnd.innerText = termE;
         state.innerText = stateTwo;
 
-        allBills(bioguide);
-        donations(crp, 2013);
+        console.log(nowLegislator);
     })
 
     xhr.send()
 })
 
+showBills.addEventListener('click', function(){
+    allBills(bioguide);
+})
 
-
-
-
+showDonations.addEventListener('click', function(){
+    donations(crp, 2013);
+})
+    
 
