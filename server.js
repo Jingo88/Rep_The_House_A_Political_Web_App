@@ -11,7 +11,6 @@ var sunKey = fs.readFileSync('sunlightKey.txt', 'utf8');
 var openKey = fs.readFileSync('openKey.txt', 'utf8');
 
 app.get('/', function(req, res){
-
 	res.render('index.ejs', {sunKey: sunKey, openKey: openKey});
 
 })
