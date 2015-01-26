@@ -319,26 +319,24 @@ function searchLegislatorState(state){
     xhr.addEventListener("load", function() {
 
         //gives you the senator you found in a JSON object
-        var senatorObj = JSON.parse(xhr.responseText);
-        var results = senatorObj.results;
+        var stateObj = JSON.parse(xhr.responseText);
+        var results = stateObj.results;
 
-        if (senatorObj.results.length === 1){
+        if (results.length === 1){
             //you will use the bioguide to pass into the function as a parameter and search for bills        
-            bioguide = senatorObj.results[0].bioguide_id;
+            bioguide = results[0].bioguide_id;
             
             //you will use the crp id to pass into a function to search for donations
-            crp = senatorObj.results[0].crp_id;
+            crp = results[0].crp_id;
 
-            console.log(name + " has a crp id of " + crp)
-
-            var firstName = senatorObj.results[0].first_name;
-            var lastName = senatorObj.results[0].last_name;
-            var stateTwo = senatorObj.results[0].state;
-            var partyOne = senatorObj.results[0].party;
-            var gender = senatorObj.results[0].gender;
-            var termS = senatorObj.results[0].term_start;
-            var termE = senatorObj.results[0].term_end;
-            var twitter = senatorObj.results[0].twitter_id;
+            var firstName = results[0].first_name;
+            var lastName = results[0].last_name;
+            var stateTwo = results[0].state;
+            var partyOne = results[0].party;
+            var gender = results[0].gender;
+            var termS = results[0].term_start;
+            var termE = results[0].term_end;
+            var twitter = results[0].twitter_id;
 
             nowLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, twitter);
 
