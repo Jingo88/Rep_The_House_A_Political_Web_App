@@ -78,6 +78,8 @@ function allBills(bioID) {
     xhr.open("GET", urlB);
 
     xhr.addEventListener('load', function(){
+        //Things to include
+        //have a link to the pdfs? 
     	
     	var billObj = JSON.parse(xhr.responseText)
 
@@ -449,8 +451,19 @@ showDonations.addEventListener('click', function(){
 //make sure to make the data more appealing
 
 
-//submit for search name not working
-//moving bills to server not working
+//things to include for the bio information
+//chamber: house or senate
+//title: Sen or Rep
+//Party: change if I to independent
+
+//What to add to bill information?
+//include the pdf or html file link? HTML seems faster
+//target Active and if active === true then active at to find date, if false then there is no date
+//give the bills a count just like the multiple legislators list
+//move them all into an object
+
+
+
 
 //constructor, constructor, view more buttons, bio, pictures
 //bills in a constructor with more information/

@@ -3,3 +3,11 @@
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 }
+
+#info{
+	background-color: blue;
+	border: 4px solid #ccb62f;
+	border-radius: 20px
+	color: white;
+	padding: 35px;
+}
