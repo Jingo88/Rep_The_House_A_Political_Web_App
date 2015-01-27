@@ -20,6 +20,7 @@ var yearDonate = document.querySelector('#donationYear');
 //defined these variables as global so we can use them in multiple functions
 var bioguide = '';
 var crp = '';
+var multiCounter = 1;
 
 var legislatorsArr = [];
 
@@ -29,6 +30,7 @@ function clearData(){
     inputState.value = '';
     bioDiv.innerHTML = '';
     multiDiv.innerHTML = '';
+    multiCounter = 1;
 }
 
 //returns a string to clarify party affiliation
@@ -168,35 +170,6 @@ inputState.addEventListener('keypress', function(e){
     }
 })
 
-
-//     var searchingState = inputState.value;
-//     var stateInitials = searchingState.toUpperCase();
-
-//     console.log("YOU HAVE SEARCHED FOR " + stateInitials)
-
-//     if (stateInitials.length>= 3){
-//         alert("Please enter two letters of a valid state");
-
-//     } else {
-
-//         var sunStateURL = "/searchState/"+ stateInitials;
-
-//         var xhr = new XMLHttpRequest();
-
-//         xhr.open('GET', sunStateURL);
-
-//         xhr.addEventListener('load', function(){
-
-//             var stateObj = JSON.parse(xhr.responseText);
-
-//             var stateLegislators = stateObj.results;
-
-//             console.log(stateLegislators);
-//         })
-//     xhr.send();
-//     }
-// })
-
 function searchLegislatorName(name){
 
     var sunlighturl = "/searchLname/"+name
@@ -298,9 +271,12 @@ function searchLegislatorName(name){
 
                     bioUL.appendChild(li);
                 }
-                
+                var heading = document.createElement('h4');
+                heading.innerText = multiCounter + ": " +  legislatorsArr[l][keys[0]] + " " + legislatorsArr[l][keys[1]];
+                multiDiv.appendChild(heading);
                 multiDiv.appendChild(bioUL)
-                console.log('WE ARE AT THE L COUNTER === ' + l);
+                
+                multiCounter++
             }
             console.log(legislatorsArr); 
         }
@@ -429,9 +405,11 @@ function searchLegislatorState(state){
 
                     bioUL.appendChild(li);
                 }
-                
-                multiDiv.appendChild(bioUL)
-                console.log('WE ARE AT THE L COUNTER === ' + l);
+                var heading = document.createElement('h4');
+                heading.innerText = multiCounter + ": " +  legislatorsArr[l][keys[0]] + " " + legislatorsArr[l][keys[1]];
+                multiDiv.appendChild(heading);
+                multiDiv.appendChild(bioUL);
+                multiCounter ++ 
             }
         }
     })
