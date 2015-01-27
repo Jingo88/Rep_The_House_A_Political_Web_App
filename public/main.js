@@ -24,6 +24,23 @@ var multiCounter = 1;
 
 var legislatorsArr = [];
 
+function chamberInfo(x){
+    if (x === 'senate'){
+        return "The Senate";
+
+    } else if (x === 'house'){
+        return "The House";
+    }
+}
+
+function titleInfo(x){
+    if (x === 'Rep'){
+        return "Representative";
+    } else if (x === 'Sen'){
+        return "Senator";
+    }
+}
+
 function clearData(){
     legislatorsArr = [];
     inputName.value = '';
@@ -56,7 +73,7 @@ function genderInfo(x){
 }
 
 //constructor to create a object of the currently viewed legislator
-function currentBio(First_Name,Last_Name,State,Party,Gender,Term_Start,Term_End,Twitter_Handle) {
+function currentBio(First_Name,Last_Name,State,Party,Gender,Term_Start,Term_End,Chamber,Title,Twitter_Handle) {
     this.First_Name = First_Name;
     this.Last_Name = Last_Name;
     this.State = State;
@@ -64,6 +81,8 @@ function currentBio(First_Name,Last_Name,State,Party,Gender,Term_Start,Term_End,
     this.Gender = Gender;
     this.Term_Start = Term_Start;
     this.Term_End = Term_End;
+    this.Chamber = Chamber;
+    this.Title = Title;
     this.Twitter_Handle = Twitter_Handle;
 }
 
@@ -204,9 +223,11 @@ function searchLegislatorName(name){
             var gender = genderInfo(senatorObj.results[0].gender);
             var termS = senatorObj.results[0].term_start;
             var termE = senatorObj.results[0].term_end;
+            var chamber = chamberInfo(results[0].chamber);
+            var title = titleInfo(results[0].title);
             var twitter = "@" + senatorObj.results[0].twitter_id;
 
-            nowLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, twitter);
+            nowLegislator = new currentBio(firstName,lastName,stateTwo,partyOne,gender,termS,termE,chamber,title,twitter);
 
             var person = document.createElement('h1');
             person.innerText = nowLegislator.First_Name + " " + nowLegislator.Last_Name;
@@ -241,9 +262,11 @@ function searchLegislatorName(name){
                 var gender = genderInfo(results[i].gender);
                 var termS = results[i].term_start;
                 var termE = results[i].term_end;
+                var chamber = chamberInfo(results[i].chamber);
+                var title = titleInfo(results[i].title);
                 var twitter = "@" + results[i].twitter_id;
 
-                addLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, twitter);
+                addLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, chamber, title, twitter);
 
                 legislatorsArr.push(addLegislator);
             }
@@ -339,9 +362,11 @@ function searchLegislatorState(state){
             var gender = genderInfo(results[0].gender);
             var termS = results[0].term_start;
             var termE = results[0].term_end;
+            var chamber = chamberInfo(results[0].chamber);
+            var title = titleInfo(results[0].title);
             var twitter = "@" + results[0].twitter_id;
 
-            nowLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, twitter);
+            nowLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, chamber, title, twitter);
 
             var person = document.createElement('h1');
             person.innerText = nowLegislator.First_Name + " " + nowLegislator.Last_Name;
@@ -374,9 +399,11 @@ function searchLegislatorState(state){
                 var gender = genderInfo(results[i].gender);
                 var termS = results[i].term_start;
                 var termE = results[i].term_end;
+                var chamber = chamberInfo(results[i].chamber);
+                var title = titleInfo(results[i].title);
                 var twitter = "@" + results[i].twitter_id;
 
-                addLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, twitter);
+                addLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, chamber, title, twitter);
 
                 legislatorsArr.push(addLegislator);
             }
@@ -421,7 +448,6 @@ function searchLegislatorState(state){
 showBills.addEventListener('click', function(){
     if (bioguide != ''){
         allBills(bioguide);
-        console.log(bioguide);
     } else {
         alert("Sorry you have not chosen a legislator to view the bills of")
     }
