@@ -31,6 +31,26 @@ function clearData(){
     multiDiv.innerHTML = '';
 }
 
+//returns a string to clarify party affiliation
+function partyInfo(x){
+    if (x === 'D'){
+        return "Democrat";
+    } else if (x === 'R') {
+        return "Republican";
+    } else if (x === 'I'){
+        return "Independent";
+    }
+}
+
+//returns a string to clarify gender
+function genderInfo(x){
+    if (x === 'F'){
+        return 'Female';
+    } else if (x === 'M'){
+        return 'Male';
+    }
+}
+
 //constructor to create a object of the currently viewed legislator
 function currentBio(First_Name,Last_Name,State,Party,Gender,Term_Start,Term_End,Twitter_Handle) {
     this.First_Name = First_Name;
@@ -194,11 +214,11 @@ function searchLegislatorName(name){
             var firstName = senatorObj.results[0].first_name;
             var lastName = senatorObj.results[0].last_name;
             var stateTwo = senatorObj.results[0].state;
-            var partyOne = senatorObj.results[0].party;
-            var gender = senatorObj.results[0].gender;
+            var partyOne = partyInfo(senatorObj.results[0].party);
+            var gender = genderInfo(senatorObj.results[0].gender);
             var termS = senatorObj.results[0].term_start;
             var termE = senatorObj.results[0].term_end;
-            var twitter = senatorObj.results[0].twitter_id;
+            var twitter = "@" + senatorObj.results[0].twitter_id;
 
             nowLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, twitter);
 
@@ -231,11 +251,11 @@ function searchLegislatorName(name){
                 var firstName = results[i].first_name;                
                 var lastName = results[i].last_name;
                 var stateTwo = results[i].state;
-                var partyOne = results[i].party;
-                var gender = results[i].gender;
+                var partyOne = partyInfo(results[i].party);
+                var gender = genderInfo(results[i].gender);
                 var termS = results[i].term_start;
                 var termE = results[i].term_end;
-                var twitter = results[i].twitter_id;
+                var twitter = "@" + results[i].twitter_id;
 
                 addLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, twitter);
 
@@ -332,11 +352,11 @@ function searchLegislatorState(state){
             var firstName = results[0].first_name;
             var lastName = results[0].last_name;
             var stateTwo = results[0].state;
-            var partyOne = results[0].party;
-            var gender = results[0].gender;
+            var partyOne = partyInfo(results[0].party);
+            var gender = genderInfo(results[0].gender);
             var termS = results[0].term_start;
             var termE = results[0].term_end;
-            var twitter = results[0].twitter_id;
+            var twitter = "@" + results[0].twitter_id;
 
             nowLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, twitter);
 
@@ -369,11 +389,11 @@ function searchLegislatorState(state){
                 var firstName = results[i].first_name;                
                 var lastName = results[i].last_name;
                 var stateTwo = results[i].state;
-                var partyOne = results[i].party;
-                var gender = results[i].gender;
+                var partyOne = partyInfo(results[i].party);
+                var gender = genderInfo(results[i].gender);
                 var termS = results[i].term_start;
                 var termE = results[i].term_end;
-                var twitter = results[i].twitter_id;
+                var twitter = "@" + results[i].twitter_id;
 
                 addLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, twitter);
 
