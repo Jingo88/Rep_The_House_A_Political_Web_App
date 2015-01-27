@@ -21,9 +21,29 @@ var yearDonate = document.querySelector('#donationYear');
 var bioguide = '';
 var crp = '';
 var multiCounter = 1;
+var billCounter = 1;
 
+//these are the arrays that store the data as objects
 var legislatorsArr = [];
+var billsArr = [];
+var donations = [];
 
+//the function that is used to clear the data at every search
+function clearData(){
+    legislatorsArr = [];
+    inputName.value = '';
+    inputState.value = '';
+    bioDiv.innerHTML = '';
+    multiDiv.innerHTML = '';
+    multiCounter = 1;
+    billCounter = 1;
+    bioguide = '';
+    crp = '';
+    billsArr = [];
+    donations = [];
+}
+
+//below functions grabs the data from the JSON file and returns a more user friendly string
 function chamberInfo(x){
     if (x === 'senate'){
         return "The Senate";
@@ -41,18 +61,6 @@ function titleInfo(x){
     }
 }
 
-function clearData(){
-    legislatorsArr = [];
-    inputName.value = '';
-    inputState.value = '';
-    bioDiv.innerHTML = '';
-    multiDiv.innerHTML = '';
-    multiCounter = 1;
-    bioguide = '';
-    crp = '';
-}
-
-//returns a string to clarify party affiliation
 function partyInfo(x){
     if (x === 'D'){
         return "Democrat";
@@ -63,7 +71,6 @@ function partyInfo(x){
     }
 }
 
-//returns a string to clarify gender
 function genderInfo(x){
     if (x === 'F'){
         return 'Female';
@@ -86,44 +93,76 @@ function currentBio(First_Name,Last_Name,State,Party,Gender,Term_Start,Term_End,
     this.Twitter_Handle = Twitter_Handle;
 }
 
+//constructor to create an object of the bills being sponsored by the current legislator
+function currentBills(Official_Title, Bill_HTML, Bill_Active, Bill_Active_Date){
+    this.Official_Title = Official_Title;
+    this.Bill_HTML = Bill_HTML;
+    this.Bill_Active = Bill_Active;
+    this.Bill_Active_Date = Bill_Active_Date;
+}
+
+
 //creates a list of all the bills sponsored by the currently searched politician
 function allBills(bioID) {
-    var bills = [];
-
     var urlB = "/bills/" + bioID;
-
     var xhr = new XMLHttpRequest();
 
     xhr.open("GET", urlB);
-
     xhr.addEventListener('load', function(){
-        //Things to include
-        //have a link to the pdfs? 
-    	
-    	var billObj = JSON.parse(xhr.responseText)
-
-    	var billsUL = document.createElement('ul');
-        billsUL.setAttribute('id', 'billInfo');
-        billsUL.innerText = "Bills Sponsored"
+    	var billObj = JSON.parse(xhr.responseText);
+        var billResults = billObj.results;
 
         for (var i = 0; i < billObj.results.length; i++) {
-    		bills.push(billObj.results[i]);
+
+            var official_title = billResults[i].official_title;
+            var billLink = billResults[i].last_version.urls.html;
+            var billactive = billResults[i].history.active;
+            if (billactive === 'true'){
+
+                var billactiveDate = billResults[i].history.active_at;
+
+            } else if (billactive === 'false'){
+                var billactiveDate = '';
+            }
+            
+            newBill = new currentBills(official_title,billLink, billactive, billactiveDate);
+
+    		billsArr.push(newBill);
+            console.log(billsArr);
     	};
 
-    	bills.forEach(function(x){
-    		var li = document.createElement('li');
-    		li.innerText=x.official_title;
-    		billsUL.appendChild(li);
-    	})
+        for (l=0; l<billsArr.length; l++){
+            var billsUL = document.createElement('ul');
+            billsUL.setAttribute('id', 'billInfo');
 
-        billsDiv.appendChild(billsUL)
+            var keys = Object.keys(billsArr[l]);
+            console.log("These are the bills keys" + keys);
+
+            for (k=0; k<keys.length; k++){
+                var values = keys[k];
+                    
+                var newKey = values.replace(/[_]/g, " ");
+
+                var li = document.createElement('li');
+                
+                li.setAttribute('class', 'bills');
+                li.innerText = newKey + ": " + billsArr[l][values];
+
+                billsUL.appendChild(li);
+            }
+            var billNum = document.createElement('h4');
+            billNum.innerText = billCounter;
+            billsDiv.appendChild(billNum);
+            billsDiv.appendChild(billsUL);
+            billCounter++;
+        }
     })
     xhr.send();
 }
 
 //creates a list of donations for the currently viewed politician
 function donations(crpID,year){
-    var donations = [];
+    
 
     var donateurl2 = "/donate/"+crpID+"/"+year;
     
@@ -248,8 +287,7 @@ function searchLegislatorName(name){
 
             }
 
-            bioDiv.appendChild(bioUL)
-            console.log(nowLegislator);            
+            bioDiv.appendChild(bioUL)       
         
         }  else if (results.length > 1) {
                 
@@ -305,7 +343,6 @@ function searchLegislatorName(name){
                 
                 multiCounter++
             }
-            console.log(legislatorsArr); 
         }
     })
     xhr.send();
@@ -489,6 +526,7 @@ showDonations.addEventListener('click', function(){
 //move them all into an object
 
 
+//maybe add the show bills button into the bioDiv and multiDiv? does that mean the multiDiv has to encapsulate the bioDivs?
 
 
 //constructor, constructor, view more buttons, bio, pictures
