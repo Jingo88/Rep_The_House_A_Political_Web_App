@@ -31,6 +31,8 @@ function clearData(){
     bioDiv.innerHTML = '';
     multiDiv.innerHTML = '';
     multiCounter = 1;
+    bioguide = '';
+    crp = '';
 }
 
 //returns a string to clarify party affiliation
@@ -68,7 +70,9 @@ function currentBio(First_Name,Last_Name,State,Party,Gender,Term_Start,Term_End,
 //creates a list of all the bills sponsored by the currently searched politician
 function allBills(bioID) {
     var bills = [];
-    var urlB = "https://congress.api.sunlightfoundation.com/bills?&apikey=" + sunKey + "&sponsor_id=" + bioID;
+
+    var urlB = "/bills/" + bioID;
+
     var xhr = new XMLHttpRequest();
 
     xhr.open("GET", urlB);
@@ -101,8 +105,6 @@ function donations(crpID,year){
     var donations = [];
 
     var donateurl2 = "/donate/"+crpID+"/"+year;
-
-    console.log("YOUR DONATE URL TWO IS " + donateurl2)
     
     var xhr = new XMLHttpRequest();
 
@@ -286,11 +288,11 @@ function searchLegislatorName(name){
 
 
 findName.addEventListener("click", function() {
-    clearData();
+    
     var input = inputName.value;
 
     var name = input.charAt(0).toUpperCase() + input.slice(1);
-
+    clearData();
     searchLegislatorName(name);
 })
 
@@ -357,9 +359,7 @@ function searchLegislatorState(state){
                 bioUL.appendChild(li);
 
             }
-
-            bioDiv.appendChild(bioUL)
-            console.log(nowLegislator);            
+            bioDiv.appendChild(bioUL)           
         
         }  else if (results.length > 1) {
                 
@@ -419,6 +419,7 @@ function searchLegislatorState(state){
 showBills.addEventListener('click', function(){
     if (bioguide != ''){
         allBills(bioguide);
+        console.log(bioguide);
     } else {
         alert("Sorry you have not chosen a legislator to view the bills of")
     }
@@ -448,6 +449,8 @@ showDonations.addEventListener('click', function(){
 //make sure to make the data more appealing
 
 
+//submit for search name not working
+//moving bills to server not working
 
 //constructor, constructor, view more buttons, bio, pictures
 //bills in a constructor with more information/

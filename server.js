@@ -29,6 +29,19 @@ app.get('/donate/:crpID/:year', function(req, res){
 	})
 });
 
+app.get('/bills/:bioID', function(req, res){
+
+	var bio = req.params.bioID;
+
+	var billsurl = "https://congress.api.sunlightfoundation.com/bills?&apikey=" + sunKey + "&sponsor_id=" + bio;
+	
+	request(billsurl, function(error, response, body){
+		if (!error && response.statusCode == 200){
+			res.send(body)
+		}
+	})
+});
+
 app.get('/searchLname/:Lname', function(req, res){
 
 	var name = req.params.Lname;
