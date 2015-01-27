@@ -141,28 +141,29 @@ findState.addEventListener('click', function(){
     var searchingState = inputState.value;
     var stateInitials = searchingState.toUpperCase();
 
-    console.log("YOU HAVE SEARCHED FOR " + stateInitials)
-
     if (stateInitials.length>= 3){
         alert("Please enter two letters of a valid state");
 
     } else {
-
-        var sunStateURL = "/searchState/"+ stateInitials;
-
-        var xhr = new XMLHttpRequest();
-
-        xhr.open('GET', sunStateURL);
-
-        xhr.addEventListener('load', function(){
-
-            var stateObj = JSON.parse(xhr.responseText);
-
-            var stateLegislators = stateObj.results;
-
-            console.log(stateLegislators);
-        })
+        searchLegislatorState(stateInitials);
+    }
     xhr.send();
+})
+
+inputName.addEventListener('keypress', function(e){
+    var searchingState = inputState.value;
+    var stateInitials = searchingState.toUpperCase();
+    
+    if (stateInitials.length>= 3){
+    alert("Please enter two letters of a valid state");
+
+    } else {
+
+        if (e.keyCode === 13){
+
+        clearData();
+        searchLegislatorState(stateInitials);
+        }
     }
 })
 
