@@ -145,17 +145,18 @@ findState.addEventListener('click', function(){
         alert("Please enter two letters of a valid state");
 
     } else {
+        clearData();
         searchLegislatorState(stateInitials);
     }
-    xhr.send();
 })
 
-inputName.addEventListener('keypress', function(e){
+inputState.addEventListener('keypress', function(e){
     var searchingState = inputState.value;
     var stateInitials = searchingState.toUpperCase();
     
     if (stateInitials.length>= 3){
-    alert("Please enter two letters of a valid state");
+
+        alert("Please enter two letters of a valid state");
 
     } else {
 
@@ -167,27 +168,34 @@ inputName.addEventListener('keypress', function(e){
     }
 })
 
-findName.addEventListener("click", function() {
-    clearData();
-    var input = inputName.value;
 
-    var name = input.charAt(0).toUpperCase() + input.slice(1);
+//     var searchingState = inputState.value;
+//     var stateInitials = searchingState.toUpperCase();
 
-    searchLegislatorName(name);
-})
+//     console.log("YOU HAVE SEARCHED FOR " + stateInitials)
 
-inputName.addEventListener('keypress', function(e){
-    
-    if (e.keyCode === 13){
-        
-        var input = inputName.value;
+//     if (stateInitials.length>= 3){
+//         alert("Please enter two letters of a valid state");
 
-        var name = input.charAt(0).toUpperCase() + input.slice(1);
+//     } else {
 
-        clearData();
-        searchLegislatorName(name);
-    }
-})
+//         var sunStateURL = "/searchState/"+ stateInitials;
+
+//         var xhr = new XMLHttpRequest();
+
+//         xhr.open('GET', sunStateURL);
+
+//         xhr.addEventListener('load', function(){
+
+//             var stateObj = JSON.parse(xhr.responseText);
+
+//             var stateLegislators = stateObj.results;
+
+//             console.log(stateLegislators);
+//         })
+//     xhr.send();
+//     }
+// })
 
 function searchLegislatorName(name){
 
@@ -301,37 +309,31 @@ function searchLegislatorName(name){
 }
 
 
-//     var searchingState = inputState.value;
-//     var stateInitials = searchingState.toUpperCase();
+findName.addEventListener("click", function() {
+    clearData();
+    var input = inputName.value;
 
-//     console.log("YOU HAVE SEARCHED FOR " + stateInitials)
+    var name = input.charAt(0).toUpperCase() + input.slice(1);
 
-//     if (stateInitials.length>= 3){
-//         alert("Please enter two letters of a valid state");
+    searchLegislatorName(name);
+})
 
-//     } else {
+inputName.addEventListener('keypress', function(e){
+    
+    if (e.keyCode === 13){
+        
+        var input = inputName.value;
 
-//         var sunStateURL = "/searchState/"+ stateInitials;
+        var name = input.charAt(0).toUpperCase() + input.slice(1);
 
-//         var xhr = new XMLHttpRequest();
-
-//         xhr.open('GET', sunStateURL);
-
-//         xhr.addEventListener('load', function(){
-
-//             var stateObj = JSON.parse(xhr.responseText);
-
-//             var stateLegislators = stateObj.results;
-
-//             console.log(stateLegislators);
-//         })
-//     xhr.send();
-//     }
-// })
+        clearData();
+        searchLegislatorName(name);
+    }
+})
 
 function searchLegislatorState(state){
 
-    var sunlighturl = "/searchState"+ state
+    var sunlighturl = "/searchState/"+ state
 
     var xhr = new XMLHttpRequest();
 
@@ -469,3 +471,10 @@ showDonations.addEventListener('click', function(){
 
 
 
+//constructor, constructor, view more buttons, bio, pictures
+//bills in a constructor with more information/
+//donations in a contructor with company, and prices
+//view more buttons for the multiLists
+//find an api with bios and pictures of each person? 
+//number the lists
+//include legislator title
