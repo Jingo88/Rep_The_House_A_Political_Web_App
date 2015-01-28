@@ -167,10 +167,13 @@ function allBills(bioID) {
     xhr.send();
 }
 
+
 //creates a list of donations for the currently viewed politician
-function donations(crpID,year){
+function donationFunc(crpID,year){
     var donateurl2 = "/donate/"+crpID+"/"+year;
     var xhr = new XMLHttpRequest();
+
+    console.log(crpID + year)
 
     xhr.open("GET", donateurl2);
     xhr.addEventListener('load', function(){
@@ -506,11 +509,13 @@ showBills.addEventListener('click', function(){
 
 showDonations.addEventListener('click', function(){
     var year = yearDonate.value
-
+    console.log(crp);
+    console.log(year);
     if (year.length != 4){
         alert("please enter a valid year");
     } else {
-        donations(crp,year);
+        donationFunc(crp, year);
+        // donationFunc("N00033492", "2014");
     }    
 })
     
