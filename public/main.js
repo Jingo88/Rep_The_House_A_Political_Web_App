@@ -22,11 +22,12 @@ var bioguide = '';
 var crp = '';
 var multiCounter = 1;
 var billCounter = 1;
+var donateCounter = 1;
 
 //these are the arrays that store the data as objects
 var legislatorsArr = [];
 var billsArr = [];
-var donations = [];
+var donationArr = [];
 
 //the function that is used to clear the data at every search
 function clearData(){
@@ -41,6 +42,7 @@ function clearData(){
     crp = '';
     billsArr = [];
     donations = [];
+    donateCounter = 1;
 }
 
 //below functions grabs the data from the JSON file and returns a more user friendly string
@@ -101,6 +103,11 @@ function currentBills(Official_Title, Bill_HTML, Bill_Active, Bill_Active_Date){
     this.Bill_Active_Date = Bill_Active_Date;
 }
 
+function currentDonation(Organization_Name, Total_Amount){
+    this.Organization_Name = Organization_Name;
+    this.Total_Amount = Total_Amount;
+}
+
 
 //creates a list of all the bills sponsored by the currently searched politician
 function allBills(bioID) {
@@ -151,7 +158,7 @@ function allBills(bioID) {
                 billsUL.appendChild(li);
             }
             var billNum = document.createElement('h4');
-            billNum.innerText = billCounter;
+            billNum.innerText = "Bill: " + billCounter;
             billsDiv.appendChild(billNum);
             billsDiv.appendChild(billsUL);
             billCounter++;
@@ -162,41 +169,48 @@ function allBills(bioID) {
 
 //creates a list of donations for the currently viewed politician
 function donations(crpID,year){
-    
-
     var donateurl2 = "/donate/"+crpID+"/"+year;
-    
     var xhr = new XMLHttpRequest();
 
     xhr.open("GET", donateurl2);
-
     xhr.addEventListener('load', function(){
         
         var donateObj = JSON.parse(xhr.responseText);
-
         var contributions = donateObj.response["contributors"]["contributor"];
 
-        var donateUL = document.createElement('ul');
-        donateUL.setAttribute('id', 'donationList');
-        donateUL.innerText = "Donations Lists"
-
         for (var i = 0; i < contributions.length; i++) {
+            console.log("WE ARE IN THE FIRST FOR LOOP")
+            var org_name = contributions[i]["@attributes"]["org_name"];
+            var total = contributions[i]["@attributes"]["total"];
 
-            donations.push(contributions[i]["@attributes"]);
+            newDonate = new currentDonation(org_name, total);
 
-            var org = document.createElement('li');
-            org.setAttribute('class', 'donate_org');
-            org.innerText = contributions[i]["@attributes"]["org_name"];
-            donateUL.appendChild(org);
+            donationArr.push(newDonate);
 
-            var total = document.createElement('li');
-            total.setAttribute('class', 'donate_total');
-            total.innerText = contributions[i]["@attributes"]["total"];
-            donateUL.appendChild(total);
+        }
 
-        };
+        for (l=0; l<donationArr.length; l++){
+            var donateUL = document.createElement('ul');
+            donateUL.setAttribute('id', 'donationList');
 
-        donateDiv.appendChild(donateUL);
+            var keys = Object.keys(donationArr[l]);
+
+            for (k=0; k<keys.length; k++){
+                var values = keys[k];
+
+                var newKey = values.replace(/[_]/g, " ");
+
+                var li = document.createElement('li');
+                li.setAttribute('class', 'donations');
+                li.innerText = newKey + ": " +donationArr[l][values];
+                donateUL.appendChild(li);
+            }   
+            var donateNum = document.createElement('h4');
+            donateNum.innerText = "Donation: " + donateNum;
+            donateDiv.appendChild(donateNum);
+            donateDiv.appendChild(donateUL);
+            donateCounter++;
+        }
     })
     xhr.send();
 }
@@ -514,17 +528,11 @@ showDonations.addEventListener('click', function(){
 //make sure to make the data more appealing
 
 
-//things to include for the bio information
-//chamber: house or senate
-//title: Sen or Rep
-//Party: change if I to independent
-
-//What to add to bill information?
-//include the pdf or html file link? HTML seems faster
-//target Active and if active === true then active at to find date, if false then there is no date
-//give the bills a count just like the multiple legislators list
-//move them all into an object
-
+//idea for bolding the keys of the list items when they are produced
+//var dateSpan = document.createElement('span')
+// dateSpan.innerHTML = dateString;
+// var li = document.createElement('li');
+// li.appendChild(dateSpan);
 
 //maybe add the show bills button into the bioDiv and multiDiv? does that mean the multiDiv has to encapsulate the bioDivs?
 
