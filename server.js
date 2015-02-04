@@ -70,7 +70,7 @@ app.get('/searchState/:stateInitials', function(req, res){
 });
 
 app.listen(3000);
-
+console.log("We are connected to port 3000");
 
 
 

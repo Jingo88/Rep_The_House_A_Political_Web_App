@@ -122,20 +122,19 @@ function allBills(bioID) {
         for (var i = 0; i < billObj.results.length; i++) {
 
             var official_title = billResults[i].official_title;
-            var billLink = billResults[i].last_version.urls.html;
+            var billLink = billResults[i].urls.html;
             var billactive = billResults[i].history.active;
-            if (billactive === 'true'){
+            if (billactive === true){
 
                 var billactiveDate = billResults[i].history.active_at;
 
-            } else if (billactive === 'false'){
-                var billactiveDate = '';
+            } else {
+                var billactiveDate = 'This bill is not active';
             }
             
             newBill = new currentBills(official_title,billLink, billactive, billactiveDate);
 
     		billsArr.push(newBill);
-            console.log(billsArr);
     	};
 
         for (l=0; l<billsArr.length; l++){
@@ -541,6 +540,8 @@ showDonations.addEventListener('click', function(){
 
 //maybe add the show bills button into the bioDiv and multiDiv? does that mean the multiDiv has to encapsulate the bioDivs?
 
+//look into "this.parentNode" if you want to target a specific div
+// var li = this.parentNode
 
 //constructor, constructor, view more buttons, bio, pictures
 //bills in a constructor with more information/
