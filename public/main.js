@@ -122,7 +122,7 @@ function allBills(bioID) {
         for (var i = 0; i < billObj.results.length; i++) {
 
             var official_title = billResults[i].official_title;
-            var billLink = billResults[i].urls.html;
+            var billLink = billResults[i].urls.congress;
             var billactive = billResults[i].history.active;
             if (billactive === true){
 
