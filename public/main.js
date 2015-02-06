@@ -124,6 +124,8 @@ function allBills(bioID) {
             var official_title = billResults[i].official_title;
             var billLink = billResults[i].urls.congress;
             var billactive = billResults[i].history.active;
+            //make a var bill link array and have that loop through the urls. It can then push all the 
+            //urls (url[j] etc etc) into an array and at the end push that array into the newBill hash
             if (billactive === true){
 
                 var billactiveDate = billResults[i].history.active_at;
