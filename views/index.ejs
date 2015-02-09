@@ -5,37 +5,39 @@
 <link href="style.css" rel='stylesheet'>
 </head>
 <body>
-	<h1>PolitiSearch</h1>
-
-
-<div id='search'>
-	<input type='text' placeholder='Search By Last Name' id='findlastName'></input>
-	<button id='searchName'> Find Senator By Last Name </button>
-
-	<input type='text' placeholder='Search By State ' id='findStateTwo'></input>
-	<button id='searchState'> Find Senator By State </button>
 	
-	<button id='showBills'>Show Bills Sponsored</button>
+	<div id='search'>
+		<input class='bar' type='text' placeholder='Search By Last Name' id='findlastName'></input>
+		<button class='bar' id='searchName'> Find Senator By Last Name </button>
 
-	<input type='text' placeholder='Enter Year' id='donationYear'></input>
-	<button id='showDonate'>Show Donations </button>
-</div>
+		<input class='bar' type='text' placeholder='Search By State ' id='findStateTwo'></input>
+		<button class='bar' id='searchState'> Find Senator By State </button>
+		
+		<button class='bar' id='showBills'>Show Bills Sponsored</button>
 
-<h2></h2>
+		<input class='bar' type='text' placeholder='Enter Year' id='donationYear'></input>
+		<button class='bar' id='showDonate'>Show Donations </button>
+	</div>
 
-<div id='poliInfo'></div>
+	<h1 id='pageTitle'>PolitiSearch</h1>
 
-<div id='multiList'></div>
 
-<div id='billsDiv'></div>
+	<h2></h2>
 
-<div id='donationDiv'></div>
+	<div id='poliInfo'></div>
+
+	<div id='multiList'></div>
+
+	<div id='billsDiv'></div>
+
+	<div id='donationDiv'></div>
 
 <script>
 	var sunKey = '<%= sunKey %>'; 
 
 </script>
 
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script type='text/javascript' src='main.js'></script>
 
 </body>
