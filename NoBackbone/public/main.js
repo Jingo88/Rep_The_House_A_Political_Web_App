@@ -8,11 +8,11 @@ function allBills(bioID) {
     	var billObj = JSON.parse(xhr.responseText);
         var billResults = billObj.results;
 
-        
         for (var i = 0; i < billObj.results.length; i++) {
 
             var official_title = billResults[i].official_title;
             var billLink = billResults[i].urls.congress;
+            var billURL = "<a href=" + billLink + " target='_blank'>" + billLink + "</a>";
             var billactive = billResults[i].history.active;
             //make a var bill link array and have that loop through the urls. It can then push all the 
             //urls (url[j] etc etc) into an array and at the end push that array into the newBill hash
@@ -24,7 +24,7 @@ function allBills(bioID) {
                 var billactiveDate = 'This bill is not active';
             }
             
-            newBill = new currentBills(official_title,billLink, billactive, billactiveDate);
+            newBill = new currentBills(official_title,billURL, billactive, billactiveDate);
 
     		billsArr.push(newBill);
     	};
@@ -44,7 +44,7 @@ function allBills(bioID) {
                 var li = document.createElement('li');
                 
                 li.setAttribute('class', 'bills');
-                li.innerText = newKey + ": " + billsArr[l][values];
+                li.innerHTML = newKey + ": " + billsArr[l][values];
 
                 billsUL.appendChild(li);
             }

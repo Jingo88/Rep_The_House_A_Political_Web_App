@@ -1,3 +1,5 @@
+//user login express example in Week 10 of WDI
+
 var express = require('express');
 var app = express();
 var request = require('request');
