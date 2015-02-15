@@ -2,11 +2,13 @@
 //You will need multiple models and an equal number of collections
 //currently thinking three models - organize how you want your code to be divded
 
-var Legislator = Backbone.Model.extend({
+var LegislatorName = Backbone.Model.extend({
+    initialize: function(){
+        console.log('The Legislator Model has been initialized.');
+    }
+});
 
-})
-
-var userSearch = new Legislator({
+var userSearch = new LegislatorName({
 
     // firstName: senatorObj.results[0].first_name;
     // lastName: senatorObj.results[0].last_name;

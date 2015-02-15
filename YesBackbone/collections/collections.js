@@ -1,7 +1,10 @@
-var LegislatorsCollection = Backbone.Collection.extend({
-	model : Legislator
-})
+// talks to the server, and the model
+var LegislatorsNameCollection = Backbone.Collection.extend({
+	model : LegislatorName
+    
+});
 
+    
 
 //use set to empty current collection/legislators and set it equal to the parameter you're passing in.
 

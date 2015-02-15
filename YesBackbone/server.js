@@ -11,7 +11,8 @@ var sunKey = fs.readFileSync('sunlightKey.txt', 'utf8');
 var openKey = fs.readFileSync('openKey.txt', 'utf8');
 
 app.get('/', function(req, res){
-	res.render('index.ejs', {sunKey: sunKey, openKey: openKey});
+	// res.render('index.html');
+	res.render('index.html.ejs', {sunKey: sunKey, openKey: openKey});
 })
 
 app.get('/donate/:crpID/:year', function(req, res){
