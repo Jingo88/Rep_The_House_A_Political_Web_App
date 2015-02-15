@@ -106,8 +106,11 @@ function donationFunc(crpID,year){
             donateCounter++;
         }
     })
+
     xhr.send();
 }
+
+
 
 findState.addEventListener('click', function(){
     var searchingState = inputState.value;
@@ -406,8 +409,13 @@ showDonations.addEventListener('click', function(){
         alert("please enter a valid year");
     } else {
         donationFunc(crp, year);
-        // donationFunc("N00033492", "2014");
+        
     }    
+})
+    
+var showCircles = document.querySelector('#BLAH');
+showCircles.addEventListener('click', function(){
+    donationCircles(donationArr);
 })
     
 //how to store the legislators information when there is more than one whether it's by state, or by same last name?
