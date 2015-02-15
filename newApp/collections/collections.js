@@ -1,3 +1,22 @@
+var LegislatorsCollection = Backbone.Collection.extend({
+	model : Legislator
+})
+
+
+//use set to empty current collection/legislators and set it equal to the parameter you're passing in.
+
+
+    // firstName: senatorObj.results[0].first_name;
+    // lastName: senatorObj.results[0].last_name;
+    // stateTwo: senatorObj.results[0].state;
+    // partyOne: partyInfo(senatorObj.results[0].party);
+    // gender: genderInfo(senatorObj.results[0].gender);
+    // termS: senatorObj.results[0].term_start;
+    // termE: senatorObj.results[0].term_end;
+    // chamber: chamberInfo(results[0].chamber);
+    // title: titleInfo(results[0].title);
+    // twitter:"@" + senatorObj.results[0].twitter_id;
+
 // // var PetsCollection = Backbone.Collection.extend({
 // // 	model : Pet
 
