@@ -1,3 +1,10 @@
+//How to not make the circles overlap?
+//edited the cx/cy math randoms so they do not go off the page too much
+//How to put the Organization_Name and Total_Amount inside the circle
+//Width and Height are in css file from id tag. They must be set, can't be auto
+//How do you make the circle sizes relative to the portion of the total donations received
+//We don't want circles too big for popular senators
+//Or circles too small for lesser know legislators
 function donationCircles(data){
 
 	var svg = d3.select("body").append("svg")
@@ -11,23 +18,17 @@ function donationCircles(data){
 						.append('circle');
 
 	var circlesAttributes = circles
-						// .data(data.Total_Amount)
 							.data(data, function(amt){
 								var donationNum = parseInt(amt.Total_Amount);
-								// console.log(donationNum);
-								// console.log(data[Total_Amount]);
 								return donationNum; 
 							})
-							//find out how to get the total amount from data. 
-							//doesn't .data iterate through the data
-							//also think about how to not make the circles overlap
-							.attr('r', function(d){
-								console.log(d)
-								return d.Total_Amount/100 + "px"
-							})
-							.attr('cx', function(){return Math.random()*100 + "%"})
-							.attr('cy', function(){return Math.random()*100 + "%"})
-							.style('fill', '#cc5a62');
+								.attr('r', function(d){
+									console.log(d)
+									return d.Total_Amount/1000 + "px"
+								})
+								.attr('cx', function(){return (Math.random()*90 + 5) + "%"})
+								.attr('cy', function(){return (Math.random()*90 + 5) + "%"})
+								.style('fill', "#53e961");
 
 	
 	// svg.selectAll('circle')
