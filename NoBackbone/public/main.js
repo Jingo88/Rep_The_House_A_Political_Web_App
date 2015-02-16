@@ -414,9 +414,11 @@ showDonations.addEventListener('click', function(){
 })
     
 var showCircles = document.querySelector('#BLAH');
+
 showCircles.addEventListener('click', function(){
     donationCircles(donationArr);
 })
+
     
 //how to store the legislators information when there is more than one whether it's by state, or by same last name?
 //keep in mind crp_id and bioguide_id > both being used for bill and donation lists. 
