@@ -4,6 +4,12 @@
 	-webkit-box-sizing: border-box;
 }
 
+#svgBox{
+	width: 100%;
+	height: 500px;
+	border: 2px solid black;
+}
+
 #info{
 	background-color: blue;
 	border: 4px solid #ccb62f;

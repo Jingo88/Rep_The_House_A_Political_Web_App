@@ -1,7 +1,9 @@
 function donationCircles(data){
-	console.log(data);
-	console.log(data.Total_Amount)
-	var svg = d3.select('svg');
+
+	var svg = d3.select("body").append("svg")
+								.style('fill', "#e9656e")
+								.attr("id", 'svgBox')
+								// .attr("height", 500+"px");
 
 	var circles = svg.selectAll('circle')
 						.data(data)
@@ -10,8 +12,19 @@ function donationCircles(data){
 
 	var circlesAttributes = circles
 						// .data(data.Total_Amount)
-							.data(data)
-							.attr('r', 100 + "px")
+							.data(data, function(amt){
+								var donationNum = parseInt(amt.Total_Amount);
+								// console.log(donationNum);
+								// console.log(data[Total_Amount]);
+								return donationNum; 
+							})
+							//find out how to get the total amount from data. 
+							//doesn't .data iterate through the data
+							//also think about how to not make the circles overlap
+							.attr('r', function(d){
+								console.log(d)
+								return d.Total_Amount/100 + "px"
+							})
 							.attr('cx', function(){return Math.random()*100 + "%"})
 							.attr('cy', function(){return Math.random()*100 + "%"})
 							.style('fill', '#cc5a62');
