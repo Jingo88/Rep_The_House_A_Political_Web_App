@@ -109,9 +109,7 @@
 // }
 
 
-
 function donationCircles(data){
-  console.log(data)
     var diameter = 960;
     	width = 200;
         height = 400;
@@ -119,21 +117,28 @@ function donationCircles(data){
     var color = d3.scale.category20c();
 
     var bubble = d3.layout.pack()
-    				.size([310,310])
+    				.size([500,500])
     				.padding(2)
-    				.value( function(d) {return d.size});
+    				.value( function(d) { console.log(d.size);return d.size});
 
-	var svg = d3.select("body")
+	var svg = d3.select("body").select('#svgBox')
 					.append("svg")
 					.style('fill', "#e9656e")
-					.attr("id", 'svgBox')
-		                
+					// .attr("id", 'svgBox')
+					.attr("width",300)
+					.attr("height", 300)
+					.attr("class","bubble")
+					//This centers the div
+					.style({ display: "block",
+						"margin-left": 'auto',
+						"margin-right": "auto"
+					});       
 
     var node = svg.selectAll(".node")
     					// console.log(data)
     					// console.log(donationArr)	
 					  .data(bubble.nodes(data)
-					  .filter(function(d){console.log(d); return !d.children;}))
+					  .filter(function(d){return !d.children;}))
 
 					  .enter()
 					  .append("g")
@@ -152,12 +157,15 @@ function donationCircles(data){
 
 
    node.append("text")
-        .style("color",function(d,i) { return color(i)})
-        .style("opacity", ".02")
-        .style("font-size","0px")
         .text(function(d) { 
+        	console.log(d.amt)
               return d.amt;
         })
+        .style("color", "#020406")
+        	// function(d,i) { return color(i)})
+        .style("opacity", ".02")
+        .style("font-size","0px")
+
 
 
     .transition()
@@ -173,24 +181,99 @@ function donationCircles(data){
         })
          .style({ "font-family":'Indie Flower'})
         .text(function(d) {
-            if(d.r >= 10) { return d.name }
+            if(d.r >= 10) { return d.amt }
         });
 }
 
 function processData(data) {
-   var obj = data.thoughts
+   var obj = data
    var newDataSet = [];
    for(var i in obj) {
       newDataSet.push({
-      	name: obj[i].Organization_Name,
       	amt: parseInt(obj[i].Total_Amount),
-      	size: obj[i].count 
+      	name: obj[i].Organization_Name,
+      	size: obj[i].Total_Amount 
     });
     }
    return {children: newDataSet};
 }
 
+// function processData(data) {
+//    var obj = data.thoughts
+//   // console.log(obj)
+//    var newDataSet = [];
+//    for(var i in obj) {
+//       //if( !(obj[i].count <= 10 && obj[i].word.length > 5)) {
+//       //console.log(obj[i])
+//       newDataSet.push( {name: obj[i].word, 
+//          className: obj[i].word.toLowerCase(), size: obj[i].count});
+//       //}
+//     }
+//    return {children: newDataSet};
+// }
 
+
+// function drawBubbleChart(root){
+//   //console.log(root)
+//     var diameter = 960;
+//     var width = 200;
+//         height = 400;
+//     var color = d3.scale.category20c();
+//     var bubble = d3.layout.pack().size([310,310]).padding(2).value( function(d) { return d.size})
+//     var svg = d3.select('body').select(".segment")
+//       .append("svg")
+//       .attr("width",300)
+//       .attr("height", 300)
+//       .attr("class","bubble")
+//       //This centers the div
+//       .style({ display: "block",
+//         "margin-left": 'auto',
+//         "margin-right": "auto"
+//       })
+                
+//     var node = svg.selectAll(".node")
+//       .data(bubble.nodes(processData(thought))
+//       .filter(function(d){ return !d.children;}))
+//       .enter()
+//       .append("g")
+//       .attr("class","node")
+//       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+//    node.append("circle")
+//        .attr("r", function(d) { return d.r; })
+//        .style("fill", function(d) { return color(d.name) })
+//        .style("opacity", ".02")
+//        .classed("selected",true)
+//        .transition()
+//          .duration(2000)
+//          .style("fill", function(d) { return color(d.name)})
+//          .style("opacity","05")
+//    node.append("text")
+//         .style("color",function(d,i) { return color(i)})
+//         .style("opacity", ".02")
+//         .style("font-size","0px")
+//         .text(function(d) { 
+//               return d.name;
+//         })
+//     .transition()
+//        .duration(2000)
+//        .style("opacity",1)
+//        .style("text-anchor", "middle")
+//        .style("font-size", function(d) {
+//             var len = d.name.substring(0, d.r / 3).length;
+//             var size = d.r/3;
+//             size *= 5 / len;
+//             size += 1;
+//             return Math.round(size)+'px';
+//         })
+//          .style({ "font-family":'Indie Flower'})
+//         .text(function(d) {
+//             if(d.r >= 10) { return d.name }
+//         });
+// }
+
+// drawBubbleChart(processData(thought))
+// console.log(processData(thought))
 
 // function processData(data) {
 //    var obj = data.thoughts

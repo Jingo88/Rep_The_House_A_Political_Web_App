@@ -31,14 +31,14 @@
 
 
 
-#svgBox{
+/*#svgBox{
 	width: 50%;
 	margin-left: auto;
 	margin-right: auto;
 	height: 500px;
 	border: 2px solid black;
 }
-
+*/
 #info{
 	width: 50%;
 	background-color: blue;
