@@ -101,8 +101,8 @@ function donationFunc(crpID,year){
             }   
             var donateNum = document.createElement('h4');
             donateNum.innerText = "Donation: " + donationArr[l].Organization_Name;
-            donateDiv.appendChild(donateNum);
-            donateDiv.appendChild(donateUL);
+            donateInfo.appendChild(donateNum);
+            donateInfo.appendChild(donateUL);
             donateCounter++;
         }
     })
@@ -166,16 +166,16 @@ function searchLegislatorName(name){
 
             console.log(name + " has a crp id of " + crp)
 
-            var firstName = senatorObj.results[0].first_name;
-            var lastName = senatorObj.results[0].last_name;
-            var stateTwo = senatorObj.results[0].state;
-            var partyOne = partyInfo(senatorObj.results[0].party);
-            var gender = genderInfo(senatorObj.results[0].gender);
-            var termS = senatorObj.results[0].term_start;
-            var termE = senatorObj.results[0].term_end;
+            var firstName = results[0].first_name;
+            var lastName = results[0].last_name;
+            var stateTwo = results[0].state;
+            var partyOne = partyInfo(results[0].party);
+            var gender = genderInfo(results[0].gender);
+            var termS = results[0].term_start;
+            var termE = results[0].term_end;
             var chamber = chamberInfo(results[0].chamber);
             var title = titleInfo(results[0].title);
-            var twitter = "@" + senatorObj.results[0].twitter_id;
+            var twitter = "@" + results[0].twitter_id;
 
             nowLegislator = new currentBio(firstName,lastName,stateTwo,partyOne,gender,termS,termE,chamber,title,twitter);
 
@@ -198,7 +198,10 @@ function searchLegislatorName(name){
 
             }
 
-            bioDiv.appendChild(bioUL)       
+            bioDiv.appendChild(bioUL);
+            bioDiv.appendChild(billsButton);
+            bioDiv.appendChild(donateInput);
+            bioDiv.appendChild(donateButton);    
         
         }  else if (results.length > 1) {
                 
@@ -334,7 +337,13 @@ function searchLegislatorState(state){
                 bioUL.appendChild(li);
 
             }
-            bioDiv.appendChild(bioUL)           
+            bioDiv.appendChild(bioUL);
+
+            bioDiv.appendChild(billsButton);
+            bioDiv.appendChild(donateInput);
+            bioDiv.appendChild(donateButton);
+
+            body.appendChild(bioDiv);
         
         }  else if (results.length > 1) {
                 
@@ -393,7 +402,9 @@ function searchLegislatorState(state){
     xhr.send()
 }
 
-showBills.addEventListener('click', function(){
+// showBills
+
+billsButton.addEventListener('click', function(){
     if (bioguide != ''){
         allBills(bioguide);
     } else {
@@ -401,22 +412,23 @@ showBills.addEventListener('click', function(){
     }
 })
 
-showDonations.addEventListener('click', function(){
-    var year = yearDonate.value
+donateButton.addEventListener('click', function(){
+    var year = donateInput.value
     console.log(crp);
     console.log(year);
     if (year.length != 4){
         alert("please enter a valid year");
     } else {
         donationFunc(crp, year);
-        
     }    
 })
+
+
     
 var showCircles = document.querySelector('#BLAH');
 
 showCircles.addEventListener('click', function(){
-    donationCircles(processData(donationArr));
+    donationCircles(processData(donationArr));            
 })
 
     

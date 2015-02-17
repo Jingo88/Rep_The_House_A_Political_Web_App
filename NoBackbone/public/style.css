@@ -28,7 +28,9 @@
 }
 
 
-
+#svgBubble{
+	float: left;
+}
 
 
 /*#svgBox{

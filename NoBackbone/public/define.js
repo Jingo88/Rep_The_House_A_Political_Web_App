@@ -1,3 +1,30 @@
+var body = document.querySelector('body');
+
+var billsButton = document.createElement('button');
+	billsButton.setAttribute('id', 'showbills');
+	billsButton.setAttribute('class', 'click');
+	billsButton.innerText = "Show Bills Sponsored";
+var showbills = document.querySelector('#showBills');
+
+var donateInput = document.createElement('input');
+	donateInput.setAttribute('id', 'donationYear');
+	donateInput.setAttribute('type', 'text');
+	donateInput.setAttribute('placeholder', 'Enter Year');
+var yearDonate = document.querySelector('#donationYear');
+
+var donateButton = document.createElement('button');
+	donateButton.setAttribute('id', 'showDonate');
+	donateButton.setAttribute('class', 'click');
+var showDonations = document.querySelector('#showDonate');
+
+var poliInfo = document.createElement('div');
+	poliInfo.setAttribute('id', 'poliInfo');
+var bioDiv = document.querySelector('#poliInfo');
+
+var donateInfo = document.createElement('div');
+	donateInfo.setAttribute('id', 'donationDiv');
+var donateDiv = document.querySelector('#donationDiv');
+
 //buttons to grab inputs of the name and/or state
 var findName = document.querySelector("#searchName");
 var findState = document.querySelector('#searchState');
@@ -5,17 +32,13 @@ var inputName = document.querySelector("#findlastName");
 var inputState = document.querySelector('#findStateTwo');
 
 //div where we will store the info of the politicions search
-var bioDiv = document.querySelector('#poliInfo');
+
 var multiDiv = document.querySelector('#multiList');
-
 //button and div for bill list
-var showbills = document.querySelector('#showBills');
 var billsDiv = document.querySelector('#billsDiv');
-
 //button and div for donation list
-var showDonations = document.querySelector('#showDonate');
-var donateDiv = document.querySelector('#donationDiv');
-var yearDonate = document.querySelector('#donationYear');
+
+
 
 //defined these variables as global so we can use them in multiple functions
 var bioguide = '';
