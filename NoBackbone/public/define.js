@@ -21,10 +21,13 @@ var showDonations = document.querySelector('#showDonate');
 var poliInfo = document.createElement('div');
 	poliInfo.setAttribute('id', 'poliInfo');
 
-
 var donateInfo = document.createElement('div');
 	donateInfo.setAttribute('id', 'donationDiv');
 var donateDiv = document.querySelector('#donationDiv');
+
+var multiInfo = document.createElement('div');
+	multiInfo.setAttribute('id', 'multiInfo');
+
 
 //buttons to grab inputs of the name and/or state
 var findName = document.querySelector("#searchName");
@@ -34,12 +37,10 @@ var inputState = document.querySelector('#findStateTwo');
 
 //div where we will store the info of the politicions search
 
-var multiDiv = document.querySelector('#multiList');
+
 //button and div for bill list
 var billsDiv = document.querySelector('#billsDiv');
 //button and div for donation list
-
-
 
 //defined these variables as global so we can use them in multiple functions
 var bioguide = '';
@@ -59,7 +60,7 @@ function clearData(){
     inputName.value = '';
     inputState.value = '';
     poliInfo.innerHTML = '';
-    multiDiv.innerHTML = '';
+    multiInfo.innerHTML = '';
     multiCounter = 1;
     billCounter = 1;
     bioguide = '';
@@ -106,7 +107,8 @@ function genderInfo(x){
 }
 
 //constructor to create a object of the currently viewed legislator
-function currentBio(First_Name,Last_Name,State,Party,Gender,Term_Start,Term_End,Chamber,Title,Twitter_Handle) {
+function currentBio(crp_id,First_Name,Last_Name,State,Party,Gender,Term_Start,Term_End,Chamber,Title,Twitter_Handle) {
+    this.crp_ID = crp_id;
     this.First_Name = First_Name;
     this.Last_Name = Last_Name;
     this.State = State;

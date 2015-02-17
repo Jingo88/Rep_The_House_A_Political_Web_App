@@ -32,13 +32,19 @@
 	float: left;
 }
 
-
 #poliInfo{
 	width: 50%;
 	background-color: blue;
 	border: 4px solid #ccb62f;
 	border-radius: 20px;
 	color: white;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#multiInfo{
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #donationYear{
