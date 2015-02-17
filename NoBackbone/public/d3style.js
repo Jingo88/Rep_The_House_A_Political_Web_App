@@ -5,37 +5,40 @@
 //How do you make the circle sizes relative to the portion of the total donations received
 //We don't want circles too big for popular senators
 //Or circles too small for lesser know legislators
-// function donationCircles(data){
+function donationCircles(data){
 
-// 	var svg = d3.select("body").append("svg")
-// 								.style('fill', "#e9656e")
-// 								.attr("id", 'svgBox')
-// 								// .attr("height", 500+"px");
+	var svg = d3.select("body").append("svg")
+								.style('fill', "#e9656e")
+								.attr("id", 'svgBox')
+								// .attr("height", 500+"px");
 
-// 	var circles = svg.selectAll('circle')
-// 						.data(data)
-// 						.enter()
-// 						.append('circle');
+	var circles = svg.selectAll('circle')
+						.data(data)
+						.enter()
+						.append('circle');
 
-// 	var circlesAttributes = circles
-// 							.data(data, function(amt){
-// 								var donationNum = parseInt(amt.Total_Amount);
-// 								return donationNum; 
-// 							})
-// 								.attr('r', function(d){
-// 									console.log(d)
-// 									return d.Total_Amount/1000 + "px"
-// 								})
-// 								.attr('cx', function(){return (Math.random()*90 + 5) + "%"})
-// 								.attr('cy', function(){return (Math.random()*90 + 5) + "%"})
-// 								.style('fill', "#53e961");
+	var circlesAttributes = circles
+							.data(data)
+							//the below function will give us the total amt but we don't need it there
+							
+							// 	, function(amt){
+							// 	var donationNum = parseInt(amt.Total_Amount);
+							// 	return donationNum; 
+							// })
+								.attr('r', function(d){
+									console.log(d)
+									return d.Total_Amount/1000 + "px"
+								})
+								.attr('cx', function(){return (Math.random()*90 + 5) + "%"})
+								.attr('cy', function(){return (Math.random()*90 + 5) + "%"})
+								.style('fill', "#53e961");
 
 	
-// 	// svg.selectAll('circle')
-// 	// 	.data(data)
-// 	// 	.exit()
-// 	// 	.remove();														
-// }
+	// svg.selectAll('circle')
+	// 	.data(data)
+	// 	.exit()
+	// 	.remove();														
+}
 
 //donationArr is a array of hashes with the name of the organization and the donation amount
 
@@ -46,66 +49,66 @@
 //do they use layout pack to create a new bubble with default settings everytime?
 
 
-function donationCircles(data){
+// function donationCircles(data){
 
-//diameter / format / color are all different variables, you don't need to use "var" everywhere in d3
-	var diameter = 960,
-	    format = d3.format("$"),
-	    color = d3.scale.category20c();
+// //diameter / format / color are all different variables, you don't need to use "var" everywhere in d3
+// 	var diameter = 960,
+// 	    format = d3.format("$"),
+// 	    color = d3.scale.category20c();
 
-	var bubble = d3.layout.pack()
-	    .sort(null)
-	    .size([diameter, diameter])
-	    .padding(1.5);
+// 	var bubble = d3.layout.pack()
+// 	    .sort(null)
+// 	    .size([diameter, diameter])
+// 	    .padding(1.5);
 
-	// Create the svg box and append it to the body
-	var svg = d3.select("body").append("svg")
-	    .attr("width", diameter)
-	    .attr("height", diameter)
-	    .attr("class", "bubble");
+// 	// Create the svg box and append it to the body
+// 	var svg = d3.select("body").append("svg")
+// 	    .attr("width", diameter)
+// 	    .attr("height", diameter)
+// 	    .attr("class", "bubble");
 
-	//we do not need a .json because we are not making a GET request to a url or a file
-	// d3.json("flare.json", function(error, root) {
+// 	//we do not need a .json because we are not making a GET request to a url or a file
+// 	// d3.json("flare.json", function(error, root) {
 
-	  var node = svg.selectAll(".node")
+// 	  var node = svg.selectAll(".node")
 
-						.data(bubble.nodes(classes(root)) // what is classes(root)
-						.filter(function(d) { return !d.children; }))
-				// Filters the selection, returning a new selection that contains 
-				// only the elements for which the specified selector is true. 
-				// The .data and .filter are chained together
+// 						.data(bubble.nodes(classes(root)) // what is classes(root)
+// 						.filter(function(d) { return !d.children; }))
+// 				// Filters the selection, returning a new selection that contains 
+// 				// only the elements for which the specified selector is true. 
+// 				// The .data and .filter are chained together
 	
-	// "g" is not specific to d3. it is an SVG element 
-	//<g> is used to group SVG shapes together
-	    .enter().append("g")
-	      .attr("class", "node")
-	      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+// 	// "g" is not specific to d3. it is an SVG element 
+// 	//<g> is used to group SVG shapes together
+// 	    .enter().append("g")
+// 	      .attr("class", "node")
+// 	      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
-	  node.append("title")
-	      .text(function(d) { return d.className + ": " + format(d.value); });
+// 	  node.append("title")
+// 	      .text(function(d) { return d.className + ": " + format(d.value); });
 
-	  node.append("circle")
-	      .attr("r", function(d) { return d.r; })
-	      .style("fill", function(d) { return color(d.packageName); });
+// 	  node.append("circle")
+// 	      .attr("r", function(d) { return d.r; })
+// 	      .style("fill", function(d) { return color(d.packageName); });
 
-	  node.append("text")
-	      .attr("dy", ".3em")
-	      .style("text-anchor", "middle")
-	      .text(function(d) { return d.className.substring(0, d.r / 3); });
-	// });
+// 	  node.append("text")
+// 	      .attr("dy", ".3em")
+// 	      .style("text-anchor", "middle")
+// 	      .text(function(d) { return d.className.substring(0, d.r / 3); });
+// 	// });
 
-	// Returns a flattened hierarchy containing all leaf nodes under the root.
-	function classes(root) {
-	  var classes = [];
+// 	// Returns a flattened hierarchy containing all leaf nodes under the root.
+// 	function classes(root) {
+// 	  var classes = [];
 
-	  function recurse(name, node) {
-	    if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-	    else classes.push({packageName: name, className: node.name, value: node.size});
-	  }
+// 	  function recurse(name, node) {
+// 	    if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
+// 	    else classes.push({packageName: name, className: node.name, value: node.size});
+// 	  }
 
-	  recurse(null, root);
-	  return {children: classes};
-	}
+// 	  recurse(null, root);
+// 	  return {children: classes};
+// 	}
 
-	d3.select(self.frameElement).style("height", diameter + "px");
-}
+// 	d3.select(self.frameElement).style("height", diameter + "px");
+// }

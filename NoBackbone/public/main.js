@@ -100,7 +100,7 @@ function donationFunc(crpID,year){
                 donateUL.appendChild(li);
             }   
             var donateNum = document.createElement('h4');
-            donateNum.innerText = "Donation: " + donateNum;
+            donateNum.innerText = "Donation: " + donationArr[l].Organization_Name;
             donateDiv.appendChild(donateNum);
             donateDiv.appendChild(donateUL);
             donateCounter++;
