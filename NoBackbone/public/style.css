@@ -33,20 +33,16 @@
 }
 
 
-/*#svgBox{
-	width: 50%;
-	margin-left: auto;
-	margin-right: auto;
-	height: 500px;
-	border: 2px solid black;
-}
-*/
 #poliInfo{
 	width: 50%;
 	background-color: blue;
 	border: 4px solid #ccb62f;
 	border-radius: 20px;
 	color: white;
+}
+
+#donationYear{
+	color: black;
 }
 
 .billLinking{

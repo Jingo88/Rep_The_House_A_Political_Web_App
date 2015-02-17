@@ -15,6 +15,7 @@ var yearDonate = document.querySelector('#donationYear');
 var donateButton = document.createElement('button');
 	donateButton.setAttribute('id', 'showDonate');
 	donateButton.setAttribute('class', 'click');
+	donateButton.innerText = "Show Donations per Year"
 var showDonations = document.querySelector('#showDonate');
 
 var poliInfo = document.createElement('div');
