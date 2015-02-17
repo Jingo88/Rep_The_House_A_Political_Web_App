@@ -75,7 +75,7 @@ function donationFunc(crpID,year){
         for (var i = 0; i < contributions.length; i++) {
             console.log("WE ARE IN THE FIRST FOR LOOP")
             var org_name = contributions[i]["@attributes"]["org_name"];
-            var total = contributions[i]["@attributes"]["total"];
+            var total = parseInt(contributions[i]["@attributes"]["total"]);
 
             newDonate = new currentDonation(org_name, total);
 
@@ -416,7 +416,7 @@ showDonations.addEventListener('click', function(){
 var showCircles = document.querySelector('#BLAH');
 
 showCircles.addEventListener('click', function(){
-    donationCircles(donationArr);
+    donationCircles(processData(donationArr));
 })
 
     

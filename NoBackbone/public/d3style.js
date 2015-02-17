@@ -111,27 +111,17 @@
 
 
 function donationCircles(data){
-  //console.log(root)
-    // var diameter = 960;
-    // 	width = 200;
-    //     height = 400;
+  console.log(data)
+    var diameter = 960;
+    	width = 200;
+        height = 400;
 
     var color = d3.scale.category20c();
+
     var bubble = d3.layout.pack()
     				.size([310,310])
     				.padding(2)
-    				.value( function(d) { return d.size})
-
-    // var svg = d3.select('body').select(".segment")
-			 //      .append("svg")
-			 //      .attr("width",300)
-			 //      .attr("height", 300)
-			 //      .attr("class","bubble")
-			 //      //This centers the div
-			 //      .style({ display: "block",
-			 //        "margin-left": 'auto',
-			 //        "margin-right": "auto"
-			 //      })
+    				.value( function(d) {return d.size});
 
 	var svg = d3.select("body")
 					.append("svg")
@@ -140,31 +130,24 @@ function donationCircles(data){
 		                
 
     var node = svg.selectAll(".node")
-    					console.log(data)
+    					// console.log(data)
+    					// console.log(donationArr)	
 					  .data(bubble.nodes(data)
-					  .filter(function(d){ return !d.data;}))
-					  console.log(data)
+					  .filter(function(d){console.log(d); return !d.children;}))
+
 					  .enter()
 					  .append("g")
 					  .attr("class","node")
 					  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
-    // var node = svg.selectAll(".node")
-    //   .data(bubble.nodes(processData(thought))
-    //   .filter(function(d){ return !d.children;}))
-    //   .enter()
-    //   .append("g")
-    //   .attr("class","node")
-    //   .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-
    node.append("circle")
 	       .attr("r", function(d) { return d.r; })
-	       .style("fill", function(d) { return color(d.Total_Amount) })
+	       .style("fill", function(d) { return color(d.amt) })
 	       .style("opacity", ".02")
 	       .classed("selected",true)
 	       .transition()
 	         .duration(2000)
-	         .style("fill", function(d) { return color(d.Total_Amount)})
+	         .style("fill", function(d) { return color(d.amt)})
 	         .style("opacity","05")
 
 
@@ -173,7 +156,7 @@ function donationCircles(data){
         .style("opacity", ".02")
         .style("font-size","0px")
         .text(function(d) { 
-              return d.Total_Amount;
+              return d.amt;
         })
 
 
@@ -194,8 +177,20 @@ function donationCircles(data){
         });
 }
 
-// drawBubbleChart(processData(thought))
-// console.log(processData(thought))
+function processData(data) {
+   var obj = data.thoughts
+   var newDataSet = [];
+   for(var i in obj) {
+      newDataSet.push({
+      	name: obj[i].Organization_Name,
+      	amt: parseInt(obj[i].Total_Amount),
+      	size: obj[i].count 
+    });
+    }
+   return {children: newDataSet};
+}
+
+
 
 // function processData(data) {
 //    var obj = data.thoughts
