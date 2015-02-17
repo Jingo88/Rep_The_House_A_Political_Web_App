@@ -103,10 +103,10 @@ function donationFunc(crpID,year){
             donateNum.innerText = "Donation: " + donationArr[l].Organization_Name;
             donateInfo.appendChild(donateNum);
             donateInfo.appendChild(donateUL);
+            body.appendChild(donateInfo);
             donateCounter++;
         }
     })
-
     xhr.send();
 }
 
@@ -181,7 +181,7 @@ function searchLegislatorName(name){
 
             var person = document.createElement('h1');
             person.innerText = nowLegislator.First_Name + " " + nowLegislator.Last_Name;
-            bioDiv.appendChild(person);
+            poliInfo.appendChild(person);
 
             var bioUL = document.createElement('ul');
             bioUL.setAttribute('id', 'info');
@@ -198,10 +198,11 @@ function searchLegislatorName(name){
 
             }
 
-            bioDiv.appendChild(bioUL);
-            bioDiv.appendChild(billsButton);
-            bioDiv.appendChild(donateInput);
-            bioDiv.appendChild(donateButton);    
+            poliInfo.appendChild(bioUL);
+            poliInfo.appendChild(billsButton);
+            poliInfo.appendChild(donateInput);
+            poliInfo.appendChild(donateButton); 
+            body.appendChild(poliInfo);   
         
         }  else if (results.length > 1) {
                 

@@ -19,7 +19,7 @@ var showDonations = document.querySelector('#showDonate');
 
 var poliInfo = document.createElement('div');
 	poliInfo.setAttribute('id', 'poliInfo');
-var bioDiv = document.querySelector('#poliInfo');
+
 
 var donateInfo = document.createElement('div');
 	donateInfo.setAttribute('id', 'donationDiv');
@@ -57,7 +57,7 @@ function clearData(){
     legislatorsArr = [];
     inputName.value = '';
     inputState.value = '';
-    bioDiv.innerHTML = '';
+    poliInfo.innerHTML = '';
     multiDiv.innerHTML = '';
     multiCounter = 1;
     billCounter = 1;
