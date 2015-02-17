@@ -4,6 +4,33 @@
 	-webkit-box-sizing: border-box;
 }
 
+/*search bar styling*/
+#search{
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 8%;
+	background-color: #488be1;
+}
+
+.bar{
+	height: 80%;
+	text-align: center;
+	left: 20%;
+	position: relative;
+	top: 10%;
+}
+
+.click{
+	border-radius: 50px;
+	box-shadow: 3px 0px 3px 0px #170000;
+	margin-left: 20px;
+}
+
+
+
+
+
 #svgBox{
 	width: 50%;
 	margin-left: auto;
@@ -26,22 +53,13 @@
 	font-size: 36px;
 }
 
-#search{
-	position: absolute;
-	top: 0;
-	width: 100%;
-	height: 5%;
-	background-color: red;
-}
-
-.bar{
-	padding-right: auto;
-	padding-left: auto;
-	position: relative;
-	height: 90%;
-}
-
 #pageTitle{
 	top: 6%;
 	position: relative;
+}
+
+/*consider making the divs on click if we cannot have them hardcoded in the html*/
+#donationDiv{
+	background-color: #53e961;
+	border: 2px solid blue;
 }

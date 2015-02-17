@@ -5,40 +5,35 @@
 //How do you make the circle sizes relative to the portion of the total donations received
 //We don't want circles too big for popular senators
 //Or circles too small for lesser know legislators
-function donationCircles(data){
 
-	var svg = d3.select("body").append("svg")
-								.style('fill', "#e9656e")
-								.attr("id", 'svgBox')
-								// .attr("height", 500+"px");
+// function donationCircles(data){
 
-	var circles = svg.selectAll('circle')
-						.data(data)
-						.enter()
-						.append('circle');
+// 	var svg = d3.select("body").append("svg")
+// 								.style('fill', "#e9656e")
+// 								.attr("id", 'svgBox')
+// 								// .attr("height", 500+"px");
 
-	var circlesAttributes = circles
-							.data(data)
-							//the below function will give us the total amt but we don't need it there
-							
-							// 	, function(amt){
-							// 	var donationNum = parseInt(amt.Total_Amount);
-							// 	return donationNum; 
-							// })
-								.attr('r', function(d){
-									console.log(d)
-									return d.Total_Amount/1000 + "px"
-								})
-								.attr('cx', function(){return (Math.random()*90 + 5) + "%"})
-								.attr('cy', function(){return (Math.random()*90 + 5) + "%"})
-								.style('fill', "#53e961");
+// 	var circles = svg.selectAll('circle')
+// 						.data(data)
+// 						.enter()
+// 						.append('circle');
+
+// 	var circlesAttributes = circles
+// 							.data(data)
+// 								.attr('r', function(d){
+// 									console.log(d)
+// 									return d.Total_Amount/1000 + "px"
+// 								})
+// 								.attr('cx', function(){return (Math.random()*90 + 5) + "%"})
+// 								.attr('cy', function(){return (Math.random()*90 + 5) + "%"})
+// 								.style('fill', "#53e961");
 
 	
-	// svg.selectAll('circle')
-	// 	.data(data)
-	// 	.exit()
-	// 	.remove();														
-}
+// 	// svg.selectAll('circle')
+// 	// 	.data(data)
+// 	// 	.exit()
+// 	// 	.remove();														
+// }
 
 //donationArr is a array of hashes with the name of the organization and the donation amount
 
@@ -111,4 +106,107 @@ function donationCircles(data){
 // 	}
 
 // 	d3.select(self.frameElement).style("height", diameter + "px");
+// }
+
+
+
+function donationCircles(data){
+  //console.log(root)
+    // var diameter = 960;
+    // 	width = 200;
+    //     height = 400;
+
+    var color = d3.scale.category20c();
+    var bubble = d3.layout.pack()
+    				.size([310,310])
+    				.padding(2)
+    				.value( function(d) { return d.size})
+
+    // var svg = d3.select('body').select(".segment")
+			 //      .append("svg")
+			 //      .attr("width",300)
+			 //      .attr("height", 300)
+			 //      .attr("class","bubble")
+			 //      //This centers the div
+			 //      .style({ display: "block",
+			 //        "margin-left": 'auto',
+			 //        "margin-right": "auto"
+			 //      })
+
+	var svg = d3.select("body")
+					.append("svg")
+					.style('fill', "#e9656e")
+					.attr("id", 'svgBox')
+		                
+
+    var node = svg.selectAll(".node")
+    					console.log(data)
+					  .data(bubble.nodes(data)
+					  .filter(function(d){ return !d.data;}))
+					  console.log(data)
+					  .enter()
+					  .append("g")
+					  .attr("class","node")
+					  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+    // var node = svg.selectAll(".node")
+    //   .data(bubble.nodes(processData(thought))
+    //   .filter(function(d){ return !d.children;}))
+    //   .enter()
+    //   .append("g")
+    //   .attr("class","node")
+    //   .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+   node.append("circle")
+	       .attr("r", function(d) { return d.r; })
+	       .style("fill", function(d) { return color(d.Total_Amount) })
+	       .style("opacity", ".02")
+	       .classed("selected",true)
+	       .transition()
+	         .duration(2000)
+	         .style("fill", function(d) { return color(d.Total_Amount)})
+	         .style("opacity","05")
+
+
+   node.append("text")
+        .style("color",function(d,i) { return color(i)})
+        .style("opacity", ".02")
+        .style("font-size","0px")
+        .text(function(d) { 
+              return d.Total_Amount;
+        })
+
+
+    .transition()
+       .duration(2000)
+       .style("opacity",1)
+       .style("text-anchor", "middle")
+       .style("font-size", function(d) {
+            var len = d.name.substring(0, d.r / 3).length;
+            var size = d.r/3;
+            size *= 5 / len;
+            size += 1;
+            return Math.round(size)+'px';
+        })
+         .style({ "font-family":'Indie Flower'})
+        .text(function(d) {
+            if(d.r >= 10) { return d.name }
+        });
+}
+
+// drawBubbleChart(processData(thought))
+// console.log(processData(thought))
+
+// function processData(data) {
+//    var obj = data.thoughts
+//   // console.log(obj)
+//    var newDataSet = [];
+//    for(var i in obj) {
+//       //if( !(obj[i].count <= 10 && obj[i].word.length > 5)) {
+//       //console.log(obj[i])
+//       newDataSet.push( {name: obj[i].word, 
+//          className: obj[i].word.toLowerCase(), size: obj[i].count});
+//       //}
+//     }
+//    return {children: newDataSet};
 // }
