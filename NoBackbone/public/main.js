@@ -209,6 +209,8 @@ function searchLegislatorName(name){
             
             //pushes each of the legislators information out to the legislatorsArr
             for (i=0; i<results.length; i++){
+
+                var crp_id = results[i].crp_id;
                 var firstName = results[i].first_name;                
                 var lastName = results[i].last_name;
                 var stateTwo = results[i].state;
@@ -220,7 +222,7 @@ function searchLegislatorName(name){
                 var title = titleInfo(results[i].title);
                 var twitter = "@" + results[i].twitter_id;
 
-                addLegislator = new currentBio(firstName, lastName, stateTwo, partyOne, gender, termS, termE, chamber, title, twitter);
+                addLegislator = new currentBio(crp_id, firstName, lastName, stateTwo, partyOne, gender, termS, termE, chamber, title, twitter);
 
                 legislatorsArr.push(addLegislator);
             }
@@ -251,33 +253,25 @@ function searchLegislatorName(name){
 
                 //     bioUL.appendChild(li);
                 // }
-            for (l=0; l<legislatorsArr.length; l++){    
-
                 var bioUL = document.createElement('ul');
                 bioUL.setAttribute('id', 'info');
-                
-                var keys = Object.keys(legislatorsArr[l]);
 
-                for (k=0; k<keys.length; k++){
+            for (l=0; l<legislatorsArr.length; l++){ 
+                var solo = legislatorsArr[l];
 
-                    var values =  keys[k];
-                    
-                    var newKey = values.replace(/[_]/g, " ");
-
-                    var li = document.createElement('li');
-                    
-                    li.setAttribute('class', 'bioInfo');
-                    li.innerText = newKey + ": " + legislatorsArr[l][values];
-
-                    bioUL.appendChild(li);
+                var li = document.createElement('li');
+                    li.setAttribute('class', 'multiList');
+                    li.innerText = solo.Last_Name + ", " + solo.First_Name + " - " + solo.State; 
+                    bioUL.appendChild(li)
                 }
-                var heading = document.createElement('h4');
-                heading.innerText = multiCounter + ": " +  legislatorsArr[l][keys[0]] + " " + legislatorsArr[l][keys[1]];
-                multiInfo.appendChild(heading);
+
+                // var heading = document.createElement('h4');
+                // heading.innerText = multiCounter + ": " +  legislatorsArr[l][keys[0]] + " " + legislatorsArr[l][keys[1]];
+                // multiInfo.appendChild(heading);
                 multiInfo.appendChild(bioUL);
                 body.appendChild(multiInfo);
                 multiCounter++;
-            }
+            
         } else {
             alert("Sorry there does not seem to be a legislator with that last name in the House of Representatives");
         }
