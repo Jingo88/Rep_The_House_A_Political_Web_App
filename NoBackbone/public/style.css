@@ -32,6 +32,7 @@
 	float: left;
 }
 
+/*the div that holds the bio information of a single legislator*/
 #poliInfo{
 	width: 50%;
 	background-color: blue;
@@ -42,11 +43,20 @@
 	margin-right: auto;
 }
 
+/*the div that holds the list items of the multiple legislators*/
 #multiInfo{
 	width: 50%;
 	margin-left: auto;
 	margin-right: auto;
 	border: 2px solid red;
+}
+
+/*the class of the li's created when there are multiple legislators*/
+.multiList{
+	margin-bottom: 10px;
+	font-size: 30px;
+	font-weight: 650;
+
 }
 
 #donationYear{
