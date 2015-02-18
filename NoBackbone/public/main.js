@@ -143,12 +143,17 @@ function donationFunc(crpID,year){
             infoBox.appendChild(donateList);
             body.appendChild(infoBox);
             donateCounter++;
+            console.log("DONATION LIST WAS CREATED");
         }
+
+            infoBox.appendChild(donateBubble);
+            body.appendChild(infoBox);
+
+            donationCircles(processData(donationArr));
+            console.log("THE BUBBLES WERE MADE!!!!");
     })
     xhr.send();
 }
-
-
 
 findState.addEventListener('click', function(){
     var searchingState = inputState.value;
@@ -384,13 +389,18 @@ donateButton.addEventListener('click', function(){
     } else {
         donationFunc(crp, year);
     }    
+
+    // if (donationArr.length > 0 ){
+    //     donationCircles(processData(donationArr));
+    //     console.log("THE BUBBLES WERE MADE!!!!");
+    // }
 })
     
-var showCircles = document.querySelector('#BLAH');
+// var showCircles = document.querySelector('#BLAH');
 
-showCircles.addEventListener('click', function(){
-    donationCircles(processData(donationArr));            
-})
+// showCircles.addEventListener('click', function(){
+//     donationCircles(processData(donationArr));            
+// })
 
 
     

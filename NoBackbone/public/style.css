@@ -93,6 +93,8 @@
 	width: 50%;
 	position: absolute;
 	right: 0;
+	z-index: 0;
+	display: none;
 }
 
 /*div that will hold the svg bubble chart*/
@@ -100,4 +102,11 @@
 	width: 50%;
 	position: absolute;
 	right: 0;
+	z-index: 1;
 }
+
+
+
+
+
+
