@@ -16,7 +16,7 @@ function donationCircles(data){
 					.style('fill', "black")
 					// .attr("id", 'svgBox')
 					.attr("width",800)
-					.attr("height", 600)
+					.attr("height", 550)
 					.attr("class","bubble")
 					//This centers the div
 					.style({ display: "block",

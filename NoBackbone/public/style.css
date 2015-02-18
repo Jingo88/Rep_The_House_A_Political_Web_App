@@ -76,16 +76,19 @@
 }
 
 /*Each whole bill*/
-#infoBox{
+#holdInfo{
 	width: 100%;
 	background-color: #998da3;
+	height: 550px;
+	border: 2px solid red;
 }
 
 /*Each line of bill information*/
 #billsInfo{
 	width: 50%;
 	position: absolute;
-	left: 0;	
+	overflow: scroll;
+	max-height: 550px;
 }
 
 /*div that will hold the donation list*/
@@ -95,6 +98,8 @@
 	right: 0;
 	z-index: 0;
 	display: none;
+	overflow: scroll;
+	max-height: 550px;
 }
 
 /*div that will hold the svg bubble chart*/
