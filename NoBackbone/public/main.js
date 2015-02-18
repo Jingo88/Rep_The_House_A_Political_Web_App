@@ -250,6 +250,10 @@ function searchLegislatorName(name){
                 multiInfo.appendChild(bioUL);
                 body.appendChild(multiInfo);
                 multiCounter++;
+                //the below code will be used to expand the multilist to choose a single legislator
+                $(".multiList").click(function(){
+                    console.log("does this work?")
+                })
             
         } else {
             alert("Sorry there does not seem to be a legislator with that last name in the House of Representatives");
@@ -348,7 +352,13 @@ function searchLegislatorState(state){
                 }
                 multiInfo.appendChild(bioUL);
                 body.appendChild(multiInfo);
-                multiCounter ++ 
+                multiCounter ++;
+
+                //use the below function to target slide down and slide up effects
+                $(".multiList").click(function(){
+                    console.log("does this work?")
+                })
+
         } else {
             alert("Please enter valid two letter initials for a state")
         }
@@ -382,5 +392,6 @@ var showCircles = document.querySelector('#BLAH');
 showCircles.addEventListener('click', function(){
     donationCircles(processData(donationArr));            
 })
+
 
     

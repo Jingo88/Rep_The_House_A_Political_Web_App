@@ -11,14 +11,7 @@
 	width: 100%;
 	height: 8%;
 	background-color: #488be1;
-	/*margin-bottom: 5%;*/
 }
-
-/*#page{
-	border: 3px solid red;
-	width: 100%;
-	height: 100vh;
-}*/
 
 .bar{
 	height: 80%;
@@ -28,12 +21,13 @@
 	top: 10%;
 }
 
+/*css for buttons*/
 .click{
 	border-radius: 50px;
 	box-shadow: 3px 0px 3px 0px #170000;
-	margin-left: 20px;
+	margin-left: 3px;
+	margin-right: 3px;
 }
-
 
 #svgBubble{
 	float: left;
