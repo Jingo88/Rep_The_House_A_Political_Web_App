@@ -109,15 +109,14 @@ function donationFunc(crpID,year){
         var donateObj = JSON.parse(xhr.responseText);
         var contributions = donateObj.response["contributors"]["contributor"];
 
+        donateList.appendChild(donateToggle2);
         for (var i = 0; i < contributions.length; i++) {
             console.log("WE ARE IN THE FIRST FOR LOOP")
             var org_name = contributions[i]["@attributes"]["org_name"];
             var total = parseInt(contributions[i]["@attributes"]["total"]);
 
             newDonate = new currentDonation(org_name, total);
-
             donationArr.push(newDonate);
-
         }
 
         for (l=0; l<donationArr.length; l++){
@@ -141,16 +140,17 @@ function donationFunc(crpID,year){
             donateList.appendChild(donateNum);
             donateList.appendChild(donateUL);
             infoBox.appendChild(donateList);
-            body.appendChild(infoBox);
             donateCounter++;
             console.log("DONATION LIST WAS CREATED");
         }
-
+            donateBubble.appendChild(donateToggle1);
             infoBox.appendChild(donateBubble);
             body.appendChild(infoBox);
 
             donationCircles(processData(donationArr));
             console.log("THE BUBBLES WERE MADE!!!!");
+
+
     })
     xhr.send();
 }
@@ -381,7 +381,8 @@ billsButton.addEventListener('click', function(){
 })
 
 donateButton.addEventListener('click', function(){
-    var year = donateInput.value
+    var year = donateInput.value;
+    $("#donateBubble").remove();
     console.log(crp);
     console.log(year);
     if (year.length != 4){
@@ -389,18 +390,16 @@ donateButton.addEventListener('click', function(){
     } else {
         donationFunc(crp, year);
     }    
-
-    // if (donationArr.length > 0 ){
-    //     donationCircles(processData(donationArr));
-    //     console.log("THE BUBBLES WERE MADE!!!!");
-    // }
 })
     
-// var showCircles = document.querySelector('#BLAH');
-
-// showCircles.addEventListener('click', function(){
-//     donationCircles(processData(donationArr));            
-// })
+donateToggle1.addEventListener('click', function(){
+    $( "#donateBubble").toggle();  
+    $('#donateList').toggle();  
+})
+donateToggle2.addEventListener('click', function(){
+    $( "#donateBubble").toggle();  
+    $('#donateList').toggle();  
+})
 
 
     

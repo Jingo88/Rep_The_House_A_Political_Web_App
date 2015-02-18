@@ -46,6 +46,14 @@ var donateBubble = document.createElement('div');
 var billsInfo = document.createElement('div');
 	billsInfo.setAttribute('id', 'billsInfo');
 
+var donateToggle1 = document.createElement('button');
+    donateToggle1.setAttribute('class', 'click');
+    donateToggle1.innerText = "List View";
+
+var donateToggle2 = document.createElement('button');
+    donateToggle2.setAttribute('class', 'click');
+    donateToggle2.innerText = "Bubble View";
+
 //defined these variables as global so we can use them in multiple functions
 var bioguide = '';
 var crp = '';

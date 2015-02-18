@@ -88,7 +88,7 @@
 	width: 50%;
 	position: absolute;
 	overflow: scroll;
-	max-height: 550px;
+	max-height: 545px;
 }
 
 /*div that will hold the donation list*/
@@ -99,15 +99,15 @@
 	z-index: 0;
 	display: none;
 	overflow: scroll;
-	max-height: 550px;
+	max-height: 545px;
 }
 
 /*div that will hold the svg bubble chart*/
 #donateBubble{
 	width: 50%;
 	position: absolute;
+	display:'';
 	right: 0;
-	z-index: 1;
 }
 
 

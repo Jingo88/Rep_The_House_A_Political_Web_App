@@ -1,4 +1,5 @@
 function donationCircles(data){
+   
     var diameter = 960;
     	width = 200;
         height = 400;
