@@ -56,21 +56,18 @@ function allBills(bioID) {
             //make a var bill link array and have that loop through the urls. It can then push all the 
             //urls (url[j] etc etc) into an array and at the end push that array into the newBill hash
             if (billactive === true){
-
                 var billactiveDate = billResults[i].history.active_at;
-
             } else {
                 var billactiveDate = 'This bill is not active';
             }
             
             newBill = new currentBills(official_title,billURL, billactive, billactiveDate);
-
     		billsArr.push(newBill);
     	};
 
         for (l=0; l<billsArr.length; l++){
             var billsUL = document.createElement('ul');
-            billsUL.setAttribute('id', 'billInfo');
+            billsUL.setAttribute('class', 'wholeBill');
 
             var keys = Object.keys(billsArr[l]);
             console.log("These are the bills keys" + keys);
@@ -82,15 +79,16 @@ function allBills(bioID) {
 
                 var li = document.createElement('li');
                 
-                li.setAttribute('class', 'bills');
+                li.setAttribute('class', 'billInfo');
                 li.innerHTML = newKey + ": " + billsArr[l][values];
 
                 billsUL.appendChild(li);
             }
             var billNum = document.createElement('h4');
             billNum.innerText = "Bill: " + billCounter;
-            billsDiv.appendChild(billNum);
-            billsDiv.appendChild(billsUL);
+            billsInfo.appendChild(billNum);
+            billsInfo.appendChild(billsUL);
+            body.appendChild(billsInfo);
             billCounter++;
         }
     })
@@ -206,19 +204,6 @@ function searchLegislatorName(name){
             console.log(name + " has a crp id of " + crp)
 
             theSearch(results);
-            // var crp_id = results[0].crp_id;
-            // var firstName = results[0].first_name;
-            // var lastName = results[0].last_name;
-            // var stateTwo = results[0].state;
-            // var partyOne = partyInfo(results[0].party);
-            // var gender = genderInfo(results[0].gender);
-            // var termS = results[0].term_start;
-            // var termE = results[0].term_end;
-            // var chamber = chamberInfo(results[0].chamber);
-            // var title = titleInfo(results[0].title);
-            // var twitter = "@" + results[0].twitter_id;
-
-            // nowLegislator = new currentBio(crp_id,firstName,lastName,stateTwo,partyOne,gender,termS,termE,chamber,title,twitter);
 
             var person = document.createElement('h1');
             person.innerText = nowLegislator.First_Name + " " + nowLegislator.Last_Name;
@@ -248,52 +233,7 @@ function searchLegislatorName(name){
         }  else if (results.length > 1) {
             
             theSearch(results);
-            //pushes each of the legislators information out to the legislatorsArr
-            // for (i=0; i<results.length; i++){
-
-            //     var crp_id = results[i].crp_id;
-            //     var firstName = results[i].first_name;                
-            //     var lastName = results[i].last_name;
-            //     var stateTwo = results[i].state;
-            //     var partyOne = partyInfo(results[i].party);
-            //     var gender = genderInfo(results[i].gender);
-            //     var termS = results[i].term_start;
-            //     var termE = results[i].term_end;
-            //     var chamber = chamberInfo(results[i].chamber);
-            //     var title = titleInfo(results[i].title);
-            //     var twitter = "@" + results[i].twitter_id;
-
-            //     addLegislator = new currentBio(crp_id, firstName, lastName, stateTwo, partyOne, gender, termS, termE, chamber, title, twitter);
-
-            //     legislatorsArr.push(addLegislator);
-            // }
-
-            var people = document.createElement('h1');
-            people.innerText = "Legislators with the last name " + name;
-            poliInfo.appendChild(people);
             
-            //this for loop runs for the length of the array
-            // for (l=0; l<legislatorsArr.length; l++){    
-
-            //     var bioUL = document.createElement('ul');
-            //     bioUL.setAttribute('id', 'info');
-                
-            //     var keys = Object.keys(legislatorsArr[l]);
-
-                //this for loop runs to print out the values of each of the keys
-                // for (k=0; k<keys.length; k++){
-
-                //     var values =  keys[k];
-                    
-                //     var newKey = values.replace(/[_]/g, " ");
-
-                //     var li = document.createElement('li');
-                    
-                //     li.setAttribute('class', 'bioInfo');
-                //     li.innerText = newKey + ": " + legislatorsArr[l][values];
-
-                //     bioUL.appendChild(li);
-                // }
                 var bioUL = document.createElement('ul');
                 bioUL.setAttribute('id', 'info');
 
@@ -302,13 +242,10 @@ function searchLegislatorName(name){
 
                 var li = document.createElement('li');
                     li.setAttribute('class', 'multiList');
-                    li.innerText = solo.Last_Name + ", " + solo.First_Name + " - " + solo.State; 
+                    li.innerText = solo.Last_Name+", "+solo.First_Name+" - "+solo.State+ " - "+solo.Party;
                     bioUL.appendChild(li)
                 }
 
-                // var heading = document.createElement('h4');
-                // heading.innerText = multiCounter + ": " +  legislatorsArr[l][keys[0]] + " " + legislatorsArr[l][keys[1]];
-                // multiInfo.appendChild(heading);
                 multiInfo.appendChild(bioUL);
                 body.appendChild(multiInfo);
                 multiCounter++;
@@ -365,19 +302,6 @@ function searchLegislatorState(state){
             crp = results[0].crp_id;
 
             theSearch(results);
-            // var crp_id = results[0].crp_id;
-            // var firstName = results[0].first_name;
-            // var lastName = results[0].last_name;
-            // var stateTwo = results[0].state;
-            // var partyOne = partyInfo(results[0].party);
-            // var gender = genderInfo(results[0].gender);
-            // var termS = results[0].term_start;
-            // var termE = results[0].term_end;
-            // var chamber = chamberInfo(results[0].chamber);
-            // var title = titleInfo(results[0].title);
-            // var twitter = "@" + results[0].twitter_id;
-
-            // nowLegislator = new currentBio(crp_id,firstName, lastName, stateTwo, partyOne, gender, termS, termE, chamber, title, twitter);
 
             var person = document.createElement('h1');
             person.innerText = nowLegislator.First_Name + " " + nowLegislator.Last_Name;
@@ -409,52 +333,6 @@ function searchLegislatorState(state){
         }  else if (results.length > 1) {
                 
             theSearch(results);
-            //pushes each of the legislators information out to the legislatorsArr
-            // for (i=0; i<results.length; i++){
-
-            //     var crp_id = results[i].crp_id;
-            //     var firstName = results[i].first_name;                
-            //     var lastName = results[i].last_name;
-            //     var stateTwo = results[i].state;
-            //     var partyOne = partyInfo(results[i].party);
-            //     var gender = genderInfo(results[i].gender);
-            //     var termS = results[i].term_start;
-            //     var termE = results[i].term_end;
-            //     var chamber = chamberInfo(results[i].chamber);
-            //     var title = titleInfo(results[i].title);
-            //     var twitter = "@" + results[i].twitter_id;
-
-            //     addLegislator = new currentBio(crp_id,firstName, lastName, stateTwo, partyOne, gender, termS, termE, chamber, title, twitter);
-
-            //     legislatorsArr.push(addLegislator);
-            // }
-
-            var people = document.createElement('h1');
-            people.innerText = "Legislators with the last name " + name;
-            poliInfo.appendChild(people);
-            
-            // //this for loop runs for the length of the array
-            // for (l=0; l<legislatorsArr.length; l++){    
-
-            //     var bioUL = document.createElement('ul');
-            //     bioUL.setAttribute('id', 'info');
-                
-            //     var keys = Object.keys(legislatorsArr[l]);
-
-            //     //this for loop runs to print out the values of each of the keys
-            //     for (k=0; k<keys.length; k++){
-
-            //         var values =  keys[k];
-                    
-            //         var newKey = values.replace(/[_]/g, " ");
-
-            //         var li = document.createElement('li');
-                    
-            //         li.setAttribute('class', 'bioInfo');
-            //         li.innerText = newKey + ": " + legislatorsArr[l][values];
-
-            //         bioUL.appendChild(li);
-            //     }
 
             var bioUL = document.createElement('ul');
                 bioUL.setAttribute('id', 'info');
@@ -464,12 +342,9 @@ function searchLegislatorState(state){
 
                 var li = document.createElement('li');
                     li.setAttribute('class', 'multiList');
-                    li.innerText = solo.Last_Name + ", " + solo.First_Name + " - " + solo.State; 
+                    li.innerText = solo.Last_Name+", "+solo.First_Name+" - "+solo.State+ " - "+solo.Party; 
                     bioUL.appendChild(li)
                 }
-                // var heading = document.createElement('h4');
-                // heading.innerText = multiCounter + ": " +  legislatorsArr[l][keys[0]] + " " + legislatorsArr[l][keys[1]];
-                // multiInfo.appendChild(heading);
                 multiInfo.appendChild(bioUL);
                 body.appendChild(multiInfo);
                 multiCounter ++ 
@@ -500,8 +375,6 @@ donateButton.addEventListener('click', function(){
         donationFunc(crp, year);
     }    
 })
-
-
     
 var showCircles = document.querySelector('#BLAH');
 

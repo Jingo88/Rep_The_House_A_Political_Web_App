@@ -10,24 +10,23 @@ var donateInput = document.createElement('input');
 	donateInput.setAttribute('id', 'donationYear');
 	donateInput.setAttribute('type', 'text');
 	donateInput.setAttribute('placeholder', 'Enter Year');
-var yearDonate = document.querySelector('#donationYear');
 
 var donateButton = document.createElement('button');
 	donateButton.setAttribute('id', 'showDonate');
 	donateButton.setAttribute('class', 'click');
 	donateButton.innerText = "Show Donations per Year"
-var showDonations = document.querySelector('#showDonate');
 
 var poliInfo = document.createElement('div');
 	poliInfo.setAttribute('id', 'poliInfo');
 
 var donateInfo = document.createElement('div');
 	donateInfo.setAttribute('id', 'donationDiv');
-var donateDiv = document.querySelector('#donationDiv');
 
 var multiInfo = document.createElement('div');
 	multiInfo.setAttribute('id', 'multiInfo');
 
+var billsInfo = document.createElement('div');
+	billsInfo.setAttribute('id', 'billsInfo');
 
 //buttons to grab inputs of the name and/or state
 var findName = document.querySelector("#searchName");
