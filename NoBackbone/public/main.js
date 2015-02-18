@@ -88,13 +88,13 @@ function allBills(bioID) {
             billNum.innerText = "Bill: " + billCounter;
             billsInfo.appendChild(billNum);
             billsInfo.appendChild(billsUL);
-            body.appendChild(billsInfo);
+            infoBox.appendChild(billsInfo);
+            body.appendChild(infoBox);
             billCounter++;
         }
     })
     xhr.send();
 }
-
 
 //creates a list of donations for the currently viewed politician
 function donationFunc(crpID,year){
@@ -365,8 +365,6 @@ function searchLegislatorState(state){
     })
     xhr.send()
 }
-
-// showBills
 
 billsButton.addEventListener('click', function(){
     if (bioguide != ''){

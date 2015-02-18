@@ -11,6 +11,7 @@ function donationCircles(data){
     				.value( function(d){console.log(d.size);return d.size});
 
 	var svg = d3.select("body")
+          .select("#holdInfo")
 					.append("svg")
 					.style('fill', "black")
 					// .attr("id", 'svgBox')

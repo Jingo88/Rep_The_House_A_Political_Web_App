@@ -1,10 +1,26 @@
+//This file holds all the elements that will be created and used, along with constructors, and variables that will hold information as the functions are called
+
+//buttons to grab inputs of the name and/or state
+var findName = document.querySelector("#searchName");
+var findState = document.querySelector('#searchState');
+var inputName = document.querySelector("#findlastName");
+var inputState = document.querySelector('#findStateTwo');
+
+//Going to append things to the body
 var body = document.querySelector('body');
 
+//these two are for users searching for legislators by last name or state
+var poliInfo = document.createElement('div');
+    poliInfo.setAttribute('id', 'poliInfo');
+
+var multiInfo = document.createElement('div');
+    multiInfo.setAttribute('id', 'multiInfo');
+
+//These variables will be appended into a single legislator box so the user can click from there
 var billsButton = document.createElement('button');
 	billsButton.setAttribute('id', 'showbills');
 	billsButton.setAttribute('class', 'click');
 	billsButton.innerText = "Show Bills Sponsored";
-var showbills = document.querySelector('#showBills');
 
 var donateInput = document.createElement('input');
 	donateInput.setAttribute('id', 'donationYear');
@@ -16,30 +32,19 @@ var donateButton = document.createElement('button');
 	donateButton.setAttribute('class', 'click');
 	donateButton.innerText = "Show Donations per Year"
 
-var poliInfo = document.createElement('div');
-	poliInfo.setAttribute('id', 'poliInfo');
+//the giant div that will hold the other divs for DOM manipulation
+var infoBox = document.createElement('div');
+    infoBox.setAttribute('id', 'holdInfo');
 
-var multiInfo = document.createElement('div');
-    multiInfo.setAttribute('id', 'multiInfo');
+//the divs created to hold the donation and bills information
+var donateList = document.createElement('div');
+	donateList.setAttribute('id', 'donateList');
 
-var donateInfo = document.createElement('div');
-	donateInfo.setAttribute('id', 'donationDiv');
+var donateBubble = document.createElement('div');
+    donateBubble.setAttribute('id', 'donateBubble');
 
 var billsInfo = document.createElement('div');
 	billsInfo.setAttribute('id', 'billsInfo');
-
-//buttons to grab inputs of the name and/or state
-var findName = document.querySelector("#searchName");
-var findState = document.querySelector('#searchState');
-var inputName = document.querySelector("#findlastName");
-var inputState = document.querySelector('#findStateTwo');
-
-//div where we will store the info of the politicions search
-
-
-//button and div for bill list
-var billsDiv = document.querySelector('#billsDiv');
-//button and div for donation list
 
 //defined these variables as global so we can use them in multiple functions
 var bioguide = '';
