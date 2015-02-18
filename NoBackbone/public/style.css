@@ -90,11 +90,14 @@
 
 /*div that will hold the donation list*/
 #donateList{
-	background-color: #53e961;
-	border: 2px solid blue;
+	width: 50%;
+	position: absolute;
+	right: 0;
 }
 
 /*div that will hold the svg bubble chart*/
 #donateBubble{
-
+	width: 50%;
+	position: absolute;
+	right: 0;
 }

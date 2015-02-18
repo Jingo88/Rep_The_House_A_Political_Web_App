@@ -138,9 +138,10 @@ function donationFunc(crpID,year){
             }   
             var donateNum = document.createElement('h4');
             donateNum.innerText = "Donation: " + donationArr[l].Organization_Name;
-            donateInfo.appendChild(donateNum);
-            donateInfo.appendChild(donateUL);
-            body.appendChild(donateInfo);
+            donateList.appendChild(donateNum);
+            donateList.appendChild(donateUL);
+            infoBox.appendChild(donateList);
+            body.appendChild(infoBox);
             donateCounter++;
         }
     })
