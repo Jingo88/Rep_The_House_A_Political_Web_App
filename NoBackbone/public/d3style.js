@@ -1,23 +1,21 @@
-
-
 function donationCircles(data){
     var diameter = 960;
     	width = 200;
         height = 400;
 
-    var color = d3.scale.category20c();
+    var color = d3.scale.category10();
 
     var bubble = d3.layout.pack()
-    				.size([500,500])
+    				.size([700,550])
     				.padding(2)
     				.value( function(d){console.log(d.size);return d.size});
 
 	var svg = d3.select("body")
 					.append("svg")
-					.style('fill', "#e9656e")
+					.style('fill', "black")
 					// .attr("id", 'svgBox')
-					.attr("width",300)
-					.attr("height", 300)
+					.attr("width",800)
+					.attr("height", 600)
 					.attr("class","bubble")
 					//This centers the div
 					.style({ display: "block",
@@ -52,7 +50,7 @@ function donationCircles(data){
         	console.log(d.amt)
               return d.amt;
         })
-        .style("color", "#020406")
+        .style("color", "black")
         	// function(d,i) { return color(i)})
         .style("opacity", ".02")
         .style("font-size","0px")
@@ -62,15 +60,16 @@ function donationCircles(data){
     .transition()
        .duration(2000)
        .style("opacity",1)
+       .style("color", "black")
        .style("text-anchor", "middle")
        .style("font-size", function(d) {
             var len = d.name.substring(0, d.r / 3).length;
             var size = d.r/3;
-            size *= 5 / len;
+            size *= 8 / len;
             size += 1;
             return Math.round(size)+'px';
         })
-         .style({ "font-family":'Indie Flower'})
+         .style({ "font-family":'Arial'})
         .text(function(d) {
             if(d.r >= 10) { return d.amt }
         });
@@ -81,7 +80,7 @@ function processData(data) {
    var newDataSet = [];
    for(var i in obj) {
       newDataSet.push({
-      	amt: parseInt(obj[i].Total_Amount),
+      	amt: "$" + obj[i].Total_Amount,
       	name: obj[i].Organization_Name,
       	size: obj[i].Total_Amount 
     });

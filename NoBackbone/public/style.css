@@ -11,7 +11,14 @@
 	width: 100%;
 	height: 8%;
 	background-color: #488be1;
+	/*margin-bottom: 5%;*/
 }
+
+/*#page{
+	border: 3px solid red;
+	width: 100%;
+	height: 100vh;
+}*/
 
 .bar{
 	height: 80%;
@@ -41,6 +48,7 @@
 	color: white;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 5%;
 }
 
 /*the div that holds the list items of the multiple legislators*/
@@ -49,6 +57,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	border: 4px solid #ccb62f;
+	margin-top: 5%;
 }
 
 /*the class of the li's created when there are multiple legislators*/
@@ -81,7 +90,7 @@
 
 /*Each line of bill information*/
 #billInfo{
-	
+
 }
 
 #pageTitle{

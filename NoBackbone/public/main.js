@@ -197,6 +197,7 @@ function searchLegislatorName(name){
         if (senatorObj.results.length === 1){
             //you will use the bioguide to pass into the function as a parameter and search for bills        
             bioguide = senatorObj.results[0].bioguide_id;
+            console.log(bioguide);
             
             //you will use the crp id to pass into a function to search for donations
             crp = senatorObj.results[0].crp_id;

@@ -19,11 +19,11 @@ var donateButton = document.createElement('button');
 var poliInfo = document.createElement('div');
 	poliInfo.setAttribute('id', 'poliInfo');
 
+var multiInfo = document.createElement('div');
+    multiInfo.setAttribute('id', 'multiInfo');
+
 var donateInfo = document.createElement('div');
 	donateInfo.setAttribute('id', 'donationDiv');
-
-var multiInfo = document.createElement('div');
-	multiInfo.setAttribute('id', 'multiInfo');
 
 var billsInfo = document.createElement('div');
 	billsInfo.setAttribute('id', 'billsInfo');
