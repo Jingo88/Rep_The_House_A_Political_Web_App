@@ -228,7 +228,6 @@ function searchLegislatorName(name){
                 multiCounter++;
 
                 $(".multiList").click(function(){
-                    $(this).css("height", "300px");
 
                     for (i=0; i<legislatorsArr.length; i++){
 
@@ -329,8 +328,7 @@ function searchLegislatorState(state){
 
                 //use the below function to target slide down and slide up effects
                 $(".multiList").click(function(){
-                    $(this).css("height", "300px");
-
+                    
                     for (i=0; i<legislatorsArr.length; i++){
                         if (legislatorsArr[i].crp_ID === this.id){
 

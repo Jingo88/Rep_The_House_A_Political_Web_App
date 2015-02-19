@@ -9,7 +9,7 @@
 	position: absolute;
 	top: 0;
 	width: 100%;
-	height: 8%;
+	height: 6%;
 	background-color: #488be1;
 	left: 0;
 }
@@ -45,7 +45,7 @@
 	color: white;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 5%;
+	margin-top: 3%;
 }
 
 /*the div that holds the list items of the multiple legislators*/
