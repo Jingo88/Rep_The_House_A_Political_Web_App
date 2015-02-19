@@ -229,7 +229,17 @@ function searchLegislatorName(name){
 
                 $(".multiList").click(function(){
 
-                    for (i=0; i<legislatorsArr.length; i++){
+                    if ($(this).find('li').length > 0){
+
+                        var title = this.firstChild;
+
+                        this.innerHTML = '';
+
+                        this.appendChild(title);
+
+                    } else {
+
+                        for (i=0; i<legislatorsArr.length; i++){
 
                         if (legislatorsArr[i].crp_ID === this.id){
                             
@@ -246,6 +256,7 @@ function searchLegislatorName(name){
                                 this.appendChild(li);
                             }
                         }
+                    }
                     }
                 });
             
@@ -328,22 +339,33 @@ function searchLegislatorState(state){
 
                 //use the below function to target slide down and slide up effects
                 $(".multiList").click(function(){
-                    
-                    for (i=0; i<legislatorsArr.length; i++){
-                        if (legislatorsArr[i].crp_ID === this.id){
 
-                            var chosen = legislatorsArr[i];
+                    if ($(this).find('li').length > 0){
+                        
+                        var title = this.firstChild;
+                        
+                        this.innerHTML = '';
+                        
+                        this.appendChild(title);
 
-                            var key = Object.keys(chosen);
+                    } else {
 
-                            for (l=0; l<key.length; l++){
+                        for (i=0; i<legislatorsArr.length; i++){
+                            if (legislatorsArr[i].crp_ID === this.id){
 
-                                var newKey = key[l].replace(/[_]/g, " ");
+                                var chosen = legislatorsArr[i];
 
-                                var li = document.createElement('li');
-                                    li.innerText = newKey + ": " + chosen[key[l]];
+                                var key = Object.keys(chosen);
 
-                                this.appendChild(li);
+                                for (l=0; l<key.length; l++){
+
+                                    var newKey = key[l].replace(/[_]/g, " ");
+
+                                    var li = document.createElement('li');
+                                        li.innerText = newKey + ": " + chosen[key[l]];
+
+                                    this.appendChild(li);
+                                }
                             }
                         }
                     }
