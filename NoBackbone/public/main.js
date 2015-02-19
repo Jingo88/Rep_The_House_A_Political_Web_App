@@ -41,7 +41,7 @@ function theSearch(results){
 function allBills(bioID) {
     var urlB = "/bills/" + bioID;
     var xhr = new XMLHttpRequest();
-    console.log(urlB)
+    console.log(urlB);
     xhr.open("GET", urlB);
     xhr.addEventListener('load', function(){
     	var billObj = JSON.parse(xhr.responseText);
@@ -92,9 +92,10 @@ function allBills(bioID) {
             page.appendChild(infoBox);
             billCounter++;
         }
-    })
+    });
+
     xhr.send();
-}
+};
 
 //creates a list of donations for the currently viewed politician
 function donationFunc(crpID,year){
@@ -414,7 +415,7 @@ billsButton.addEventListener('click', function(){
     if (bioguide != ''){
         allBills(bioguide);
     } else {
-        alert("Sorry you have not chosen a legislator to view the bills of")
+        alert("Sorry you have not chosen a legislator to view the bills of");
     }
 })
 
