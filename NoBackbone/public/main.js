@@ -89,7 +89,7 @@ function allBills(bioID) {
             billsInfo.appendChild(billNum);
             billsInfo.appendChild(billsUL);
             infoBox.appendChild(billsInfo);
-            body.appendChild(infoBox);
+            page.appendChild(infoBox);
             billCounter++;
         }
     })
@@ -145,7 +145,7 @@ function donationFunc(crpID,year){
         }
             donateBubble.appendChild(donateToggle1);
             infoBox.appendChild(donateBubble);
-            body.appendChild(infoBox);
+            page.appendChild(infoBox);
 
             donationCircles(processData(donationArr));
             console.log("THE BUBBLES WERE MADE!!!!");
@@ -235,7 +235,7 @@ function searchLegislatorName(name){
             poliInfo.appendChild(billsButton);
             poliInfo.appendChild(donateInput);
             poliInfo.appendChild(donateButton); 
-            body.appendChild(poliInfo);   
+            page.appendChild(poliInfo);   
         
         }  else if (results.length > 1) {
             
@@ -254,7 +254,7 @@ function searchLegislatorName(name){
                 }
 
                 multiInfo.appendChild(bioUL);
-                body.appendChild(multiInfo);
+                page.appendChild(multiInfo);
                 multiCounter++;
                 //the below code will be used to expand the multilist to choose a single legislator
                 $(".multiList").click(function(){
@@ -339,7 +339,7 @@ function searchLegislatorState(state){
             poliInfo.appendChild(donateInput);
             poliInfo.appendChild(donateButton);
 
-            body.appendChild(poliInfo);
+            page.appendChild(poliInfo);
         
         }  else if (results.length > 1) {
                 
@@ -357,7 +357,7 @@ function searchLegislatorState(state){
                     bioUL.appendChild(li)
                 }
                 multiInfo.appendChild(bioUL);
-                body.appendChild(multiInfo);
+                page.appendChild(multiInfo);
                 multiCounter ++;
 
                 //use the below function to target slide down and slide up effects

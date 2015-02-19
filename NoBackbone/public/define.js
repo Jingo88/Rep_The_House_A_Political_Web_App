@@ -7,7 +7,7 @@ var inputName = document.querySelector("#findlastName");
 var inputState = document.querySelector('#findStateTwo');
 
 //Going to append things to the body
-var body = document.querySelector('body');
+var page = document.querySelector('#page');
 
 //these two are for users searching for legislators by last name or state
 var poliInfo = document.createElement('div');
@@ -71,6 +71,7 @@ function clearData(){
     legislatorsArr = [];
     inputName.value = '';
     inputState.value = '';
+    page.innerHTML = '';
     poliInfo.innerHTML = '';
     multiInfo.innerHTML = '';
     multiCounter = 1;
