@@ -4,6 +4,27 @@
 	-webkit-box-sizing: border-box;
 }
 
+body{
+	font-family: 'Open Sans', sans-serif;
+}
+
+#landing{
+	text-align: center;
+	font-size: 72px;
+	font-weight: 600;
+	margin-top: 20%;
+	position: relative;
+	text-decoration: underline;
+}
+
+#sublanding{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	font-size: 35px;
+	width: 50%;
+}
+
 /*search bar styling*/
 #searchbar{
 	position: absolute;

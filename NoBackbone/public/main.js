@@ -258,9 +258,9 @@ function searchLegislatorName(name){
                                         li.innerText = newKey + ": " + chosen[key[l]];
 
                                     this.appendChild(li);
+                                }
                             }
                         }
-                        
                         var select = document.createElement('button');
                             // select.setAttribute('id', 'select');
                             select.setAttribute('class', 'select');
@@ -316,7 +316,7 @@ function searchLegislatorName(name){
 
                                 page.appendChild(poliInfo);
                         }); 
-                    }
+                    
                     }
                 });
             
@@ -397,11 +397,8 @@ function searchLegislatorState(state){
                 page.appendChild(multiInfo);
                 multiCounter ++;
 
-
-
                 //use the below function to target slide down and slide up effects
                 $(".multiList").click(function(){
-
 
                     if ($(this).find('li').length > 0){
                         
