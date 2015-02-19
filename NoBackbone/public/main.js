@@ -309,11 +309,13 @@ function searchLegislatorState(state){
 
                 //use the below function to target slide down and slide up effects
                 $(".multiList").click(function(){
-                    console.log(this.id);
-                    console.log(legislatorsArr);
+                    
                     for (i=0; i<legislatorsArr.length; i++){
                         if (legislatorsArr[i].crp_ID === this.id){
+                            console.log(legislatorsArr[i]);
                             console.log("WE HAVE A FUCKING WINNER" + legislatorsArr[i].First_Name);
+                            // var indexes = legislatorsArr.indexOf(this.id);
+                            // console.log(indexes);
                         }
                     }
                 });
