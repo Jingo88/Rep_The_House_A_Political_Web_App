@@ -123,7 +123,7 @@ function genderInfo(x){
 }
 
 //constructor to create a object of the currently viewed legislator
-function currentBio(crp_id,First_Name,Last_Name,State,Party,Gender,Term_Start,Term_End,Chamber,Title,Twitter_Handle) {
+function currentBio(crp_id,First_Name,Last_Name,State,Party,Gender,Term_Start,Term_End,Chamber,Title,Twitter_Handle,bioguide_id) {
     this.crp_ID = crp_id;
     this.First_Name = First_Name;
     this.Last_Name = Last_Name;
@@ -135,6 +135,7 @@ function currentBio(crp_id,First_Name,Last_Name,State,Party,Gender,Term_Start,Te
     this.Chamber = Chamber;
     this.Title = Title;
     this.Twitter_Handle = Twitter_Handle;
+    this.Bioguide_ID = bioguide_id;
 }
 
 //constructor to create an object of the bills being sponsored by the current legislator

@@ -1,7 +1,7 @@
 //creates a list of all the bills sponsored by the currently searched politician
 function theSearch(results){
     if (results.length === 1){
-        console.log("we have reached the search")
+        
         var crp_id = results[0].crp_id;
         var firstName = results[0].first_name;                
         var lastName = results[0].last_name;
@@ -13,8 +13,9 @@ function theSearch(results){
         var chamber = chamberInfo(results[0].chamber);
         var title = titleInfo(results[0].title);
         var twitter = "@" + results[0].twitter_id;
+        var bioguide_id = results[0].bioguide_id;
 
-        nowLegislator = new currentBio(crp_id,firstName,lastName,stateTwo,partyOne,gender,termS,termE,chamber,title,twitter);
+        nowLegislator = new currentBio(crp_id,firstName,lastName,stateTwo,partyOne,gender,termS,termE,chamber,title,twitter,bioguide_id);
 
     } else if (results.length > 1){
         for (i=0; i<results.length; i++){
@@ -30,8 +31,9 @@ function theSearch(results){
             var chamber = chamberInfo(results[i].chamber);
             var title = titleInfo(results[i].title);
             var twitter = "@" + results[i].twitter_id;
+            var bioguide_id = results[i].bioguide_id;
 
-            addLegislator = new currentBio(crp_id, firstName, lastName, stateTwo, partyOne, gender, termS, termE, chamber, title, twitter);
+            addLegislator = new currentBio(crp_id, firstName, lastName, stateTwo, partyOne, gender, termS, termE, chamber, title, twitter, bioguide_id);
 
             legislatorsArr.push(addLegislator);
         }
@@ -46,7 +48,9 @@ function allBills(bioID) {
     xhr.addEventListener('load', function(){
     	var billObj = JSON.parse(xhr.responseText);
         var billResults = billObj.results;
+        console.log("WE ARE IN THE EVENT LISTENER");
 
+        console.log(billResults);
         for (var i = 0; i < billObj.results.length; i++) {
 
             var official_title = billResults[i].official_title;
@@ -172,13 +176,13 @@ function searchLegislatorName(name){
 
         if (senatorObj.results.length === 1){
             //you will use the bioguide to pass into the function as a parameter and search for bills        
-            bioguide = senatorObj.results[0].bioguide_id;
+            bioguide = results[0].bioguide_id;
             console.log(bioguide);
             
             //you will use the crp id to pass into a function to search for donations
             crp = senatorObj.results[0].crp_id;
 
-            console.log(name + " has a crp id of " + crp)
+            console.log(name + " has a crp id of " + crp);
 
             theSearch(results);
 
@@ -241,21 +245,77 @@ function searchLegislatorName(name){
 
                         for (i=0; i<legislatorsArr.length; i++){
 
-                        if (legislatorsArr[i].crp_ID === this.id){
-                            
-                            var chosen = legislatorsArr[i];
-
-                            var key = Object.keys(chosen);
-
-                            for (l=0; l<key.length; l++){
-                                var newKey = key[l].replace(/[_]/g, " ");
+                            if (legislatorsArr[i].crp_ID === this.id){
                                 
-                                var li = document.createElement('li');
-                                    li.innerText = newKey + ": " + chosen[key[l]];
+                                var chosen = legislatorsArr[i];
 
-                                this.appendChild(li);
+                                var key = Object.keys(chosen);
+
+                                for (l=0; l<key.length; l++){
+                                    var newKey = key[l].replace(/[_]/g, " ");
+                                    
+                                    var li = document.createElement('li');
+                                        li.innerText = newKey + ": " + chosen[key[l]];
+
+                                    this.appendChild(li);
                             }
                         }
+                        
+                        var select = document.createElement('button');
+                            // select.setAttribute('id', 'select');
+                            select.setAttribute('class', 'select');
+                            select.style.zIndex = "1";
+                            select.innerText = "Select";
+                            this.appendChild(select);
+
+                        $('.select').click(function(){
+                            var eachLI = $(this).parent().find('li');
+
+                            var holder = [];
+                            // var holder2 = [];
+                                for (j=0; j< eachLI.length; j++){
+                                    var textLI = eachLI[j].innerText;
+
+                                    var textSplit = textLI.split(': ');   
+                                    console.log(textSplit);
+
+                                    holder.push(textSplit[1]);
+                                }
+                                console.log(holder);
+
+                                nowLegislator = new currentBio(holder[0],holder[1],holder[2],holder[3],holder[4],holder[5],holder[6],holder[7],holder[8],holder[9],holder[10],holder[11]);
+
+                            page.innerHTML = '';
+                            bioguide = holder[11];
+                            crp = holder[0];
+
+                            var person = document.createElement('h1');
+                                person.innerText = nowLegislator.First_Name + " " + nowLegislator.Last_Name;
+                                poliInfo.appendChild(person);
+
+                            var bioUL = document.createElement('ul');
+                                bioUL.setAttribute('id', 'info');
+
+                            for (var i in nowLegislator){   
+                                var value = nowLegislator[i];
+                                var newKey = i.replace(/[_]/g, " ");
+
+                                var li = document.createElement('li');
+
+                                li.setAttribute('class', 'bioInfo');
+                                li.innerText = newKey + ": " + value;
+                                bioUL.appendChild(li);
+
+                            }
+
+                                poliInfo.appendChild(bioUL);
+
+                                poliInfo.appendChild(billsButton);
+                                poliInfo.appendChild(donateInput);
+                                poliInfo.appendChild(donateButton);
+
+                                page.appendChild(poliInfo);
+                        }); 
                     }
                     }
                 });
@@ -337,8 +397,11 @@ function searchLegislatorState(state){
                 page.appendChild(multiInfo);
                 multiCounter ++;
 
+
+
                 //use the below function to target slide down and slide up effects
                 $(".multiList").click(function(){
+
 
                     if ($(this).find('li').length > 0){
                         
@@ -368,9 +431,66 @@ function searchLegislatorState(state){
                                 }
                             }
                         }
+                        
+                        var select = document.createElement('button');
+                            // select.setAttribute('id', 'select');
+                            select.setAttribute('class', 'select');
+                            select.style.zIndex = "1";
+                            select.innerText = "Select";
+                            this.appendChild(select);
+
+
+                        $('.select').click(function(){
+                            var eachLI = $(this).parent().find('li');
+
+                            var holder = [];
+                            // var holder2 = [];
+                                for (j=0; j< eachLI.length; j++){
+                                    var textLI = eachLI[j].innerText;
+
+                                    var textSplit = textLI.split(': ');   
+                                    console.log(textSplit);
+
+                                    holder.push(textSplit[1]);
+                                }
+                                console.log(holder);
+
+                                nowLegislator = new currentBio(holder[0],holder[1],holder[2],holder[3],holder[4],holder[5],holder[6],holder[7],holder[8],holder[9],holder[10],holder[11]);
+
+                            page.innerHTML = '';
+                            bioguide = holder[11];
+                            crp = holder[0];
+
+                            var person = document.createElement('h1');
+                                person.innerText = nowLegislator.First_Name + " " + nowLegislator.Last_Name;
+                                poliInfo.appendChild(person);
+
+                            var bioUL = document.createElement('ul');
+                                bioUL.setAttribute('id', 'info');
+
+                            for (var i in nowLegislator){   
+                                var value = nowLegislator[i];
+                                var newKey = i.replace(/[_]/g, " ");
+
+                                var li = document.createElement('li');
+
+                                li.setAttribute('class', 'bioInfo');
+                                li.innerText = newKey + ": " + value;
+                                bioUL.appendChild(li);
+
+                            }
+
+                                poliInfo.appendChild(bioUL);
+
+                                poliInfo.appendChild(billsButton);
+                                poliInfo.appendChild(donateInput);
+                                poliInfo.appendChild(donateButton);
+
+                                page.appendChild(poliInfo);
+                        }); 
                     }
                 });
-
+            
         } else {
             alert("Please enter valid two letter initials for a state")
         }
