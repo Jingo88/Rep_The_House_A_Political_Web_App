@@ -299,6 +299,7 @@ function searchLegislatorState(state){
 
                 var p = document.createElement('p');
                     p.setAttribute('class', 'multiList');
+                    p.setAttribute('id', solo.Last_Name);
                     p.innerText = solo.Last_Name+", "+solo.First_Name+" - "+solo.State+ " - "+solo.Party; 
                     bioUL.appendChild(p)
                 }
@@ -308,8 +309,12 @@ function searchLegislatorState(state){
 
                 //use the below function to target slide down and slide up effects
                 $(".multiList").click(function(){
-                    console.log("does this work?")
-                })
+                    console.log(this.id);
+                    console.log(legislatorsArr);
+                    // for (i=0; i<legislatorsArr.length; i++){
+
+                    // }
+                });
 
         } else {
             alert("Please enter valid two letter initials for a state")

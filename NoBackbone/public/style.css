@@ -72,6 +72,10 @@
 	border-bottom: 2px solid #ccb62f;
 }
 
+.multiList:hover{
+	opacity: .5;
+}
+
 #donationYear{
 	color: black;
 }
