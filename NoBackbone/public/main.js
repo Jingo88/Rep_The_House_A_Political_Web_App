@@ -299,9 +299,9 @@ function searchLegislatorState(state){
 
                 var p = document.createElement('p');
                     p.setAttribute('class', 'multiList');
-                    p.setAttribute('id', solo.Last_Name);
+                    p.setAttribute('id', solo.crp_ID);
                     p.innerText = solo.Last_Name+", "+solo.First_Name+" - "+solo.State+ " - "+solo.Party; 
-                    bioUL.appendChild(p)
+                    bioUL.appendChild(p);
                 }
                 multiInfo.appendChild(bioUL);
                 page.appendChild(multiInfo);
@@ -311,9 +311,11 @@ function searchLegislatorState(state){
                 $(".multiList").click(function(){
                     console.log(this.id);
                     console.log(legislatorsArr);
-                    // for (i=0; i<legislatorsArr.length; i++){
-
-                    // }
+                    for (i=0; i<legislatorsArr.length; i++){
+                        if (legislatorsArr[i].crp_ID === this.id){
+                            console.log("WE HAVE A FUCKING WINNER" + legislatorsArr[i].First_Name);
+                        }
+                    }
                 });
 
         } else {
