@@ -1,5 +1,5 @@
 function donationCircles(data){
-   
+
     var diameter = 960;
     	width = 200;
         height = 400;
@@ -9,7 +9,7 @@ function donationCircles(data){
     var bubble = d3.layout.pack()
     				.size([700,550])
     				.padding(2)
-    				.value( function(d){console.log(d.size);return d.size});
+    				.value( function(d){return d.size});
 
 	var svg = d3.select("body")
           .select("#donateBubble")
@@ -26,8 +26,6 @@ function donationCircles(data){
 					});       
 
     var node = svg.selectAll(".node")
-    					// console.log(data)
-    					// console.log(donationArr)	
 					  .data(bubble.nodes(data)
 					  .filter(function(d){return !d.children;}))
 
@@ -49,7 +47,6 @@ function donationCircles(data){
 
    node.append("text")
         .text(function(d) { 
-        	console.log(d.amt)
               return d.amt;
         })
         .style("color", "black")

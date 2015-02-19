@@ -68,19 +68,22 @@ var donationArr = [];
 
 //the function that is used to clear the data at every search
 function clearData(){
-    legislatorsArr = [];
     inputName.value = '';
     inputState.value = '';
     page.innerHTML = '';
     poliInfo.innerHTML = '';
     multiInfo.innerHTML = '';
+    billsInfo.innerHTML = '';
+    donateList.innerHTML = '';
+    donateBubble.innerHTML = '';
     multiCounter = 1;
     billCounter = 1;
+    donateCounter = 1;
     bioguide = '';
     crp = '';
+    legislatorsArr = [];
     billsArr = [];
-    donations = [];
-    donateCounter = 1;
+    donationArr = [];
 }
 
 //below functions grabs the data from the JSON file and returns a more user friendly string

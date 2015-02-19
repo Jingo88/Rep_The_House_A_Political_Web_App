@@ -155,37 +155,6 @@ function donationFunc(crpID,year){
     xhr.send();
 }
 
-findState.addEventListener('click', function(){
-    var searchingState = inputState.value;
-    var stateInitials = searchingState.toUpperCase();
-
-    if (stateInitials.length>= 3){
-        alert("Please enter two letters of a valid state");
-
-    } else {
-        clearData();
-        searchLegislatorState(stateInitials);
-    }
-})
-
-inputState.addEventListener('keypress', function(e){
-    var searchingState = inputState.value;
-    var stateInitials = searchingState.toUpperCase();
-    
-    if (stateInitials.length>= 3){
-
-        alert("Please enter two letters of a valid state");
-
-    } else {
-
-        if (e.keyCode === 13){
-
-        clearData();
-        searchLegislatorState(stateInitials);
-        }
-    }
-})
-
 function searchLegislatorName(name){
 
     var sunlighturl = "/searchLname/"+name
@@ -268,29 +237,6 @@ function searchLegislatorName(name){
     xhr.send();
 }
 
-
-findName.addEventListener("click", function() {
-    
-    var input = inputName.value;
-
-    var name = input.charAt(0).toUpperCase() + input.slice(1);
-    clearData();
-    searchLegislatorName(name);
-})
-
-inputName.addEventListener('keypress', function(e){
-    
-    if (e.keyCode === 13){
-        
-        var input = inputName.value;
-
-        var name = input.charAt(0).toUpperCase() + input.slice(1);
-
-        clearData();
-        searchLegislatorName(name);
-    }
-})
-
 function searchLegislatorState(state){
 
     var sunlighturl = "/searchState/"+ state
@@ -372,6 +318,59 @@ function searchLegislatorState(state){
     xhr.send()
 }
 
+findState.addEventListener('click', function(){
+    var searchingState = inputState.value;
+    var stateInitials = searchingState.toUpperCase();
+
+    if (stateInitials.length>= 3){
+        alert("Please enter two letters of a valid state");
+
+    } else {
+        clearData();
+        searchLegislatorState(stateInitials);
+    }
+});
+
+inputState.addEventListener('keypress', function(e){
+    var searchingState = inputState.value;
+    var stateInitials = searchingState.toUpperCase();
+    
+    if (stateInitials.length>= 3){
+
+        alert("Please enter two letters of a valid state");
+
+    } else {
+
+        if (e.keyCode === 13){
+
+        clearData();
+        searchLegislatorState(stateInitials);
+        }
+    }
+});
+
+findName.addEventListener("click", function() {
+    
+    var input = inputName.value;
+
+    var name = input.charAt(0).toUpperCase() + input.slice(1);
+    clearData();
+    searchLegislatorName(name);
+});
+
+inputName.addEventListener('keypress', function(e){
+    
+    if (e.keyCode === 13){
+        
+        var input = inputName.value;
+
+        var name = input.charAt(0).toUpperCase() + input.slice(1);
+
+        clearData();
+        searchLegislatorName(name);
+    }
+});
+
 billsButton.addEventListener('click', function(){
     if (bioguide != ''){
         allBills(bioguide);
@@ -389,6 +388,7 @@ donateButton.addEventListener('click', function(){
         alert("please enter a valid year");
     } else {
         donationFunc(crp, year);
+        donateInput.value = '';
     }    
 })
     
