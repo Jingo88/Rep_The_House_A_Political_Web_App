@@ -197,7 +197,6 @@ function searchLegislatorName(name){
                 li.setAttribute('class', 'bioInfo');
                 li.innerText = newKey + ": " + value;
                 bioUL.appendChild(li);
-
             }
 
             poliInfo.appendChild(bioUL);
@@ -218,6 +217,7 @@ function searchLegislatorName(name){
 
                 var p = document.createElement('li');
                     p.setAttribute('class', 'multiList');
+                    p.setAttribute('id', solo.crp_ID);
                     p.innerText = solo.Last_Name+", "+solo.First_Name+" - "+solo.State+ " - "+solo.Party;
                     bioUL.appendChild(p);
                 }
@@ -225,10 +225,29 @@ function searchLegislatorName(name){
                 multiInfo.appendChild(bioUL);
                 page.appendChild(multiInfo);
                 multiCounter++;
-                //the below code will be used to expand the multilist to choose a single legislator
+
                 $(".multiList").click(function(){
-                    console.log("does this work?")
-                })
+                    $(this).css("height", "300px");
+
+                    for (i=0; i<legislatorsArr.length; i++){
+
+                        if (legislatorsArr[i].crp_ID === this.id){
+                            
+                            var chosen = legislatorsArr[i];
+
+                            var key = Object.keys(chosen);
+
+                            for (l=0; l<key.length; l++){
+                                var newKey = key[l].replace(/[_]/g, " ");
+                                
+                                var li = document.createElement('li');
+                                    li.innerText = newKey + ": " + chosen[key[l]];
+
+                                this.appendChild(li);
+                            }
+                        }
+                    }
+                });
             
         } else {
             alert("Sorry there does not seem to be a legislator with that last name in the House of Representatives");
@@ -309,13 +328,24 @@ function searchLegislatorState(state){
 
                 //use the below function to target slide down and slide up effects
                 $(".multiList").click(function(){
-                    
+                    $(this).css("height", "300px");
+
                     for (i=0; i<legislatorsArr.length; i++){
                         if (legislatorsArr[i].crp_ID === this.id){
-                            console.log(legislatorsArr[i]);
-                            console.log("WE HAVE A FUCKING WINNER" + legislatorsArr[i].First_Name);
-                            // var indexes = legislatorsArr.indexOf(this.id);
-                            // console.log(indexes);
+
+                            var chosen = legislatorsArr[i];
+
+                            var key = Object.keys(chosen);
+
+                            for (l=0; l<key.length; l++){
+
+                                var newKey = key[l].replace(/[_]/g, " ");
+
+                                var li = document.createElement('li');
+                                    li.innerText = newKey + ": " + chosen[key[l]];
+
+                                this.appendChild(li);
+                            }
                         }
                     }
                 });

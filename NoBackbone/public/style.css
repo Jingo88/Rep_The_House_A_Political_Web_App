@@ -61,15 +61,20 @@
 /*the class of the li's created when there are multiple legislators*/
 .multiList{
 	margin: 0 0 0 0;
+	height: auto;
 	text-align: center;
 	font-size: 20px;
 	font-weight: 650;
 	background-color: #0474ef;
 	color: white;
-	list-style: none;
+	/*list-style: none;*/
 	padding-top: 2%;
 	padding-bottom: 2%;
 	border-bottom: 2px solid #ccb62f;
+	-webkit-transition: height 1s ease-out 1s;
+    -moz-transition: height 1s ease-out 1s;
+    -o-transition: height 1s ease-out 1s;
+    transition: height 1s ease-out 1s;
 }
 
 .multiList:hover{
