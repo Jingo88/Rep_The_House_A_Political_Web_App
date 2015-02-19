@@ -210,16 +210,16 @@ function searchLegislatorName(name){
             
             theSearch(results);
             
-                var bioUL = document.createElement('ul');
+                var bioUL = document.createElement('div');
                 bioUL.setAttribute('id', 'info');
 
             for (l=0; l<legislatorsArr.length; l++){ 
                 var solo = legislatorsArr[l];
 
-                var li = document.createElement('li');
-                    li.setAttribute('class', 'multiList');
-                    li.innerText = solo.Last_Name+", "+solo.First_Name+" - "+solo.State+ " - "+solo.Party;
-                    bioUL.appendChild(li)
+                var p = document.createElement('li');
+                    p.setAttribute('class', 'multiList');
+                    p.innerText = solo.Last_Name+", "+solo.First_Name+" - "+solo.State+ " - "+solo.Party;
+                    bioUL.appendChild(p);
                 }
 
                 multiInfo.appendChild(bioUL);
@@ -291,16 +291,16 @@ function searchLegislatorState(state){
                 
             theSearch(results);
 
-            var bioUL = document.createElement('ul');
+            var bioUL = document.createElement('div');
                 bioUL.setAttribute('id', 'info');
 
             for (l=0; l<legislatorsArr.length; l++){ 
                 var solo = legislatorsArr[l];
 
-                var li = document.createElement('li');
-                    li.setAttribute('class', 'multiList');
-                    li.innerText = solo.Last_Name+", "+solo.First_Name+" - "+solo.State+ " - "+solo.Party; 
-                    bioUL.appendChild(li)
+                var p = document.createElement('p');
+                    p.setAttribute('class', 'multiList');
+                    p.innerText = solo.Last_Name+", "+solo.First_Name+" - "+solo.State+ " - "+solo.Party; 
+                    bioUL.appendChild(p)
                 }
                 multiInfo.appendChild(bioUL);
                 page.appendChild(multiInfo);
