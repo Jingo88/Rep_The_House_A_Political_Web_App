@@ -156,7 +156,7 @@ function donationFunc(crpID,year){
             };
 
             console.log(parseInt(totalDonate));
-            donateTotal.innerText = "Total Donation Amount: " + totalDonate;
+            donateTotal.innerText = "Total Donation Amount: $" + totalDonate;
             donateBubble.appendChild(donateTotal);
             donateBubble.appendChild(donateToggle1);
             infoBox.appendChild(donateBubble);
