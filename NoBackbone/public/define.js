@@ -54,12 +54,16 @@ var donateToggle2 = document.createElement('button');
     donateToggle2.setAttribute('class', 'click');
     donateToggle2.innerText = "Bubble View";
 
+var donateTotal = document.createElement('h3');
+    donateTotal.setAttribute('id', 'donateTotal');
+
 //defined these variables as global so we can use them in multiple functions
 var bioguide = '';
 var crp = '';
 var multiCounter = 1;
 var billCounter = 1;
 var donateCounter = 1;
+var totalDonate = 0;
 
 //these are the arrays that store the data as objects
 var legislatorsArr = [];

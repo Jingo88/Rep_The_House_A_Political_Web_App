@@ -141,20 +141,29 @@ function donationFunc(crpID,year){
                 donateUL.appendChild(li);
             }   
             var donateNum = document.createElement('h4');
+
             donateNum.innerText = "Donation: " + donationArr[l].Organization_Name;
             donateList.appendChild(donateNum);
             donateList.appendChild(donateUL);
+            
             infoBox.appendChild(donateList);
             donateCounter++;
             console.log("DONATION LIST WAS CREATED");
         }
+
+            for (i = 0; i < donationArr.length; i++) {
+                totalDonate += donationArr[i].Total_Amount;
+            };
+
+            console.log(parseInt(totalDonate));
+            donateTotal.innerText = "Total Donation Amount: " + totalDonate;
+            donateBubble.appendChild(donateTotal);
             donateBubble.appendChild(donateToggle1);
             infoBox.appendChild(donateBubble);
             page.appendChild(infoBox);
 
             donationCircles(processData(donationArr));
             console.log("THE BUBBLES WERE MADE!!!!");
-
 
     })
     xhr.send();
@@ -564,6 +573,9 @@ donateButton.addEventListener('click', function(){
     if (year.length != 4){
         alert("please enter a valid year");
     } else {
+        donationArr = [];
+        donateList.innerHTML = '';
+        donateBubble.innerHTML = '';
         donationFunc(crp, year);
         donateInput.value = '';
     }    
