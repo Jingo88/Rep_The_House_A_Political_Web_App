@@ -5,6 +5,7 @@ var findName = document.querySelector("#searchName");
 var findState = document.querySelector('#searchState');
 var inputName = document.querySelector("#findlastName");
 var inputState = document.querySelector('#findStateTwo');
+var home = document.querySelector('#home');
 
 //Going to append things to the body
 var page = document.querySelector('#page');

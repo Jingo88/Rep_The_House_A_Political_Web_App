@@ -14,8 +14,7 @@ var openKey = fs.readFileSync('openKey.txt', 'utf8');
 
 app.get('/', function(req, res){
 	res.render('index.ejs', {sunKey: sunKey, openKey: openKey});
-
-})
+});
 
 app.get('/donate/:crpID/:year', function(req, res){
 
@@ -71,8 +70,8 @@ app.get('/searchState/:stateInitials', function(req, res){
 	})
 });
 
-app.listen(80);
-console.log("We are connected to port 80");
+app.listen(3000);
+console.log("We are connected to port 3000, You have to change this when hosting on DO to port 80!!!");
 
 
 

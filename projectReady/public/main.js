@@ -1,3 +1,16 @@
+
+
+home.addEventListener('click', function(){
+    var url = "/";
+    var xhr = new XMLHttpRequest();
+    console.log(url);
+    xhr.open("GET", url);
+    xhr.addEventListener('load', function(){
+        console.log(url);
+    });
+    xhr.send();
+})
+
 //creates a list of all the bills sponsored by the currently searched politician
 function theSearch(results){
     if (results.length === 1){

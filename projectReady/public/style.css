@@ -54,6 +54,20 @@ a{
 	margin-right: auto;
 }
 
+#home{
+	float: left;
+	height: 100%;
+	position: absolute;
+}
+
+#RTH{
+	font-family: 'EB Garamond', serif;
+	font-weight: 800;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+}
+
 /*css for buttons*/
 .click, .select{
 	border-radius: 50px;
