@@ -8,6 +8,10 @@ var inputName = document.querySelector("#findlastName");
 var inputState = document.querySelector('#findStateTwo');
 var home = document.querySelector('#home');
 
+//variables grabbing the landing headings
+var landing = document.querySelector('#landing');
+var sublanding = document.querySelector('#sublanding');
+
 //Going to append things to the body
 var page = document.querySelector('#page');
 

@@ -590,5 +590,18 @@ donateToggle2.addEventListener('click', function(){
     $('#donateList').toggle();  
 })
 
+home.addEventListener('click', function(){
+    clearData();
 
-    
+    var landing = document.createElement('h1');
+        landing.setAttribute('id', 'landing');
+        landing.innerHTML = "REP THE HOUSE";
+
+    var sublanding = document.createElement('h3');
+        sublanding.setAttribute('id', 'sublanding');
+        sublanding.innerHTML = "This is a website for you to research the current legislators in the United States House of Representatives. Do yourselves a favor and stay informed!";
+
+    page.appendChild(landing);
+    page.appendChild(sublanding);
+
+})
