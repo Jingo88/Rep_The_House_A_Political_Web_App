@@ -25,10 +25,9 @@ function donationCircles(data){
 						"margin-right": "auto"
 					});       
 
-    var node = svg.selectAll(".node")
+  var node = svg.selectAll(".node")
 					  .data(bubble.nodes(data)
-					  .filter(function(d){return !d.children;}))
-
+    					  .filter(function(d){return !d.children;}))
 					  .enter()
 					  .append("g")
 					  .attr("class","node")
