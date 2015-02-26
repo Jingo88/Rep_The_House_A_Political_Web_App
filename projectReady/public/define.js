@@ -2,14 +2,14 @@
 
 
 //buttons to grab inputs of the name and/or state
-// var findName = document.querySelector("searchName");
-// var findState = document.querySelector('#searchState');
-// var inputName = document.querySelector("#findlastName");
-// var inputState = document.querySelector('#findStateTwo');
-// var home = document.querySelector('#home');
+var findName = document.querySelector("#searchName");
+var findState = document.querySelector('#searchState');
+var inputName = document.querySelector("#findlastName");
+var inputState = document.querySelector('#findStateTwo');
+var home = document.querySelector('#home');
 
 //Going to append things to the body
-// var page = document.querySelector('#page');
+var page = document.querySelector('#page');
 
 //these two are for users searching for legislators by last name or state
 var poliInfo = document.createElement('div');
@@ -74,8 +74,8 @@ var donationArr = [];
 
 //the function that is used to clear the data at every search
 function clearData(){
-    searchName.value = '';
-    searchState.value = '';
+    inputName.value = '';
+    inputState.value = '';
     page.innerHTML = '';
     poliInfo.innerHTML = '';
     multiInfo.innerHTML = '';

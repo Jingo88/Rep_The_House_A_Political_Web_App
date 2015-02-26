@@ -504,8 +504,8 @@ function searchLegislatorState(state){
     xhr.send()
 }
 
-searchState.addEventListener('click', function(){
-    var searchingState = searchState.value;
+findState.addEventListener('click', function(){
+    var searchingState = inputState.value;
     var stateInitials = searchingState.toUpperCase();
 
     if (stateInitials.length>= 3){
@@ -517,8 +517,8 @@ searchState.addEventListener('click', function(){
     }
 });
 
-findStateTwo.addEventListener('keypress', function(e){
-    var searchingState = searchState.value;
+inputState.addEventListener('keypress', function(e){
+    var searchingState = inputState.value;
     var stateInitials = searchingState.toUpperCase();
     
     if (stateInitials.length>= 3){
@@ -535,20 +535,20 @@ findStateTwo.addEventListener('keypress', function(e){
     }
 });
 
-searchName.addEventListener("click", function() {
+findName.addEventListener("click", function() {
     
-    var input = searchName.value;
+    var input = inputName.value;
 
     var name = input.charAt(0).toUpperCase() + input.slice(1);
     clearData();
     searchLegislatorName(name);
 });
 
-findlastName.addEventListener('keypress', function(e){
+inputName.addEventListener('keypress', function(e){
     
     if (e.keyCode === 13){
         
-        var input = searchName.value;
+        var input = inputName.value;
 
         var name = input.charAt(0).toUpperCase() + input.slice(1);
 
