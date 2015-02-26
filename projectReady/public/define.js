@@ -1,4 +1,5 @@
 //This file holds all the elements that will be created and used, along with constructors, and variables that will hold information as the functions are called
+var body = document.querySelector('body');
 
 //buttons to grab inputs of the name and/or state
 var findName = document.querySelector("#searchName");
@@ -20,7 +21,7 @@ var multiInfo = document.createElement('div');
 //These variables will be appended into a single legislator box so the user can click from there
 var billsButton = document.createElement('button');
 	billsButton.setAttribute('id', 'showbills');
-	billsButton.setAttribute('class', 'click');
+	billsButton.setAttribute('class', 'click2');
 	billsButton.innerText = "Show Bills Sponsored";
 
 var donateInput = document.createElement('input');
@@ -30,7 +31,7 @@ var donateInput = document.createElement('input');
 
 var donateButton = document.createElement('button');
 	donateButton.setAttribute('id', 'showDonate');
-	donateButton.setAttribute('class', 'click');
+	donateButton.setAttribute('class', 'click2');
 	donateButton.innerText = "Show Donations per Year"
 
 //the giant div that will hold the other divs for DOM manipulation
