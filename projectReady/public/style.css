@@ -58,14 +58,15 @@ a{
 	float: left;
 	height: 100%;
 	position: absolute;
-}
-
-#RTH{
+	width: auto;
+	font-size: 40px;
+	/*margin-top: 0px;
+	padding-top: 0px;*/
+	border: 2px solid white;
+	font-weight: 1000;
 	font-family: 'EB Garamond', serif;
-	font-weight: 800;
-	height: 100%;
-	width: 100%;
-	position: absolute;
+	margin: 0 !important;
+    padding: 0 !important;
 }
 
 .click{

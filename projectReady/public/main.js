@@ -1,16 +1,3 @@
-
-
-home.addEventListener('click', function(){
-    var url = "/";
-    var xhr = new XMLHttpRequest();
-    console.log(url);
-    xhr.open("GET", url);
-    xhr.addEventListener('load', function(){
-        console.log(url);
-    });
-    xhr.send();
-})
-
 //creates a list of all the bills sponsored by the currently searched politician
 function theSearch(results){
     if (results.length === 1){
@@ -517,8 +504,8 @@ function searchLegislatorState(state){
     xhr.send()
 }
 
-findState.addEventListener('click', function(){
-    var searchingState = inputState.value;
+searchState.addEventListener('click', function(){
+    var searchingState = searchState.value;
     var stateInitials = searchingState.toUpperCase();
 
     if (stateInitials.length>= 3){
@@ -530,8 +517,8 @@ findState.addEventListener('click', function(){
     }
 });
 
-inputState.addEventListener('keypress', function(e){
-    var searchingState = inputState.value;
+findStateTwo.addEventListener('keypress', function(e){
+    var searchingState = searchState.value;
     var stateInitials = searchingState.toUpperCase();
     
     if (stateInitials.length>= 3){
@@ -548,20 +535,20 @@ inputState.addEventListener('keypress', function(e){
     }
 });
 
-findName.addEventListener("click", function() {
+searchName.addEventListener("click", function() {
     
-    var input = inputName.value;
+    var input = searchName.value;
 
     var name = input.charAt(0).toUpperCase() + input.slice(1);
     clearData();
     searchLegislatorName(name);
 });
 
-inputName.addEventListener('keypress', function(e){
+findlastName.addEventListener('keypress', function(e){
     
     if (e.keyCode === 13){
         
-        var input = inputName.value;
+        var input = searchName.value;
 
         var name = input.charAt(0).toUpperCase() + input.slice(1);
 
