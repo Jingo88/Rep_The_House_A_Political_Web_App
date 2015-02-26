@@ -72,6 +72,27 @@ function donationCircles(data){
         .text(function(d) {
             if(d.r >= 10) { return d.amt }
         });
+
+
+// tool tip example http://bl.ocks.org/ilyabo/1373263
+    svg.selectAll("circle")
+            .data(data)
+            .enter()
+            .append("svg:circle")
+            .attr("cx", function(d) { console.log("WE ARE IN THE TOOLS SHIT");return x(d.x);})
+            .attr("cy", function(d) {return y(d.y)})
+            .attr("fill", "red").attr("r", 15)
+            .on("mouseover", function() {
+              d3.select(this).enter().append("text")
+                  .text(function(d) {return d.x;})
+                  .attr("x", function(d) {return x(d.x);})
+                  .attr("y", function (d) {return y(d.y);}); })
+                  .append("svg:title")
+                  .text(function(d) { return d.x; });
+
+
+            //   .data(bubble.nodes(data)
+            // .filter(function(d){return !d.children;}))
 }
 
 function processData(data) {
