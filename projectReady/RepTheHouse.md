@@ -2,7 +2,9 @@
 
 **Rep The House** is a political web application. Its purpose is to provide it's users easier access to information on the current legislators in the United States House of Representatives. The current APIs allow us to filter through information with regards to the current bills legislators are sponsoring, and the donations they have received. 
 
-# Different Files
+This web application pulls from two seperate API keys using an Express.js server. I clear through the JSON information using mostly vanilla JS with some jQuery. The bubble chart is done in D3, and the styling in CSS and BootStrap. This is a Single Page Application where the user makes AJAX GET requests to the server that will grab the data from the APIs and return them as JSON files. 
+
+## Different Files
 
 ### index.ejs
 Did not write many lines of code in this file. Used to hold static information, and the script tags. This is a Single Page Application with DOM manipulation all within the JS files
