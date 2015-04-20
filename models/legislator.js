@@ -30,16 +30,22 @@ var LegislatorSchema = new mongoose.Schema({
     }],
     sectors: [{
         sector_name: String,
-        sectorid: String,
+        sector_code: String,
         money_from_indivs: Number,
         money_from_pacs: Number
     }],
-    moneys: [{
+    contributors: [{
+        org_name: String,
+        money_from_indivs: Number,
+        money_from_pacs: Number
+    }],
+    monies: {
         total_reciepts: Number,
         total_spent: Number,
         cash_on_hand: Number,
-        debt: Number
-    }],
+        debt: Number,
+        date_last_filed: Date
+    },
     updated_at: {
         type: Date,
         default: Date.now

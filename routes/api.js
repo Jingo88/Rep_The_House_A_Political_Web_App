@@ -19,11 +19,7 @@ router.get('/', function(req, res, next) {
     console.log('hit /api');
     res.json('nothing to see here');
 })
-// router.get('/addlegislator/:last_name', function(req, res, next) {
-//     console.log('hit /api');
-//     var name = toTitleCase(req.params.last_name);
-//     res.redirect('/addlegislator/'+name)
-// })
+
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, function(txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -42,8 +38,8 @@ router.get('/addlegislator/:last_name', function(req, res, next) {
             var legislator = new Legislator({
                 bioguide_id: results[0].bioguide_id,
                 crp_id: results[0].crp_id,
-                firstName: results[0].first_name,
-                lastName: results[0].last_name,
+                first_name: results[0].first_name,
+                last_name: results[0].last_name,
                 state_name: results[0].state_name,
                 state: results[0].state,
                 party: results[0].party,
@@ -53,13 +49,12 @@ router.get('/addlegislator/:last_name', function(req, res, next) {
                 term_end: results[0].term_end,
                 website: results[0].website,
                 in_office: results[0].in_office,
-                twitter: results[0].twitter_id
+                twitter_id: results[0].twitter_id
             })
             console.log(legislator);
-            res.json(legislator);
-            legislator.save(function(err) {
+            legislator.save(function(err, post) {
                 if (err) return console.log(err);
-                // saved!
+                res.redirect('/api/addbills/' + post._id)
             })
             // if (results.length === 1) {
             //     Legislator.create(results, function(err, post))
@@ -74,6 +69,7 @@ router.get('/index', function(req, res, next) {
         res.json(legislators);
     });
 });
+// single legislator
 router.route('/legislators/:id').get(function(req, res, next) {
     Legislator.findById(req.params.id, function(err, result) {
         if (err) return next(err);
@@ -117,7 +113,7 @@ router.route('/legislators/:id').get(function(req, res, next) {
         })
     })
 })
-// UPDATE
+// UPDATE get bills
 router.get('/addbills/:id', function(req, res) {
     Legislator.findById(req.params.id, function(err, legislator) {
         if (err) return next(err);
@@ -140,36 +136,147 @@ router.get('/addbills/:id', function(req, res) {
                         vetoed: results[i].history.active
                     }
                     bills.push(bill)
-}
-console.log(bills);
-                    Legislator.update({
-                        _id: legislator._id
-                    }, {
-                        $set: {
-                            "bills": bills
-                        }
-                    }, function(err) {
-                        if (err) return res.send("contact addMsg error: " + err);
-
-
-                    })
-                    // res.send(data)
-                
-                res.redirect('/api/index')
+                }
+                // console.log(bills);
+                Legislator.update({
+                    _id: legislator._id
+                }, {
+                    $set: {
+                        "bills": bills
+                    }
+                }, function(err) {
+                    if (err) return res.send("contact addMsg error: " + err);
+                    res.redirect('/api/addIndustries/' + legislator.crp_id)
+                })
+                // res.send(data)
+                // res.redirect('/api/index')
             }
         })
     })
-    // console.log(query);
-    // res.send(query)
-    // var legs = Legislator.findByIdAndUpdate()
-    // var bio = req.params.bioID;
-    // var billsurl = "https://congress.api.sunlightfoundation.com/bills?&apikey=" + sunKey + "&sponsor_id=" + bio;
-    // request(billsurl, function(error, response, body) {
-    //     if (!error && response.statusCode == 200) {
-    //         // res.send(body)
-    //     }
-    // })
-    // res.send(update_id)
+});
+// UPDATE get donations
+router.get('/addIndustries/:crp_id', function(req, res) {
+    var cid = req.params.crp_id;
+    var year = new Date().getFullYear();
+    var industryUrl = "http://www.opensecrets.org/api/?method=candIndustry&cid=" + cid + "&cycle=" + year + "&output=json&apikey=" + openKey
+    request(industryUrl, function(error, response, data) {
+        if (!error && response.statusCode == 200) {
+            var industriesObj = JSON.parse(data);
+            var results = industriesObj.response.industries.industry;
+            // console.log(results);
+            var industries = [];
+            for (var i = 0; i < results.length; i++) {
+                var industry = {
+                    industry_name: results[i]['@attributes'].industry_name,
+                    industry_code: results[i]['@attributes'].industry_code,
+                    money_from_indivs: results[i]['@attributes'].indivs,
+                    money_from_pacs: results[i]['@attributes'].pacs
+                }
+                industries.push(industry)
+            }
+            Legislator.update({
+                crp_id: cid
+            }, {
+                $set: {
+                    "industries": industries
+                }
+            }, function(err) {
+                if (err) return res.send("contact addMsg error: " + err);
+                res.redirect('/api/addSectors/' + cid)
+            })
+        }
+    })
+});
+router.get('/addSectors/:crp_id', function(req, res) {
+    var cid = req.params.crp_id;
+    var year = new Date().getFullYear();
+    var sectorUrl = "http://www.opensecrets.org/api/?method=candSector&cid=" + cid + "&cycle=" + year + "&output=json&apikey=" + openKey
+    request(sectorUrl, function(error, response, data) {
+        if (!error && response.statusCode == 200) {
+            var sectorsObj = JSON.parse(data);
+            var results = sectorsObj.response.sectors.sector;
+            // console.log(results);
+            var sectors = [];
+            for (var i = 0; i < results.length; i++) {
+                var sector = {
+                    sector_name: results[i]['@attributes'].sector_name,
+                    sector_code: results[i]['@attributes'].sectorid,
+                    money_from_indivs: results[i]['@attributes'].indivs,
+                    money_from_pacs: results[i]['@attributes'].pacs
+                }
+                sectors.push(sector)
+            }
+            Legislator.update({
+                crp_id: cid
+            }, {
+                $set: {
+                    "sectors": sectors
+                }
+            }, function(err) {
+                if (err) return res.send("contact addMsg error: " + err);
+                res.redirect('/api/addContrib/' + cid)
+            })
+        }
+    })
+});
+router.get('/addContrib/:crp_id', function(req, res) {
+    var cid = req.params.crp_id;
+    var year = new Date().getFullYear();
+    var contributorUrl = "http://www.opensecrets.org/api/?method=candContrib&cid=" + cid + "&cycle=" + year + "&output=json&apikey=" + openKey
+    request(contributorUrl, function(error, response, data) {
+        if (!error && response.statusCode == 200) {
+            var contributorsObj = JSON.parse(data);
+            var results = contributorsObj.response.contributors.contributor;
+            // console.log(results);
+            var contributors = [];
+            for (var i = 0; i < results.length; i++) {
+                var contributor = {
+                    org_name: results[i]['@attributes'].org_name,
+                    money_from_indivs: results[i]['@attributes'].indivs,
+                    money_from_pacs: results[i]['@attributes'].pacs
+                }
+                contributors.push(contributor)
+            }
+            Legislator.update({
+                crp_id: cid
+            }, {
+                $set: {
+                    "contributors": contributors
+                }
+            }, function(err) {
+                if (err) return res.send("contact addMsg error: " + err);
+                res.redirect('/api/addMonies/' + cid)
+            })
+        }
+    })
+});
+router.get('/addMonies/:crp_id', function(req, res) {
+    var cid = req.params.crp_id;
+    var year = new Date().getFullYear();
+    var summaryUrl = "http://www.opensecrets.org/api/?method=candSummary&cid=" + cid + "&cycle=" + year + "&output=json&apikey=" + openKey
+    request(summaryUrl, function(error, response, data) {
+        if (!error && response.statusCode == 200) {
+            var summaryObj = JSON.parse(data);
+            var result = summaryObj.response.summary['@attributes'];
+            var monies = {
+                total_reciepts: result.total,
+                total_spent: result.spent,
+                cash_on_hand: result.cash_on_hand,
+                debt: result.debt,
+                date_last_filed: result.last_updated
+            }
+            Legislator.update({
+                crp_id: cid
+            }, {
+                $set: {
+                    "monies": monies
+                }
+            }, function(err) {
+                if (err) return res.send("contact addMsg error: " + err);
+                res.redirect('/api/index/')
+            })
+        }
+    })
 });
 // DESTROY
 router.delete('/legislators/:id', function(req, res, next) {
@@ -178,5 +285,4 @@ router.delete('/legislators/:id', function(req, res, next) {
         res.json(post);
     });
 });
-// probably won't have a destroy
 module.exports = router;
