@@ -5,15 +5,17 @@
 }
 
 body{
-	font-family: 'Open Sans', sans-serif;
+	/*font-family: 'Open Sans', sans-serif;*/
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 button{
 	outline: 0;
 }
 
-a{
-	color: #515151;
+a {
+	/*color: #515151;*/
+  color: #00B7FF;
 }
 
 #landing{
@@ -198,9 +200,3 @@ a{
 	display:'';
 	right: 0;
 }
-
-
-
-
-
-

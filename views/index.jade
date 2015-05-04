@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  #searchbar
+      #home
+        span#RTH RTH
+      input#findlastName.bar(type='text', placeholder='Search By Last Name')
+      button#searchName.click  Search Last Name 
+      input#findStateTwo.bar(type='text', placeholder='Search By State ')
+      button#searchState.click  Search State 
+    #page
+      h1#landing REP THE HOUSE
+      h3#sublanding Research current legislators in Congress. Do yourselves a favor and stay informed!
+
+block scripts
+  script(src='javascripts/define.js')
+  script(src='javascripts/main.js')
+  script(src='javascripts/d3style.js')
