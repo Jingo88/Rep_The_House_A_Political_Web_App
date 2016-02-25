@@ -21,6 +21,7 @@ var LegislatorSchema = new mongoose.Schema({
         active: Boolean,
         enacted: Boolean,
         vetoed: Boolean,
+        keywords: Array
     }],
     industries: [{
         industry_name: String,
