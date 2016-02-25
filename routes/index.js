@@ -34,6 +34,7 @@ router.get('/bills/:bioID', function(req, res) {
     })
 });
 router.get('/searchLname/:Lname', function(req, res) {
+    console.log(apiBuilder);
     var name = req.params.Lname;
     var sunurl = "https://congress.api.sunlightfoundation.com/legislators?fields=&apikey=" + sunKey + "&last_name=" + name;
     request(sunurl, function(error, response, body) {
